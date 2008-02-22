@@ -3,7 +3,7 @@
  *  Crab Battle
  *
  *  Created by TJ Ferrell on 2/22/08.
- *
+ *  Modified by $Author$ on $Date$ ($Revision$).
  */
 
 #include <iostream>
