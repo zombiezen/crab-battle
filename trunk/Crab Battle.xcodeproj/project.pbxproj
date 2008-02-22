@@ -1,0 +1,170 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		454402230D6F453300658D3D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 454402100D6F444800658D3D /* main.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		454402100D6F444800658D3D /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		454402140D6F44F200658D3D /* Crab Battle */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "Crab Battle"; path = "build/Debug/Crab Battle"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		454402120D6F44F200658D3D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		454401FF0D6F43E800658D3D = {
+			isa = PBXGroup;
+			children = (
+				4544020F0D6F441400658D3D /* Source */,
+				454402150D6F44F200658D3D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4544020F0D6F441400658D3D /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				454402100D6F444800658D3D /* main.cpp */,
+			);
+			name = Source;
+			path = src;
+			sourceTree = "<group>";
+		};
+		454402150D6F44F200658D3D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				454402140D6F44F200658D3D /* Crab Battle */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		454402130D6F44F200658D3D /* Crab Battle */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 454402190D6F44F300658D3D /* Build configuration list for PBXNativeTarget "Crab Battle" */;
+			buildPhases = (
+				454402110D6F44F200658D3D /* Sources */,
+				454402120D6F44F200658D3D /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Crab Battle";
+			productName = "Crab Battle";
+			productReference = 454402140D6F44F200658D3D /* Crab Battle */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		454402010D6F43E800658D3D /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 454402040D6F43E800658D3D /* Build configuration list for PBXProject "Crab Battle" */;
+			compatibilityVersion = "Xcode 2.4";
+			hasScannedForEncodings = 0;
+			mainGroup = 454401FF0D6F43E800658D3D;
+			productRefGroup = 454402150D6F44F200658D3D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				454402130D6F44F200658D3D /* Crab Battle */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		454402110D6F44F200658D3D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				454402230D6F453300658D3D /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		454402020D6F43E800658D3D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = Debug;
+		};
+		454402030D6F43E800658D3D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+			};
+			name = Release;
+		};
+		454402170D6F44F300658D3D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INSTALL_PATH = /usr/local/bin;
+				PREBINDING = NO;
+				PRODUCT_NAME = "Crab Battle";
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		454402180D6F44F300658D3D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				PREBINDING = NO;
+				PRODUCT_NAME = "Crab Battle";
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		454402040D6F43E800658D3D /* Build configuration list for PBXProject "Crab Battle" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				454402020D6F43E800658D3D /* Debug */,
+				454402030D6F43E800658D3D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		454402190D6F44F300658D3D /* Build configuration list for PBXNativeTarget "Crab Battle" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				454402170D6F44F300658D3D /* Debug */,
+				454402180D6F44F300658D3D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 454402010D6F43E800658D3D /* Project object */;
+}
