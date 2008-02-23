@@ -84,7 +84,7 @@ static NSString *getApplicationName(void)
         CFURLRef url = CFBundleCopyBundleURL(CFBundleGetMainBundle());
         CFURLRef url2 = CFURLCreateCopyDeletingLastPathComponent(0, url);
         
-        if (CFURLGetFileSystemRepresentation(url2, true, (UInt8 *)parentdir, MAXPATHLEN))
+        if (CFURLGetFileSystemRepresentation(url2, YES, (UInt8 *)parentdir, MAXPATHLEN))
         {
             assert(chdir(parentdir) == 0);   // chdir to the binary app's parent
         }
@@ -240,29 +240,29 @@ static void CustomApplicationMain(int argc, char **argv)
     char **newargv;
     
     if (!gFinderLaunch)  // MacOS is passing command line args.
-        return FALSE;
+        return NO;
     
     if (gCalledAppMainline)  // app has started, ignore this document.
-        return FALSE;
+        return NO;
     
     temparg = [filename UTF8String];
     arglen = SDL_strlen(temparg) + 1;
     arg = (char *) SDL_malloc(arglen);
     if (arg == NULL)
-        return FALSE;
+        return NO;
     
     newargv = (char **) realloc(gArgv, sizeof (char *) * (gArgc + 2));
     if (newargv == NULL)
     {
         SDL_free(arg);
-        return FALSE;
+        return NO;
     }
     gArgv = newargv;
     
     SDL_strlcpy(arg, temparg, arglen);
     gArgv[gArgc++] = arg;
     gArgv[gArgc] = NULL;
-    return TRUE;
+    return YES;
 }
 
 
@@ -275,7 +275,7 @@ static void CustomApplicationMain(int argc, char **argv)
     [self setupWorkingDirectory:gFinderLaunch];
     
     // Hand off to main application code
-    gCalledAppMainline = TRUE;
+    gCalledAppMainline = YES;
     status = SDL_main(gArgc, gArgv);
     
     // We're done, thank you for playing
