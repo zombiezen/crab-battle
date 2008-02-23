@@ -18,7 +18,7 @@
 using namespace std;
 
 // Our wonderful main function
-// The extern "C"
+// The extern "C" is necessary so that mac_main and SDL can get access to it
 extern "C" int main(int argc, char *argv[])
 {
     Uint32 initflags = SDL_INIT_VIDEO;  /* See documentation for details */
