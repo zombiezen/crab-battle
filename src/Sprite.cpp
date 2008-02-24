@@ -12,13 +12,6 @@ using CrabBattle::Sprite;
 using CrabBattle::Rect;
 using CrabBattle::Surface;
 
-Sprite::Sprite(void)
-{
-    x = y = 0.0;
-    surface = new Surface(32, 32);
-    created_surface = true;
-}
-
 Sprite::Sprite(Surface *surf)
 {
     x = y = 0.0;
@@ -53,7 +46,7 @@ Surface *Sprite::GetSurface(void)
 void Sprite::SetSurface(Surface *surf)
 {
     if (created_surface)
-        delete surface;
+        delete surface; // safe, because Surface class knows to SDL_FreeSurface
     surface = surf;
     created_surface = false;
 }
