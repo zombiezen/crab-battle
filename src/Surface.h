@@ -28,8 +28,10 @@ namespace CrabBattle
         /*** CONSTRUCTORS ***/
         // Surface(width, height)
         Surface(unsigned int, unsigned int);
+        #ifndef NO_SDL_IMAGE
         // Surface(filename)
         Surface(const char *);
+        #endif
         // Surface(flags, width, height, bitsPerPixel)
         // Creates a surface with roughly the same arguments as SDL_CreateRGBSurface
         Surface(Uint32, unsigned int, unsigned int, unsigned int);
