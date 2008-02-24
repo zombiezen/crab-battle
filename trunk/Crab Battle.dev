@@ -1,38 +1,22 @@
 [Project]
 FileName=Crab Battle.dev
 Name=Crab Battle
-UnitCount=5
+UnitCount=7
 Type=0
-Ver=1
-ObjFiles=
-Includes=
-Libs=
-PrivateResource=
-ResourceIncludes=
-MakeIncludes=
-Compiler=-I C:\Dev-Cpp\include\SDL_@@_
-CppCompiler=-I C:\Dev-Cpp\include\SDL_@@_
-Linker=-lSDL_@@_
+Ver=3
 IsCpp=1
-Icon=
-ExeOutput=build
-ObjectOutput=build
-OverrideOutput=0
-OverrideOutputName=Crab Battle.exe
-HostApplication=
-Folders=
+Folders=Classes,Headers,"Other Sources"
 CommandLine=
-UseCustomMakefile=0
-CustomMakefile=
-IncludeVersionInfo=0
-SupportXPThemes=0
-CompilerSet=0
 CompilerSettings=0000000000000000000000
+PchHead=-1
+PchSource=-1
+ProfilesCount=1
+ProfileIndex=0
 
 [Unit1]
 FileName=src\main.cpp
 CompileCpp=1
-Folder=Crab Battle
+Folder=Other Sources
 Compile=1
 Link=1
 Priority=1000
@@ -55,12 +39,13 @@ LegalTrademarks=
 OriginalFilename=
 ProductName=
 ProductVersion=
-AutoIncBuildNr=0
+AutoIncBuildNrOnRebuild=0
+AutoIncBuildNrOnCompile=0
 
 [Unit2]
 FileName=src\Surface.h
 CompileCpp=1
-Folder=Crab Battle
+Folder=Headers
 Compile=1
 Link=1
 Priority=1000
@@ -70,7 +55,7 @@ BuildCmd=
 [Unit3]
 FileName=src\Rect.cpp
 CompileCpp=1
-Folder=Crab Battle
+Folder=Classes
 Compile=1
 Link=1
 Priority=1000
@@ -80,7 +65,7 @@ BuildCmd=
 [Unit4]
 FileName=src\Rect.h
 CompileCpp=1
-Folder=Crab Battle
+Folder=Headers
 Compile=1
 Link=1
 Priority=1000
@@ -90,10 +75,57 @@ BuildCmd=
 [Unit5]
 FileName=src\Surface.cpp
 CompileCpp=1
-Folder=Crab Battle
+Folder=Classes
 Compile=1
 Link=1
 Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
+
+[Unit6]
+FileName=src\Sprite.h
+CompileCpp=1
+Folder=Headers
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit7]
+FileName=src\Sprite.cpp
+CompileCpp=1
+Folder=Classes
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Profile1]
+ProfileName=Default Profile
+Type=0
+ObjFiles=
+Includes=
+Libs=
+ResourceIncludes=
+MakeIncludes=
+Compiler=-I C:\Dev-Cpp\include\SDL_@@_
+CppCompiler=-I C:\Dev-Cpp\include\SDL_@@_
+Linker=-lSDL_@@_
+PreprocDefines=
+CompilerSettings=0000000000000000000000
+Icon=
+ExeOutput=build
+ObjectOutput=build
+OverrideOutput=0
+OverrideOutputName=Crab Battle.exe
+HostApplication=
+CommandLine=
+UseCustomMakefile=0
+CustomMakefile=
+IncludeVersionInfo=0
+SupportXPThemes=0
+CompilerSet=0
+compilerType=0
 
