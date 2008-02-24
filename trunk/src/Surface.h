@@ -29,6 +29,8 @@ namespace CrabBattle
         unsigned int GetHeight(void);
         Rect GetRect(void);
         void Fill(Rect, unsigned int, unsigned int, unsigned int);
+        void Blit(Surface *, Rect);
+        void Blit(Surface *, Rect, Rect);
         void Update(Rect);
         ~Surface(void);
     };
