@@ -14,8 +14,10 @@
 #include <cstring>
 
 #include "SDL.h"
+#include "Surface.h"
 
 using namespace std;
+using namespace CrabBattle;
 
 // Our wonderful main function
 // The extern "C" is necessary so that mac_main and SDL can get access to it
@@ -31,6 +33,7 @@ extern "C" int main(int argc, char *argv[])
     Uint32 videoflags = SDL_SWSURFACE;
     int done;
     SDL_Event event;
+    Surface *screenObj = NULL;
     
     /* Initialize the SDL library */
     if (SDL_Init(initflags) < 0)
@@ -49,6 +52,7 @@ extern "C" int main(int argc, char *argv[])
     }
     
     done = 0;
+    screenObj = new Surface(screen);
     while (!done)
     {
         /* Check for events */
@@ -69,7 +73,11 @@ extern "C" int main(int argc, char *argv[])
                     break;
             }
         }
+        screenObj->Fill(screenObj->GetRect(), 0, 0, 255);
+        screenObj->Update(screenObj->GetRect());
     }
+    
+    delete screenObj;
     
     /* Clean up the SDL library */
     SDL_Quit();
