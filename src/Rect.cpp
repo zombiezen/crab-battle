@@ -35,9 +35,19 @@ double Rect::GetX(void)
     return x;
 }
 
+void Rect::SetX(double nx)
+{
+    x = nx;
+}
+
 double Rect::GetY(void)
 {
     return y;
+}
+
+void Rect::SetY(double ny)
+{
+    y = ny;
 }
 
 double Rect::GetWidth(void)
@@ -45,9 +55,19 @@ double Rect::GetWidth(void)
     return w;
 }
 
+void Rect::SetWidth(double nw)
+{
+    w = nw;
+}
+
 double Rect::GetHeight(void)
 {
     return h;
+}
+
+void Rect::SetHeight(double nh)
+{
+    h = nh;
 }
 
 SDL_Rect Rect::ConvertToSDLRect(void)

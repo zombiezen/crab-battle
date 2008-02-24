@@ -27,9 +27,13 @@ namespace CrabBattle
         Rect(double, double);                   // (0, 0, w, h)
         Rect(double, double, double, double);   // (x, y, w, h)
         double GetX(void);
+        void SetX(double);
         double GetY(void);
+        void SetY(double);
         double GetWidth(void);
+        void SetWidth(double);
         double GetHeight(void);
+        void SetHeight(double);
         SDL_Rect ConvertToSDLRect(void);
     };
 }
