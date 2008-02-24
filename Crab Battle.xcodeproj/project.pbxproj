@@ -79,8 +79,6 @@
 			children = (
 				91A9F1940D70C7F000CB6365 /* Rect.h */,
 				91A9F1950D70C7F000CB6365 /* Rect.cpp */,
-				91A9F13F0D70B9B900CB6365 /* mac_main.h */,
-				91A9F13E0D70B9B900CB6365 /* mac_main.m */,
 				91A9F1E20D70D2F100CB6365 /* Sprite.h */,
 				91A9F1E30D70D2F100CB6365 /* Sprite.cpp */,
 				91A9F1E50D70D5AF00CB6365 /* Surface.h */,
@@ -136,6 +134,8 @@
 			children = (
 				91A9F1490D70BAF400CB6365 /* Crab_Battle_Prefix.pch */,
 				91A9F1430D70B9E100CB6365 /* main.cpp */,
+				91A9F13F0D70B9B900CB6365 /* mac_main.h */,
+				91A9F13E0D70B9B900CB6365 /* mac_main.m */,
 			);
 			name = "Other Sources";
 			path = src;
