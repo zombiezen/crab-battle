@@ -15,7 +15,10 @@
 namespace CrabBattle
 {
     /*  Sprite class
-     *  Base class for anything that moves
+     *
+     *  Sprites are a convenience class for encapsulating position and
+     *  image data.  A sprite can be described as any object that could possibly
+     *  move.
      */
     class Sprite
     {
@@ -24,14 +27,27 @@ namespace CrabBattle
         Surface *surface;
         bool created_surface;
     public:
-        Sprite(void);
+        /*** CONSTRUCTORS ***/
+        // Sprite(surface)
+        // Create a sprite from a surface.  The position defaults to (0, 0).
         Sprite(Surface *);
+        // Sprite(surface, position)
+        // Create a sprite, giving it an initial surface and position
         Sprite(Surface *, Rect);
+        /*** ACCESSORS ***/
+        // sprite.GetPosition()
         Rect GetPosition(void);
+        // sprite.SetPosition(rect)
         void SetPosition(Rect);
+        // sprite.GetSurface()
         Surface *GetSurface(void);
+        // sprite.SetSurface(surface)
         void SetSurface(Surface *);
+        /*** ACTIONS ***/
+        // sprite.Display(screen)
+        // Blits a sprite onto another surface
         void Display(Surface *);
+        /*** DESTRUCTOR ***/
         ~Sprite(void);
     };
 }

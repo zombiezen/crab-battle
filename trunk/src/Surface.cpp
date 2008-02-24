@@ -7,7 +7,7 @@
  */
 
 #include "Surface.h"
-#include <SDL_image/SDL_image.h>
+//#include <SDL_image/SDL_image.h>
 
 using CrabBattle::Surface;
 using CrabBattle::Rect;
@@ -28,7 +28,7 @@ Surface::Surface(unsigned int w, unsigned int h)
 
 Surface::Surface(const char *fname)
 {
-    surface = IMG_Load(fname);
+    //surface = IMG_Load(fname);
     // TODO: If surface is NULL, raise an error
 }
 
@@ -88,7 +88,11 @@ void Surface::Blit(Surface *src, Rect dest, Rect srcRegion)
 
 void Surface::Update(Rect region)
 {
-    SDL_UpdateRect(surface, region.GetX(), region.GetY(), region.GetWidth(), region.GetHeight());
+    SDL_UpdateRect(surface,
+                   region.GetX(),
+                   region.GetY(),
+                   region.GetWidth(),
+                   region.GetHeight());
 }
 
 Surface::~Surface(void)
