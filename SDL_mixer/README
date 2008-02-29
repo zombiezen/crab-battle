@@ -42,3 +42,8 @@ and unpack them in /usr/local/lib under UNIX, and C:\ under Win32.
 This library is available under the GNU Library General Public License,
 see the file "COPYING" for details.
 
+CRAB BATTLE-SPECIFIC NOTES:
+
+This directory is used to help out Windows and wxDev-C++.  To install, copy
+the contents of the bin, include, and lib directories to their respective
+counterparts in the Dev-Cpp install directory.
