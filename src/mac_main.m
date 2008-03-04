@@ -11,7 +11,7 @@
 
 #import "mac_main.h"
 #import "SDL.h"
-#import <sys/param.h> /* for MAXPATHLEN */
+#import <sys/param.h> // for MAXPATHLEN
 #import <unistd.h>
 
 // Use this flag to determine whether we use CPS (docking) or not
@@ -25,18 +25,18 @@
 @end
 
 #ifdef SDL_USE_CPS
-/* Portions of CPS.h */
+// Portions of CPS.h
 typedef struct CPSProcessSerNum
 {
 	UInt32		lo;
 	UInt32		hi;
 } CPSProcessSerNum;
 
-extern OSErr	CPSGetCurrentProcess( CPSProcessSerNum *psn);
-extern OSErr 	CPSEnableForegroundOperation( CPSProcessSerNum *psn, UInt32 _arg2, UInt32 _arg3, UInt32 _arg4, UInt32 _arg5);
-extern OSErr	CPSSetFrontProcess( CPSProcessSerNum *psn);
+extern OSErr	CPSGetCurrentProcess(CPSProcessSerNum *psn);
+extern OSErr 	CPSEnableForegroundOperation(CPSProcessSerNum *psn, UInt32 _arg2, UInt32 _arg3, UInt32 _arg4, UInt32 _arg5);
+extern OSErr	CPSSetFrontProcess(CPSProcessSerNum *psn);
 
-#endif /* SDL_USE_CPS */
+#endif // SDL_USE_CPS
 
 static int gArgc;
 static char **gArgv;
@@ -194,7 +194,7 @@ static void CustomApplicationMain(int argc, char **argv)
         CPSProcessSerNum PSN;
         // Tell the dock about us
         if (!CPSGetCurrentProcess(&PSN))
-            if (!CPSEnableForegroundOperation(&PSN,0x03,0x3C,0x2C,0x1103))
+            if (!CPSEnableForegroundOperation(&PSN, 0x03, 0x3C, 0x2C, 0x1103))
                 if (!CPSSetFrontProcess(&PSN))
                     [SDLApplication sharedApplication];
     }
@@ -247,11 +247,11 @@ static void CustomApplicationMain(int argc, char **argv)
     
     temparg = [filename UTF8String];
     arglen = SDL_strlen(temparg) + 1;
-    arg = (char *) SDL_malloc(arglen);
+    arg = (char *)SDL_malloc(arglen);
     if (arg == NULL)
         return NO;
     
-    newargv = (char **) realloc(gArgv, sizeof (char *) * (gArgc + 2));
+    newargv = (char **)realloc(gArgv, sizeof(char *) * (gArgc + 2));
     if (newargv == NULL)
     {
         SDL_free(arg);
@@ -289,21 +289,24 @@ static void CustomApplicationMain(int argc, char **argv)
 #  undef main
 #endif
 
-/* Main entry point to executable - should *not* be SDL_main! */
-int main (int argc, char **argv)
+// Main entry point to executable - should *not* be SDL_main!
+int main(int argc, char **argv)
 {
-    /* Copy the arguments into a global variable */
-    /* This is passed if we are launched by double-clicking */
-    if ( argc >= 2 && strncmp (argv[1], "-psn", 4) == 0 ) {
-        gArgv = (char **) SDL_malloc(sizeof (char *) * 2);
+    // Copy the arguments into a global variable
+    // This is passed if we are launched by double-clicking
+    if (argc >= 2 && strncmp (argv[1], "-psn", 4) == 0)
+	{
+        gArgv = (char **)SDL_malloc(sizeof (char *) * 2);
         gArgv[0] = argv[0];
         gArgv[1] = NULL;
         gArgc = 1;
         gFinderLaunch = YES;
-    } else {
+    }
+	else
+	{
         int i;
         gArgc = argc;
-        gArgv = (char **) SDL_malloc(sizeof (char *) * (argc+1));
+        gArgv = (char **)SDL_malloc(sizeof(char *) * (argc + 1));
         for (i = 0; i <= argc; i++)
             gArgv[i] = argv[i];
         gFinderLaunch = NO;
@@ -312,4 +315,3 @@ int main (int argc, char **argv)
     CustomApplicationMain (argc, argv);
     return 0;
 }
-
