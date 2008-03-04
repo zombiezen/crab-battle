@@ -27,7 +27,7 @@ using namespace CrabBattle;
 #endif
 extern "C" int main(int argc, char *argv[])
 {
-    Uint32 initflags = SDL_INIT_VIDEO;  /* See documentation for details */
+    Uint32 initflags = SDL_INIT_VIDEO;  // See documentation for details
     SDL_Surface *screen;
     Uint8 video_bpp = 0;
     Uint32 videoflags = SDL_SWSURFACE;
@@ -35,14 +35,14 @@ extern "C" int main(int argc, char *argv[])
     SDL_Event event;
     Surface *screenObj = NULL;
     
-    /* Initialize the SDL library */
+    // Initialize the SDL library
     if (SDL_Init(initflags) < 0)
     {
         cerr << "Couldn't initialize SDL: " << SDL_GetError() << endl;
         exit(1);
     }
     
-    /* Set 640x480 video mode */
+    // Set 640x480 video mode
     screen = SDL_SetVideoMode(640, 480, video_bpp, videoflags);
     if (screen == NULL)
     {
@@ -55,11 +55,11 @@ extern "C" int main(int argc, char *argv[])
     screenObj = new Surface(screen);
     while (!done)
     {
-        /* Check for events */
+        // Check for events
         while (SDL_PollEvent(&event))
         {
-            switch (event.type) {
-                    
+            switch (event.type)
+			{
                 case SDL_MOUSEMOTION:
                     break;
                 case SDL_MOUSEBUTTONDOWN:
@@ -79,7 +79,7 @@ extern "C" int main(int argc, char *argv[])
     
     delete screenObj;
     
-    /* Clean up the SDL library */
+    // Clean up the SDL library
     SDL_Quit();
     return(0);
 }
