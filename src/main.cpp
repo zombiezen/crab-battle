@@ -59,64 +59,76 @@ extern "C" int main(int argc, char *argv[])
         while (SDL_PollEvent(&event))
         {
             switch (event.type)
-			{
+            {
                 case SDL_MOUSEMOTION:
                     break;
                 case SDL_MOUSEBUTTONDOWN:
                     break;
                 case SDL_KEYDOWN:
-                    /* Keys definitions */
-                    //Quit
-                    if(event.key.keysym.sym==SDLK_ESCAPE)
+                    // Keys definitions
+                    // Okay, ur problem starts here
+                    // Check your notes on switch (if you can find them)
+                    switch(event.key.keysym.sym)
+                {
+                        //Quit
+                    case SDLK_ESCAPE:
                     {
+                        // sdl_quit free's all memory assosiated with the sdl library
+                        SDL_QUIT;
                         done = 1;
                         break;
                     }
-                    //First person Controls
-                    //up
-                    if(event.key.keysym.sym==SDLK_w)
+                        //First person Controls
+                        //up
+                    caseSDLK_w:
                     {
                         //to be defined :)
+                        break;
                     }
-                    //down
-                    if(event.key.keysym.sym==SDLK_s)
+                        //down
+                    case SDLK_s:
                     {
                         //to be defined :)
+                        break;
                     }
-                    //right
-                    if(event.key.keysym.sym==SDLK_a)
+                        //right
+                    case SDLK_a:
                     {
                         //to be defined :)
+                        break;
                     }
-                    //left
-                    if(event.key.keysym.sym==SDLK_d)
+                        //left
+                    case SDLK_d:
                     {
                         // to be defined :)
+                        break;
                     }
-                    // Second Person Controls
-                    //up
-                    if(event.key.keysym.sym==SDLK_UP)
+                        // Second Person Controls
+                        //up
+                    case SDLK_UP:
                     {
                         //to be definedlatter:)
+                        break;
                     }
-                    //down
-                    if(event.key.keysym.sym==SDLK_DOWN)
+                        //down
+                    case SDLK_DOWN:
                     {
                         //to be defined:)
+                        break;
                     }
-                    //right
-                    if(event.key.keysym.sym==SDLK_RIGHT)
+                        //right
+                    case SDLK_RIGHT:
                     {
                         //to be defined :)
+                        break;
                     }
-                    //left
-                    if(event.key.keysym.sym==SDLK_LEFT)
+                        //left
+                    case SDLK_LEFT:
                     {
                         //To be defined :)
-                    }
-                case SDL_QUIT:
-                    done = 1;
-                    break;
+                        break;
+                    }   
+                }
                 default:
                     break;
             }
