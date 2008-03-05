@@ -34,6 +34,7 @@ extern "C" int main(int argc, char *argv[])
     int done;
     SDL_Event event;
     Surface *screenObj = NULL;
+    Rect pcRect = Rect(0, 0, 64, 64);
     
     // Initialize the SDL library
     if (SDL_Init(initflags) < 0)
@@ -112,7 +113,10 @@ extern "C" int main(int argc, char *argv[])
                     break;
             }
         }
+        // Update
+        // Draw
         screenObj->Fill(screenObj->GetRect(), 0, 0, 255);
+        screenObj->Fill(pcRect, 0, 255, 0);
         screenObj->Update(screenObj->GetRect());
     }
     
