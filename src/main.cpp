@@ -100,17 +100,17 @@ extern "C" int main(int argc, char *argv[])
                         //to be definedlatter:)
                     }
                     //down
-                    if(event.key.keysym.sys==SDLK_DOWN)
+                    if(event.key.keysym.sym==SDLK_DOWN)
                     {
                         //to be defined:)
                     }
                     //right
-                    if(event.key.keysym.sys==SDLK_RIGHT)
+                    if(event.key.keysym.sym==SDLK_RIGHT)
                     {
                         //to be defined :)
                     }
                     //left
-                    if(event.key.keysysm.sys==SDLK_Left)
+                    if(event.key.keysym.sym==SDLK_LEFT)
                     {
                         //To be defined :)
                     }
