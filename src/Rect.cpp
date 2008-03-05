@@ -52,8 +52,8 @@ void Rect::SetY(double ny)
 
 void Rect::Move(double dx, double dy)
 {
-	x += dx;
-	y += dy;
+    x += dx;
+    y += dy;
 }
 
 double Rect::GetWidth(void)

@@ -100,14 +100,14 @@ extern "C" int main(int argc, char *argv[])
                         }   
                     }
                     break;
-				case SDL_QUIT:
-					// !DO NOT REMOVE!
-					// Terminate the loop if a QUIT event is received.
-					//
-					// If this is removed, the user cannot quit by using the
-					// close button or by other OS-specific means.
-					done = 1;
-					break;
+                case SDL_QUIT:
+                    // !DO NOT REMOVE!
+                    // Terminate the loop if a QUIT event is received.
+                    //
+                    // If this is removed, the user cannot quit by using the
+                    // close button or by other OS-specific means.
+                    done = 1;
+                    break;
                 default:
                     break;
             }
