@@ -41,9 +41,9 @@ namespace CrabBattle
         double GetY(void);
         // rect.SetY(y)
         void SetY(double);
-		// rect.Move(deltaX, deltaY)
-		// Moves a rectangle to x + deltaX, y + deltaY
-		void Move(double, double);
+        // rect.Move(deltaX, deltaY)
+        // Moves a rectangle to x + deltaX, y + deltaY
+        void Move(double, double);
         // rect.GetWidth()
         double GetWidth(void);
         // rect.SetWidth(width)
