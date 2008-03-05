@@ -65,70 +65,49 @@ extern "C" int main(int argc, char *argv[])
                 case SDL_MOUSEBUTTONDOWN:
                     break;
                 case SDL_KEYDOWN:
-                    // Keys definitions
-                    // Okay, ur problem starts here
-                    // Check your notes on switch (if you can find them)
+                    // Key definitions
                     switch(event.key.keysym.sym)
-                {
-                        //Quit
-                    case SDLK_ESCAPE:
                     {
-                        // sdl_quit free's all memory assosiated with the sdl library
-                        SDL_QUIT;
-                        done = 1;
-                        break;
+                        case SDLK_ESCAPE:
+                        {
+                            // Quit
+                            done = 1;
+                            break;
+                        }
+                        case SDLK_UP:
+                        {
+                            //up
+                            //to be defined:)
+                            break;
+                        }
+                        case SDLK_DOWN:
+                        {
+                            //down
+                            //to be defined:)
+                            break;
+                        }
+                        case SDLK_RIGHT:
+                        {
+                            //right
+                            //to be defined :)
+                            break;
+                        }
+                        case SDLK_LEFT:
+                        {
+                            //left
+                            //To be defined :)
+                            break;
+                        }   
                     }
-                        //First person Controls
-                        //up
-                    caseSDLK_w:
-                    {
-                        //to be defined :)
-                        break;
-                    }
-                        //down
-                    case SDLK_s:
-                    {
-                        //to be defined :)
-                        break;
-                    }
-                        //right
-                    case SDLK_a:
-                    {
-                        //to be defined :)
-                        break;
-                    }
-                        //left
-                    case SDLK_d:
-                    {
-                        // to be defined :)
-                        break;
-                    }
-                        // Second Person Controls
-                        //up
-                    case SDLK_UP:
-                    {
-                        //to be definedlatter:)
-                        break;
-                    }
-                        //down
-                    case SDLK_DOWN:
-                    {
-                        //to be defined:)
-                        break;
-                    }
-                        //right
-                    case SDLK_RIGHT:
-                    {
-                        //to be defined :)
-                        break;
-                    }
-                        //left
-                    case SDLK_LEFT:
-                    {
-                        //To be defined :)
-                        break;
-                    }   
-                }
+                    break;
+				case SDL_QUIT:
+					// !DO NOT REMOVE!
+					// Terminate the loop if a QUIT event is received.
+					//
+					// If this is removed, the user cannot quit by using the
+					// close button or by other OS-specific means.
+					done = 1;
+					break;
                 default:
                     break;
             }
