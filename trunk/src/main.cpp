@@ -35,7 +35,7 @@ extern "C" int main(int argc, char *argv[])
     SDL_Event event;
     Surface *screenObj = NULL;
     Rect pcRect = Rect(0, 0, 64, 64);
-    
+    Uint8* key;
     // Initialize the SDL library
     if (SDL_Init(initflags) < 0)
     {
@@ -53,6 +53,7 @@ extern "C" int main(int argc, char *argv[])
     }
     
     screenObj = new Surface(screen);
+    /*
     while (!done)
     {
         // Check for events
@@ -78,24 +79,28 @@ extern "C" int main(int argc, char *argv[])
                         case SDLK_UP:
                         {
                             //up
+                            pcRect.SetY(-10);
                             //to be defined:)
                             break;
                         }
                         case SDLK_DOWN:
                         {
                             //down
+                            pcRect.SetY(10);
                             //to be defined:)
                             break;
                         }
                         case SDLK_RIGHT:
                         {
                             //right
+                            pcRect.SetX(10);
                             //to be defined :)
                             break;
                         }
                         case SDLK_LEFT:
                         {
                             //left
+                            pcRect.SetX(-10);
                             //To be defined :)
                             break;
                         }   
@@ -113,14 +118,48 @@ extern "C" int main(int argc, char *argv[])
                 default:
                     break;
             }
+        }*/
+    while(!done)
+    {
+    while ( SDL_PollEvent(&event) )
+    {
+      if ( event.type == SDL_QUIT ) 
+       {
+        done = 1;
         }
+      if ( event.type == SDL_KEYDOWN )
+      {
+        if ( event.key.keysym.sym == SDLK_ESCAPE ) 
+        { 
+            done = 1; 
+        }
+      }
+    }//while
+    key = SDL_GetKeyState(NULL); //so holding down buttons loops
+    if ( key[SDLK_UP] ) 
+    { 
+        pcRect.SetY(-1); 
+    }
+    if ( key[SDLK_DOWN] ) 
+    { 
+        pcRect.SetY(1); 
+    }
+    if ( key[SDLK_LEFT] ) 
+    { 
+        pcRect.SetX(-1);
+    }
+    if ( key[SDLK_RIGHT] )
+    { 
+        pcRect.SetX(1); 
+    }
+
         // Update
         // TODO: insert updating code here...
         // Draw
         screenObj->Fill(screenObj->GetRect(), 0, 0, 255);
         screenObj->Fill(pcRect, 0, 255, 0);
         screenObj->Update(screenObj->GetRect());
-    }
+    }//while
     
     delete screenObj;
     

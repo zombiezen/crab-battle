@@ -8,7 +8,7 @@
 
 #include "Surface.h"
 #ifndef NO_SDL_IMAGE
-#include <SDL_image/SDL_image.h>
+#include <SDL_image.h>
 #endif
 
 using CrabBattle::Surface;
