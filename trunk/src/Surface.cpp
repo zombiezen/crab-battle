@@ -8,8 +8,12 @@
 
 #include "Surface.h"
 #ifndef NO_SDL_IMAGE
+#  ifdef MAC_OS_X
+#include <SDL_image/SDL_image.h>
+#  else
 #include <SDL_image.h>
-#endif
+#  endif // MAC_OS_X
+#endif // NO_SDL_IMAGE
 
 using CrabBattle::Surface;
 using CrabBattle::Rect;
