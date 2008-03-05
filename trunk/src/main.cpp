@@ -31,7 +31,7 @@ extern "C" int main(int argc, char *argv[])
     SDL_Surface *screen;
     Uint8 video_bpp = 0;
     Uint32 videoflags = SDL_SWSURFACE;
-    int done;
+    bool done = false;
     SDL_Event event;
     Surface *screenObj = NULL;
     Rect pcRect = Rect(0, 0, 64, 64);
@@ -52,7 +52,6 @@ extern "C" int main(int argc, char *argv[])
         exit(2);
     }
     
-    done = 0;
     screenObj = new Surface(screen);
     while (!done)
     {
@@ -66,13 +65,14 @@ extern "C" int main(int argc, char *argv[])
                 case SDL_MOUSEBUTTONDOWN:
                     break;
                 case SDL_KEYDOWN:
+                {
                     // Key definitions
-                    switch(event.key.keysym.sym)
+                    switch (event.key.keysym.sym)
                     {
                         case SDLK_ESCAPE:
                         {
                             // Quit
-                            done = 1;
+                            done = true;
                             break;
                         }
                         case SDLK_UP:
@@ -101,19 +101,21 @@ extern "C" int main(int argc, char *argv[])
                         }   
                     }
                     break;
+                }
                 case SDL_QUIT:
                     // !DO NOT REMOVE!
                     // Terminate the loop if a QUIT event is received.
                     //
                     // If this is removed, the user cannot quit by using the
                     // close button or by other OS-specific means.
-                    done = 1;
+                    done = true;
                     break;
                 default:
                     break;
             }
         }
         // Update
+        // TODO: insert updating code here...
         // Draw
         screenObj->Fill(screenObj->GetRect(), 0, 0, 255);
         screenObj->Fill(pcRect, 0, 255, 0);
