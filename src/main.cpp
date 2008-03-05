@@ -138,19 +138,19 @@ extern "C" int main(int argc, char *argv[])
     key = SDL_GetKeyState(NULL); //so holding down buttons loops
     if ( key[SDLK_UP] ) 
     { 
-        pcRect.SetY(-1); 
+        pcRect.Move(0, -1); 
     }
     if ( key[SDLK_DOWN] ) 
     { 
-        pcRect.SetY(1); 
+        pcRect.Move(0, 1); 
     }
     if ( key[SDLK_LEFT] ) 
     { 
-        pcRect.SetX(-1);
+        pcRect.Move(-1, 0);
     }
     if ( key[SDLK_RIGHT] )
     { 
-        pcRect.SetX(1); 
+        pcRect.Move(1, 0); 
     }
 
         // Update
