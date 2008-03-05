@@ -37,7 +37,7 @@ double Rect::GetX(void)
 
 void Rect::SetX(double nx)
 {
-    x += nx;
+    x = nx;
 }
 
 double Rect::GetY(void)
@@ -47,7 +47,7 @@ double Rect::GetY(void)
 
 void Rect::SetY(double ny)
 {
-    y += ny;
+    y = ny;
 }
 
 void Rect::Move(double dx, double dy)
