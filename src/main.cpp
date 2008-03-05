@@ -65,7 +65,55 @@ extern "C" int main(int argc, char *argv[])
                 case SDL_MOUSEBUTTONDOWN:
                     break;
                 case SDL_KEYDOWN:
-                    /* Any keypress quits the app... */
+                    /* Keys definitions */
+                    //Quit
+                    if(event.key.keysym.sym==SDLK_ESCAPE)
+                    {
+                        done = 1;
+                        break;
+                    }
+                    //First person Controls
+                    //up
+                    if(event.key.keysym.sym==SDLK_w)
+                    {
+                        //to be defined :)
+                    }
+                    //down
+                    if(event.key.keysym.sym==SDLK_s)
+                    {
+                        //to be defined :)
+                    }
+                    //right
+                    if(event.key.keysym.sym==SDLK_a)
+                    {
+                        //to be defined :)
+                    }
+                    //left
+                    if(event.key.keysym.sym==SDLK_d)
+                    {
+                        // to be defined :)
+                    }
+                    // Second Person Controls
+                    //up
+                    if(event.key.keysym.sym==SDLK_UP)
+                    {
+                        //to be definedlatter:)
+                    }
+                    //down
+                    if(event.key.keysym.sys==SDLK_DOWN)
+                    {
+                        //to be defined:)
+                    }
+                    //right
+                    if(event.key.keysym.sys==SDLK_RIGHT)
+                    {
+                        //to be defined :)
+                    }
+                    //left
+                    if(event.key.keysysm.sys==SDLK_Left)
+                    {
+                        //To be defined :)
+                    }
                 case SDL_QUIT:
                     done = 1;
                     break;
