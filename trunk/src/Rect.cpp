@@ -50,6 +50,12 @@ void Rect::SetY(double ny)
     y = ny;
 }
 
+void Rect::SetXY(double dx, double dy)
+{
+    x = dx;
+    y = dy;   
+}
+
 void Rect::Move(double dx, double dy)
 {
     x += dx;
