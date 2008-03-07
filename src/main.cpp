@@ -35,7 +35,10 @@ extern "C" int main(int argc, char *argv[])
     SDL_Event event;
     Surface *screenObj = NULL;
     Rect pcRect = Rect(0, 0, 64, 64);
+    Rect pcRect2 = Rect(0, 0, 64, 64);
     Uint8* key;
+    
+    
     // Initialize the SDL library
     if (SDL_Init(initflags) < 0)
     {
@@ -51,6 +54,8 @@ extern "C" int main(int argc, char *argv[])
         SDL_Quit();
         exit(2);
     }
+    
+    SDL_WM_SetCaption( "Crab Battle", NULL ); //sets the title of the window
     
     screenObj = new Surface(screen);
     /*
@@ -119,6 +124,9 @@ extern "C" int main(int argc, char *argv[])
                     break;
             }
         }*/
+    pcRect.SetXY(160,300); //set initial position for Rect
+    pcRect2.SetXY(400,300); //set initial position for Rect2
+    
     while(!done)
     {
     while ( SDL_PollEvent(&event) )
@@ -136,21 +144,39 @@ extern "C" int main(int argc, char *argv[])
       }
     }//while
     key = SDL_GetKeyState(NULL); //so holding down buttons loops
-    if ( key[SDLK_UP] ) 
+//controls for first rect
+    if ( key[SDLK_w] ) 
     { 
         pcRect.Move(0, -1); 
     }
-    if ( key[SDLK_DOWN] ) 
+    if ( key[SDLK_s] ) 
     { 
         pcRect.Move(0, 1); 
     }
-    if ( key[SDLK_LEFT] ) 
+    if ( key[SDLK_a] ) 
     { 
         pcRect.Move(-1, 0);
     }
-    if ( key[SDLK_RIGHT] )
+    if ( key[SDLK_d] )
     { 
         pcRect.Move(1, 0); 
+    }
+//controls for second rect
+    if ( key[SDLK_UP] )
+    {
+        pcRect2.Move(0, -1);
+    }
+    if ( key[SDLK_DOWN] )
+    {
+        pcRect2.Move(0, 1);
+    }
+    if ( key[SDLK_LEFT] )
+    {
+        pcRect2.Move(-1, 0);
+    }
+    if ( key[SDLK_RIGHT] )
+    {
+        pcRect2.Move(1, 0);
     }
 
         // Update
@@ -158,6 +184,7 @@ extern "C" int main(int argc, char *argv[])
         // Draw
         screenObj->Fill(screenObj->GetRect(), 0, 0, 255);
         screenObj->Fill(pcRect, 0, 255, 0);
+        screenObj->Fill(pcRect2, 255, 255, 255);
         screenObj->Update(screenObj->GetRect());
     }//while
     
