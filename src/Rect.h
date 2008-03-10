@@ -54,10 +54,10 @@ namespace CrabBattle
         double GetHeight(void);
         // rect.SetHeight(height)
         void SetHeight(double);
-        // rect.ConvertToSDLRect()
+        // (SDL_Rect)rect
         // Converts the rectangle data to an SDL_Rect.  As long as you use the
         // classes, you shouldn't need to use this very often.
-        SDL_Rect ConvertToSDLRect(void);
+        operator SDL_Rect(void);
     };
 }
 

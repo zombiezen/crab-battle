@@ -82,7 +82,7 @@ void Rect::SetHeight(double nh)
     h = nh;
 }
 
-SDL_Rect Rect::ConvertToSDLRect(void)
+Rect::operator SDL_Rect(void)
 {
     return (SDL_Rect){(Sint16)x, (Sint16)y, (Uint16)w, (Uint16)h};
 }
