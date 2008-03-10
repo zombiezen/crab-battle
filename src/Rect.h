@@ -58,6 +58,16 @@ namespace CrabBattle
         // Converts the rectangle data to an SDL_Rect.  As long as you use the
         // classes, you shouldn't need to use this very often.
         operator SDL_Rect(void);
+        /*** CONVENIENT ACCESSORS ***/
+        /* All of these accessors move their respective side, but maintain the width and height. */
+        double GetTop(void);
+        void SetTop(double);
+        double GetBottom(void);
+        void SetBottom(double);
+        double GetLeft(void);
+        void SetLeft(double);
+        double GetRight(void);
+        void SetRight(double);
     };
 }
 
