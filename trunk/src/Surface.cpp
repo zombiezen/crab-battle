@@ -74,22 +74,22 @@ Rect Surface::GetRect(void)
 void Surface::Fill(Rect dest, unsigned int r, unsigned int g, unsigned int b)
 {
     Uint32 color = SDL_MapRGB(surface->format, r, g, b);
-    SDL_Rect actualRect = dest.ConvertToSDLRect();
+    SDL_Rect actualRect = dest;
     SDL_FillRect(surface, &actualRect, color);
     // TODO: If result of SDL_FillRect is -1, raise an error
 }
 
 void Surface::Blit(Surface *src, Rect dest)
 {
-    SDL_Rect r = dest.ConvertToSDLRect();
+    SDL_Rect r = dest;
     SDL_BlitSurface(src->GetSurface(), NULL, surface, &r);
     // TODO: Raise an error if SDL_BlitSurface doesn't return 0
 }
 
 void Surface::Blit(Surface *src, Rect dest, Rect srcRegion)
 {
-    SDL_Rect r_dest = dest.ConvertToSDLRect();
-    SDL_Rect r_src = srcRegion.ConvertToSDLRect();
+    SDL_Rect r_dest = dest;
+    SDL_Rect r_src = srcRegion;
     SDL_BlitSurface(src->GetSurface(), &r_src, surface, &r_dest);
     // TODO: Raise an error if SDL_BlitSurface doesn't return 0
 }
@@ -101,6 +101,18 @@ void Surface::Update(Rect region)
                    (Sint32)region.GetY(),
                    (Uint32)region.GetWidth(),
                    (Uint32)region.GetHeight());
+}
+
+Surface &Surface::operator=(const Surface &newSurf)
+{
+    surface = newSurf.surface;
+    surface->refcount++;
+}
+
+Surface &Surface::operator=(SDL_Surface *newSurf)
+{
+    surface = newSurf;
+    surface->refcount++;
 }
 
 Surface::~Surface(void)

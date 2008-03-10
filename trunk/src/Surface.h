@@ -38,6 +38,8 @@ namespace CrabBattle
         // Surface(surface)
         // Creates a surface object that points to an existing SDL_Surface
         Surface(SDL_Surface *);
+        // Surface(surface_object)
+        Surface(Surface *);
         /*** ACCESSORS ***/
         // surface.GetSurface()
         // Retrieves the underlying SDL_Surface
@@ -64,6 +66,10 @@ namespace CrabBattle
         // Updates region on the screen.  This really only makes sense for
         // the surface given by getVideoSurface().
         void Update(Rect);
+        /*** OPERATORS ***/
+        operator SDL_Surface(void);
+        Surface &operator=(const Surface &);
+        Surface &operator=(SDL_Surface *);
         /*** DESTRUCTOR ***/
         ~Surface(void);
     };
