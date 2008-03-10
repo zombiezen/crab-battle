@@ -86,3 +86,43 @@ Rect::operator SDL_Rect(void)
 {
     return (SDL_Rect){(Sint16)x, (Sint16)y, (Uint16)w, (Uint16)h};
 }
+
+double Rect::GetTop(void)
+{
+    return y;
+}
+
+void Rect::SetTop(double top)
+{
+    y = top;
+}
+
+double Rect::GetBottom(void)
+{
+    return y + h;
+}
+
+void Rect::SetBottom(double bottom)
+{
+    y = bottom - h;
+}
+
+double Rect::GetLeft(void)
+{
+    return x;
+}
+
+void Rect::SetLeft(double left)
+{
+    x = left;
+}
+
+double Rect::GetRight(void)
+{
+    return x + w;
+}
+
+void Rect::SetRight(double right)
+{
+    x = right - w;
+}
