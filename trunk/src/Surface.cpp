@@ -107,12 +107,14 @@ Surface &Surface::operator=(const Surface &newSurf)
 {
     surface = newSurf.surface;
     surface->refcount++;
+    return *this;
 }
 
 Surface &Surface::operator=(SDL_Surface *newSurf)
 {
     surface = newSurf;
     surface->refcount++;
+    return *this;
 }
 
 Surface::~Surface(void)
