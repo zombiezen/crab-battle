@@ -1,7 +1,7 @@
 [Project]
 FileName=Crab Battle.dev
 Name=Crab Battle
-UnitCount=7
+UnitCount=9
 Type=0
 Ver=3
 IsCpp=1
@@ -113,7 +113,7 @@ ResourceIncludes=
 MakeIncludes=
 Compiler=-I C:\Dev-Cpp\include\SDL_@@_
 CppCompiler=-I C:\Dev-Cpp\include\SDL_@@_
-Linker=-lSDL -lSDL_image_@@_-mwindows_@@_
+Linker=-lSDL -lSDL_image -mwindows_@@_
 PreprocDefines=_@@_
 CompilerSettings=0000000000000000000000
 Icon=
@@ -129,4 +129,24 @@ IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=0
 compilerType=0
+
+[Unit8]
+FileName=src\BaseObject.h
+CompileCpp=1
+Folder=Headers
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit9]
+FileName=src\BaseObject.cpp
+CompileCpp=1
+Folder=Classes
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
 
