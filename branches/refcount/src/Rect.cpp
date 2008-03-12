@@ -9,6 +9,7 @@
 #include "Rect.h"
 
 using CrabBattle::Rect;
+using CrabBattle::BaseObject;
 
 Rect::Rect(void)
 {
@@ -125,4 +126,8 @@ double Rect::GetRight(void)
 void Rect::SetRight(double right)
 {
     x = right - w;
+}
+
+Rect::~Rect(void)
+{
 }
