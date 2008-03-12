@@ -7,6 +7,7 @@
  */
 
 #include "SDL.h"
+#include "BaseObject.h"
 
 #ifndef _CRAB_BATTLE_RECT_H_
 #define _CRAB_BATTLE_RECT_H_
@@ -18,7 +19,7 @@ namespace CrabBattle
      * For simplicity, all rectangles use the top-left for the origin.  Yes, I
      * know that's not mathematically correct, but that's what SDL does.
      */
-    class Rect
+    class Rect : public BaseObject
     {
     private:
         double x, y, w, h;
@@ -68,6 +69,7 @@ namespace CrabBattle
         void SetLeft(double);
         double GetRight(void);
         void SetRight(double);
+        ~Rect();
     };
 }
 
