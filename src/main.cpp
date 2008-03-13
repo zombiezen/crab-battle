@@ -57,7 +57,7 @@ extern "C" int main(int argc, char *argv[])
     
     SDL_WM_SetCaption( "Crab Battle", NULL ); //sets the title of the window
     
-    screenObj = new Surface(screen);
+    screenObj = Surface::GetVideoSurface();
     /*
     while (!done)
     {

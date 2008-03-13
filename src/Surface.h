@@ -26,6 +26,9 @@ namespace CrabBattle
     private:
         SDL_Surface *surface;
     public:
+        // screen = Surface::GetVideoSurface()
+        // Retrieves the screen that we're actually drawing to
+        static Surface *GetVideoSurface(void);
         /*** CONSTRUCTORS ***/
         // Surface(width, height)
         Surface(unsigned int, unsigned int);
@@ -74,10 +77,6 @@ namespace CrabBattle
         /*** DESTRUCTOR ***/
         ~Surface(void);
     };
-    
-    // screen = getVideoSurface()
-    // Retrieves the screen that we're actually drawing to.
-    Surface *getVideoSurface(void);
 }
 
 #endif
