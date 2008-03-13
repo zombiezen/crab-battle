@@ -69,7 +69,7 @@ namespace CrabBattle
         void SetLeft(double);
         double GetRight(void);
         void SetRight(double);
-        ~Rect();
+        ~Rect() {};
     };
 }
 

@@ -8,6 +8,7 @@
 
 #include "SDL.h"
 
+#include "BaseObject.h"
 #include "Rect.h"
 
 #ifndef _CRAB_BATTLE_SURFACE_H_
@@ -20,7 +21,7 @@ namespace CrabBattle
      * A surface is, in layman's terms, an image.  This image can be blitted,
      * which means drawn on the screen, or directly modified pixel-by-pixel.
      */
-    class Surface
+    class Surface : public BaseObject
     {
     private:
         SDL_Surface *surface;
