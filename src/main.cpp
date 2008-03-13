@@ -28,7 +28,7 @@ using namespace CrabBattle;
 extern "C" int main(int argc, char *argv[])
 {
     Uint32 initflags = SDL_INIT_VIDEO;  // See documentation for details
-    SDL_Surface *screen;
+    SDL_Surface *screen, *background, *player1, *player2;
     Uint8 video_bpp = 0;
     Uint32 videoflags = SDL_SWSURFACE;
     bool done = false;
@@ -38,6 +38,12 @@ extern "C" int main(int argc, char *argv[])
     Rect pcRect2 = Rect(0, 0, 64, 64);
     Uint8* key;
     
+       
+    //TODO: add some sort of user input to change background image
+    //      possibly in the form of if(input==2)background=LoadBMP bg2.bmp
+    background = SDL_LoadBMP("images/bg.bmp");
+    player1 = SDL_LoadBMP("images/player.bmp");
+    player2 = SDL_LoadBMP("images/player2.bmp");
     
     // Initialize the SDL library
     if (SDL_Init(initflags) < 0)
@@ -127,6 +133,8 @@ extern "C" int main(int argc, char *argv[])
     pcRect.SetXY(160,300); //set initial position for Rect
     pcRect2.SetXY(400,300); //set initial position for Rect2
     
+    //screenObj->Update(screenObj->GetRect());
+
     while(!done)
     {
     while ( SDL_PollEvent(&event) )
@@ -190,10 +198,14 @@ extern "C" int main(int argc, char *argv[])
         // Update
         // TODO: insert updating code here...
         // Draw
-        screenObj->Fill(screenObj->GetRect(), 0, 0, 255);
-        screenObj->Fill(pcRect, 0, 255, 0);
-        screenObj->Fill(pcRect2, 255, 255, 255);
-        screenObj->Update(screenObj->GetRect());
+        //screenObj->Fill(screenObj->GetRect(), 0, 0, 255);
+        screenObj->Blit(background); //blits the background
+        screenObj->Blit(player1, pcRect); //blits player 1 image at pcRect
+        screenObj->Blit(player2, pcRect2); //blits player 2 image at pcRect2
+        //screenObj->Fill(pcRect, 0, 255, 0);
+        //screenObj->Fill(pcRect2, 255, 255, 255);
+        SDL_Flip(screen); //flips screen buffer
+        //screenObj->Update(screenObj->GetRect());
     }//while
     
     delete screenObj;

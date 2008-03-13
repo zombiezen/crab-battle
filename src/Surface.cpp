@@ -79,10 +79,24 @@ void Surface::Fill(Rect dest, unsigned int r, unsigned int g, unsigned int b)
     // TODO: If result of SDL_FillRect is -1, raise an error
 }
 
+void Surface::Blit(SDL_Surface *src) //SDL_Surface
+{
+  SDL_BlitSurface(src, NULL, surface, NULL); //blits the entire screen
+  //SDL_BlitSurface(src, NULL, screen, &dest);
+
+}
+
 void Surface::Blit(Surface *src, Rect dest)
 {
     SDL_Rect r = dest;
     SDL_BlitSurface(src->GetSurface(), NULL, surface, &r);
+    // TODO: Raise an error if SDL_BlitSurface doesn't return 0
+}
+
+void Surface::Blit(SDL_Surface *src, Rect dest) //SDL_Surface
+{
+    SDL_Rect r = dest;
+    SDL_BlitSurface(src, NULL, surface, &r);
     // TODO: Raise an error if SDL_BlitSurface doesn't return 0
 }
 
