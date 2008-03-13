@@ -11,6 +11,9 @@
 #ifndef _CRAB_BATTLE_BASEOBJECT_H_
 #define _CRAB_BATTLE_BASEOBJECT_H_
 
+// Prints refcount debugging information
+//#define DEBUG_BASEOBJECT_REFCOUNT
+
 namespace CrabBattle
 {
     /* Base object class
