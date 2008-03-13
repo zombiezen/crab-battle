@@ -55,8 +55,12 @@ namespace CrabBattle
         // surface.Fill(region, red, green, blue)
         // Fills a rectangle with the given color
         void Fill(Rect, unsigned int, unsigned int, unsigned int);
+        //destination.Blit(source);
+        //blits the entire screen
+        void Blit(SDL_Surface *);
         // destination.Blit(source, location)
         // Blends source onto destination at rectangle location.
+        void Blit(SDL_Surface *, Rect);
         void Blit(Surface *, Rect);
         // destination.Blit(source, location, srcArea)
         // Blends source onto destination at rectangle location, only copying
