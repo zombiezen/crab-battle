@@ -148,35 +148,43 @@ extern "C" int main(int argc, char *argv[])
     if ( key[SDLK_w] ) 
     { 
         pcRect.Move(0, -1); 
+        if(pcRect.GetY()<0)pcRect.SetY(0);
     }
     if ( key[SDLK_s] ) 
     { 
         pcRect.Move(0, 1); 
+        if(pcRect.GetY()>416)pcRect.SetY(416); //480(size of screen) - 64(size of pcRect)
     }
     if ( key[SDLK_a] ) 
     { 
         pcRect.Move(-1, 0);
+        if(pcRect.GetX()<0)pcRect.SetX(0);
     }
     if ( key[SDLK_d] )
     { 
         pcRect.Move(1, 0); 
+        if(pcRect.GetX()>576)pcRect.SetX(576);//640(size of screen) - 64(size of pcRect)
     }
 //controls for second rect
     if ( key[SDLK_UP] )
     {
         pcRect2.Move(0, -1);
+        if(pcRect2.GetY()<0)pcRect2.SetY(0);
     }
     if ( key[SDLK_DOWN] )
     {
         pcRect2.Move(0, 1);
+        if(pcRect2.GetY()>416)pcRect2.SetY(416); //480(size of screen) - 64(size of pcRect2)
     }
     if ( key[SDLK_LEFT] )
     {
         pcRect2.Move(-1, 0);
+        if(pcRect2.GetX()<0)pcRect2.SetX(0);
     }
     if ( key[SDLK_RIGHT] )
     {
         pcRect2.Move(1, 0);
+        if(pcRect2.GetX()>576)pcRect2.SetX(576);//640(size of screen) - 64(size of pcRect2)
     }
 
         // Update
