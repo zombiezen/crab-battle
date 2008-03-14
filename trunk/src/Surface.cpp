@@ -34,7 +34,7 @@ Surface::Surface(unsigned int w, unsigned int h)
 #ifndef NO_SDL_IMAGE
 Surface::Surface(const char *fname)
 {
-    //surface = IMG_Load(fname);
+    surface = IMG_Load(fname);
     // TODO: If surface is NULL, raise an error
 }
 #endif
