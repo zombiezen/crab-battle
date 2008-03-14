@@ -75,11 +75,11 @@ extern "C" int main(int argc, char *argv[])
                 //
                 // If this is removed, the user cannot quit by using the
                 // close button or by other OS-specific means.
-                done = 1;
+                done = true;
             }
             if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
             {
-                done = 1; 
+                done = true; 
             }
         }
         // Do time stuff
@@ -137,5 +137,5 @@ extern "C" int main(int argc, char *argv[])
     
     // Clean up the SDL library
     SDL_Quit();
-    return(0);
+    return 0;
 }
