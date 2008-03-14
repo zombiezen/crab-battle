@@ -8,6 +8,7 @@
 
 #include "Rect.h"
 
+using CrabBattle::BaseObject;
 using CrabBattle::Rect;
 
 Rect::Rect(void)
