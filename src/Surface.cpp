@@ -18,13 +18,12 @@
 using CrabBattle::Surface;
 using CrabBattle::Rect;
 
-static Surface *_gVideoSurface = NULL;
-
-Surface *getVideoSurface(void)
+Surface *Surface::GetVideoSurface(void)
 {
-    if (_gVideoSurface == NULL)
-        _gVideoSurface = new Surface(SDL_GetVideoSurface());
-    return _gVideoSurface;
+    static Surface *screen = NULL;
+    if (screen == NULL)
+        screen = new Surface(SDL_GetVideoSurface());
+    return screen;
 }
 
 Surface::Surface(unsigned int w, unsigned int h)

@@ -6,6 +6,7 @@
  *  $Id$
  */
 
+#include "BaseObject.h"
 #include "Rect.h"
 #include "Surface.h"
 
@@ -20,12 +21,11 @@ namespace CrabBattle
      *  image data.  A sprite can be described as any object that could possibly
      *  move.
      */
-    class Sprite
+    class Sprite : public BaseObject
     {
     private:
         double x, y;
         Surface *surface;
-        bool created_surface;
     public:
         /*** CONSTRUCTORS ***/
         // Sprite(surface)

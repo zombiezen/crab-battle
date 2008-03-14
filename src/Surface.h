@@ -8,6 +8,7 @@
 
 #include "SDL.h"
 
+#include "BaseObject.h"
 #include "Rect.h"
 
 #ifndef _CRAB_BATTLE_SURFACE_H_
@@ -20,11 +21,14 @@ namespace CrabBattle
      * A surface is, in layman's terms, an image.  This image can be blitted,
      * which means drawn on the screen, or directly modified pixel-by-pixel.
      */
-    class Surface
+    class Surface : public BaseObject
     {
     private:
         SDL_Surface *surface;
     public:
+        // screen = Surface::GetVideoSurface()
+        // Retrieves the screen that we're actually drawing to
+        static Surface *GetVideoSurface(void);
         /*** CONSTRUCTORS ***/
         // Surface(width, height)
         Surface(unsigned int, unsigned int);
@@ -77,10 +81,6 @@ namespace CrabBattle
         /*** DESTRUCTOR ***/
         ~Surface(void);
     };
-    
-    // screen = getVideoSurface()
-    // Retrieves the screen that we're actually drawing to.
-    Surface *getVideoSurface(void);
 }
 
 #endif
