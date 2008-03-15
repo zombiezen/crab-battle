@@ -19,8 +19,20 @@
 using namespace std;
 using namespace CrabBattle;
 
+// CONSTANTS //
+
+// Globally useful constants
 const unsigned short kUpdateRate = 33; // in ms
-const unsigned short kBoxSpeed = 20;
+const int kScreenWidth = 640; // in pixels
+const int kScreenHeight = 480; // in pixels
+
+// Program initialization constants
+static const Uint32 kMainInitFlags = SDL_INIT_VIDEO;
+static const Uint32 kMainVideoFlags = SDL_SWSURFACE | SDL_DOUBLEBUF;
+static const int kMainBitsPerPixel = 0;
+
+// Game state-specific constants
+static const unsigned short kBoxSpeed = 20;
 
 // Our wonderful main function
 // The extern "C" is necessary so that mac_main and SDL can get access to it
@@ -30,10 +42,8 @@ const unsigned short kBoxSpeed = 20;
 #endif
 extern "C" int main(int argc, char *argv[])
 {
-    Uint32 initflags = SDL_INIT_VIDEO;  // See documentation for details
-    SDL_Surface *screen, *background, *player1, *player2;
-    Uint8 video_bpp = 0;
-    Uint32 videoflags = SDL_SWSURFACE | SDL_DOUBLEBUF;
+    SDL_Surface *screen;
+    SDL_Surface *background, *player1, *player2;
     bool done = false;
     SDL_Event event;
     Surface *screenObj = NULL;
@@ -51,17 +61,20 @@ extern "C" int main(int argc, char *argv[])
     player2 = SDL_LoadBMP("images/player2.bmp");
     
     // Initialize the SDL library
-    if (SDL_Init(initflags) < 0)
+    if (SDL_Init(kMainInitFlags) < 0)
     {
         cerr << "Couldn't initialize SDL: " << SDL_GetError() << endl;
         exit(1);
     }
     
-    // Set 640x480 video mode
-    screen = SDL_SetVideoMode(640, 480, video_bpp, videoflags);
+    // Set video mode
+    screen = SDL_SetVideoMode(kScreenWidth, kScreenHeight, kMainBitsPerPixel, kMainVideoFlags);
     if (screen == NULL)
     {
-        cerr << "Couldn't set 640x480x" << video_bpp << " video mode: " << SDL_GetError() << endl;
+        cerr << "Couldn't set " << kScreenWidth
+                         << "x" << kScreenHeight
+                         << "x" << kScreenWidth;
+        cerr << " video mode: " << SDL_GetError() << endl;
         SDL_Quit();
         exit(2);
     }
@@ -88,10 +101,11 @@ extern "C" int main(int argc, char *argv[])
                 done = true; 
             }
         }
-        // Do time stuff
+        // Update timer
         currentTime = SDL_GetTicks();
         deltaTime = currentTime - lastTime;
         cumulativeTime += deltaTime;
+        // Run an update if our rate has elapsed
         if (cumulativeTime > kUpdateRate)
         {
             cumulativeTime -= kUpdateRate;
@@ -106,8 +120,8 @@ extern "C" int main(int argc, char *argv[])
             if (key[SDLK_s])
             {
                 pcRect1.Move(0, kBoxSpeed);
-                if (pcRect1.GetBottom() > 480)
-                    pcRect1.SetBottom(480);
+                if (pcRect1.GetBottom() > kScreenHeight)
+                    pcRect1.SetBottom(kScreenHeight);
             }
             if (key[SDLK_a])
             {
@@ -118,8 +132,8 @@ extern "C" int main(int argc, char *argv[])
             if (key[SDLK_d])
             {
                 pcRect1.Move(kBoxSpeed, 0);
-                if (pcRect1.GetRight() > 640)
-                    pcRect1.SetRight(640);
+                if (pcRect1.GetRight() > kScreenWidth)
+                    pcRect1.SetRight(kScreenWidth);
             }
             if (key[SDLK_UP])
             {
@@ -130,8 +144,8 @@ extern "C" int main(int argc, char *argv[])
             if (key[SDLK_DOWN])
             {
                 pcRect2.Move(0, kBoxSpeed);
-                if (pcRect2.GetBottom() > 480)
-                    pcRect2.SetBottom(480);
+                if (pcRect2.GetBottom() > kScreenHeight)
+                    pcRect2.SetBottom(kScreenHeight);
             }
             if (key[SDLK_LEFT])
             {
@@ -142,22 +156,19 @@ extern "C" int main(int argc, char *argv[])
             if (key[SDLK_RIGHT])
             {
                 pcRect2.Move(kBoxSpeed, 0);
-                if (pcRect2.GetRight() > 640)
-                    pcRect2.SetRight(640);
+                if (pcRect2.GetRight() > kScreenWidth)
+                    pcRect2.SetRight(kScreenWidth);
             }
         }
         // Get ready for next timer loop
         lastTime = currentTime;
         // Draw
-        //screenObj->Fill(screenObj->GetRect(), 0, 0, 255);
-        screenObj->Blit(background); //blits the background
-        screenObj->Blit(player1, pcRect1); //blits player 1 image at pcRect
-        screenObj->Blit(player2, pcRect2); //blits player 2 image at pcRect2
-        //screenObj->Fill(pcRect1, 0, 255, 0);
-        //screenObj->Fill(pcRect2, 255, 255, 255);
-        SDL_Flip(screen); //flips screen buffer
-        //screenObj->Update(screenObj->GetRect());
-    }//while
+        screenObj->Fill(screenObj->GetRect(), 0, 0, 0); // Clears screen
+        screenObj->Blit(background); // Blits the background
+        screenObj->Blit(player1, pcRect1); // Blits player 1 image at pcRect
+        screenObj->Blit(player2, pcRect2); // Blits player 2 image at pcRect2
+        SDL_Flip(screen); // Flips second buffer
+    }
     
     delete screenObj;
     
