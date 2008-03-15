@@ -7,7 +7,6 @@
  */
 
 #include "SDL.h"
-#include "BaseObject.h"
 
 #ifndef _CRAB_BATTLE_RECT_H_
 #define _CRAB_BATTLE_RECT_H_
@@ -19,7 +18,7 @@ namespace CrabBattle
      * For simplicity, all rectangles use the top-left for the origin.  Yes, I
      * know that's not mathematically correct, but that's what SDL does.
      */
-    class Rect : public BaseObject
+    class Rect
     {
     private:
         double x, y, w, h;
@@ -42,8 +41,6 @@ namespace CrabBattle
         double GetY(void);
         // rect.SetY(y)
         void SetY(double);
-        //rect.SetXY(X, Y);
-        void SetXY(double, double);
         // rect.Move(deltaX, deltaY)
         // Moves a rectangle to x + deltaX, y + deltaY
         void Move(double, double);
@@ -55,21 +52,10 @@ namespace CrabBattle
         double GetHeight(void);
         // rect.SetHeight(height)
         void SetHeight(double);
-        // (SDL_Rect)rect
+        // rect.ConvertToSDLRect()
         // Converts the rectangle data to an SDL_Rect.  As long as you use the
         // classes, you shouldn't need to use this very often.
-        operator SDL_Rect(void);
-        /*** CONVENIENT ACCESSORS ***/
-        /* All of these accessors move their respective side, but maintain the width and height. */
-        double GetTop(void);
-        void SetTop(double);
-        double GetBottom(void);
-        void SetBottom(double);
-        double GetLeft(void);
-        void SetLeft(double);
-        double GetRight(void);
-        void SetRight(double);
-        ~Rect() {};
+        SDL_Rect ConvertToSDLRect(void);
     };
 }
 

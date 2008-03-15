@@ -8,7 +8,6 @@
 
 #include "Rect.h"
 
-using CrabBattle::BaseObject;
 using CrabBattle::Rect;
 
 Rect::Rect(void)
@@ -51,12 +50,6 @@ void Rect::SetY(double ny)
     y = ny;
 }
 
-void Rect::SetXY(double dx, double dy)
-{
-    x = dx;
-    y = dy;   
-}
-
 void Rect::Move(double dx, double dy)
 {
     x += dx;
@@ -83,47 +76,7 @@ void Rect::SetHeight(double nh)
     h = nh;
 }
 
-Rect::operator SDL_Rect(void)
+SDL_Rect Rect::ConvertToSDLRect(void)
 {
     return (SDL_Rect){(Sint16)x, (Sint16)y, (Uint16)w, (Uint16)h};
-}
-
-double Rect::GetTop(void)
-{
-    return y;
-}
-
-void Rect::SetTop(double top)
-{
-    y = top;
-}
-
-double Rect::GetBottom(void)
-{
-    return y + h;
-}
-
-void Rect::SetBottom(double bottom)
-{
-    y = bottom - h;
-}
-
-double Rect::GetLeft(void)
-{
-    return x;
-}
-
-void Rect::SetLeft(double left)
-{
-    x = left;
-}
-
-double Rect::GetRight(void)
-{
-    return x + w;
-}
-
-void Rect::SetRight(double right)
-{
-    x = right - w;
 }

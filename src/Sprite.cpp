@@ -8,7 +8,6 @@
 
 #include "Sprite.h"
 
-using CrabBattle::BaseObject;
 using CrabBattle::Sprite;
 using CrabBattle::Rect;
 using CrabBattle::Surface;
@@ -17,6 +16,7 @@ Sprite::Sprite(Surface *surf)
 {
     x = y = 0.0;
     surface = surf;
+    created_surface = false;
 }
 
 Sprite::Sprite(Surface *surf, Rect pos)
@@ -24,6 +24,7 @@ Sprite::Sprite(Surface *surf, Rect pos)
     x = pos.GetX();
     y = pos.GetY();
     surface = surf;
+    created_surface = false;
 }
 
 Rect Sprite::GetPosition(void)
@@ -44,11 +45,10 @@ Surface *Sprite::GetSurface(void)
 
 void Sprite::SetSurface(Surface *surf)
 {
-    if (surface != NULL)
-        surface->DelRef();
+    if (created_surface)
+        delete surface; // safe, because Surface class knows to SDL_FreeSurface
     surface = surf;
-    if (surface != NULL)
-        surface->AddRef();
+    created_surface = false;
 }
 
 void Sprite::Display(Surface *dest)

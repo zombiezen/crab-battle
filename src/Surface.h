@@ -8,7 +8,6 @@
 
 #include "SDL.h"
 
-#include "BaseObject.h"
 #include "Rect.h"
 
 #ifndef _CRAB_BATTLE_SURFACE_H_
@@ -21,14 +20,11 @@ namespace CrabBattle
      * A surface is, in layman's terms, an image.  This image can be blitted,
      * which means drawn on the screen, or directly modified pixel-by-pixel.
      */
-    class Surface : public BaseObject
+    class Surface
     {
     private:
         SDL_Surface *surface;
     public:
-        // screen = Surface::GetVideoSurface()
-        // Retrieves the screen that we're actually drawing to
-        static Surface *GetVideoSurface(void);
         /*** CONSTRUCTORS ***/
         // Surface(width, height)
         Surface(unsigned int, unsigned int);
@@ -42,8 +38,6 @@ namespace CrabBattle
         // Surface(surface)
         // Creates a surface object that points to an existing SDL_Surface
         Surface(SDL_Surface *);
-        // Surface(surface_object)
-        Surface(Surface *);
         /*** ACCESSORS ***/
         // surface.GetSurface()
         // Retrieves the underlying SDL_Surface
@@ -59,12 +53,8 @@ namespace CrabBattle
         // surface.Fill(region, red, green, blue)
         // Fills a rectangle with the given color
         void Fill(Rect, unsigned int, unsigned int, unsigned int);
-        //destination.Blit(source);
-        //blits the entire screen
-        void Blit(SDL_Surface *);
         // destination.Blit(source, location)
         // Blends source onto destination at rectangle location.
-        void Blit(SDL_Surface *, Rect);
         void Blit(Surface *, Rect);
         // destination.Blit(source, location, srcArea)
         // Blends source onto destination at rectangle location, only copying
@@ -74,13 +64,13 @@ namespace CrabBattle
         // Updates region on the screen.  This really only makes sense for
         // the surface given by getVideoSurface().
         void Update(Rect);
-        /*** OPERATORS ***/
-        operator SDL_Surface(void);
-        Surface &operator=(const Surface &);
-        Surface &operator=(SDL_Surface *);
         /*** DESTRUCTOR ***/
         ~Surface(void);
     };
+    
+    // screen = getVideoSurface()
+    // Retrieves the screen that we're actually drawing to.
+    Surface *getVideoSurface(void);
 }
 
 #endif
