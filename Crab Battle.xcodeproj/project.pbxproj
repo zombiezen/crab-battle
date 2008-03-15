@@ -12,6 +12,7 @@
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		918D79430D8C470B00DF7AB3 /* BaseObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 918D79410D8C470B00DF7AB3 /* BaseObject.cpp */; };
+		918D797D0D8C509F00DF7AB3 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 918D79780D8C509F00DF7AB3 /* images */; };
 		91A9F1400D70B9B900CB6365 /* mac_main.m in Sources */ = {isa = PBXBuildFile; fileRef = 91A9F13E0D70B9B900CB6365 /* mac_main.m */; };
 		91A9F1440D70B9E100CB6365 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91A9F1430D70B9E100CB6365 /* main.cpp */; };
 		91A9F15C0D70BDAF00CB6365 /* SDL_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91A9F15B0D70BDAF00CB6365 /* SDL_image.framework */; };
@@ -38,14 +39,15 @@
 
 /* Begin PBXFileReference section */
 		002F39F909D0881F00EBEB88 /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL.framework; path = /Library/Frameworks/SDL.framework; sourceTree = "<absolute>"; };
-		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		089C165DFE840E0CC02AAC07 /* InfoPlist.strings */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = InfoPlist.strings; path = English.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
-		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = SOURCE_ROOT; };
 		8D1107320486CEB800E47090 /* Crab Battle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Crab Battle.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		918D79410D8C470B00DF7AB3 /* BaseObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseObject.cpp; sourceTree = "<group>"; };
 		918D79420D8C470B00DF7AB3 /* BaseObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseObject.h; sourceTree = "<group>"; };
+		918D79780D8C509F00DF7AB3 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
 		91A9F13E0D70B9B900CB6365 /* mac_main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mac_main.m; sourceTree = "<group>"; };
 		91A9F13F0D70B9B900CB6365 /* mac_main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mac_main.h; sourceTree = "<group>"; };
 		91A9F1430D70B9E100CB6365 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
@@ -149,10 +151,11 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				918D79780D8C509F00DF7AB3 /* images */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 			);
-			name = Resources;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
@@ -209,6 +212,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
+				918D797D0D8C509F00DF7AB3 /* images in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,7 +238,7 @@
 		089C165CFE840E0CC02AAC07 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				089C165DFE840E0CC02AAC07 /* English */,
+				089C165DFE840E0CC02AAC07 /* InfoPlist.strings */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
