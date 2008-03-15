@@ -21,6 +21,7 @@
 		91A9F1960D70C7F000CB6365 /* Rect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91A9F1950D70C7F000CB6365 /* Rect.cpp */; };
 		91A9F1E40D70D2F100CB6365 /* Sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91A9F1E30D70D2F100CB6365 /* Sprite.cpp */; };
 		91A9F1E70D70D5AF00CB6365 /* Surface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91A9F1E60D70D5AF00CB6365 /* Surface.cpp */; };
+		91CD821A0D8C7EA10048A161 /* CrabBattle.icns in Resources */ = {isa = PBXBuildFile; fileRef = 91CD82190D8C7EA10048A161 /* CrabBattle.icns */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -61,6 +62,7 @@
 		91A9F1E30D70D2F100CB6365 /* Sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sprite.cpp; sourceTree = "<group>"; };
 		91A9F1E50D70D5AF00CB6365 /* Surface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Surface.h; sourceTree = "<group>"; };
 		91A9F1E60D70D5AF00CB6365 /* Surface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Surface.cpp; sourceTree = "<group>"; };
+		91CD82190D8C7EA10048A161 /* CrabBattle.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = CrabBattle.icns; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +153,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				91CD82190D8C7EA10048A161 /* CrabBattle.icns */,
 				918D79780D8C509F00DF7AB3 /* images */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
@@ -213,6 +216,7 @@
 			files = (
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				918D797D0D8C509F00DF7AB3 /* images in Resources */,
+				91CD821A0D8C7EA10048A161 /* CrabBattle.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
