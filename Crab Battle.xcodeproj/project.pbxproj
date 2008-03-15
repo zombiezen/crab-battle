@@ -22,6 +22,8 @@
 		91A9F1E40D70D2F100CB6365 /* Sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91A9F1E30D70D2F100CB6365 /* Sprite.cpp */; };
 		91A9F1E70D70D5AF00CB6365 /* Surface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91A9F1E60D70D5AF00CB6365 /* Surface.cpp */; };
 		91CD821A0D8C7EA10048A161 /* CrabBattle.icns in Resources */ = {isa = PBXBuildFile; fileRef = 91CD82190D8C7EA10048A161 /* CrabBattle.icns */; };
+		91CD824D0D8C824D0048A161 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91CD824C0D8C824D0048A161 /* State.cpp */; };
+		91CD82560D8C882F0048A161 /* GameState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91CD82550D8C882F0048A161 /* GameState.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -63,6 +65,11 @@
 		91A9F1E50D70D5AF00CB6365 /* Surface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Surface.h; sourceTree = "<group>"; };
 		91A9F1E60D70D5AF00CB6365 /* Surface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Surface.cpp; sourceTree = "<group>"; };
 		91CD82190D8C7EA10048A161 /* CrabBattle.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = CrabBattle.icns; sourceTree = "<group>"; };
+		91CD824B0D8C824D0048A161 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
+		91CD824C0D8C824D0048A161 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
+		91CD82530D8C86190048A161 /* constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
+		91CD82540D8C882F0048A161 /* GameState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameState.h; sourceTree = "<group>"; };
+		91CD82550D8C882F0048A161 /* GameState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameState.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +99,10 @@
 				91A9F1E30D70D2F100CB6365 /* Sprite.cpp */,
 				91A9F1E50D70D5AF00CB6365 /* Surface.h */,
 				91A9F1E60D70D5AF00CB6365 /* Surface.cpp */,
+				91CD824B0D8C824D0048A161 /* State.h */,
+				91CD824C0D8C824D0048A161 /* State.cpp */,
+				91CD82540D8C882F0048A161 /* GameState.h */,
+				91CD82550D8C882F0048A161 /* GameState.cpp */,
 			);
 			name = Classes;
 			path = src;
@@ -145,6 +156,7 @@
 				91A9F1430D70B9E100CB6365 /* main.cpp */,
 				91A9F13F0D70B9B900CB6365 /* mac_main.h */,
 				91A9F13E0D70B9B900CB6365 /* mac_main.m */,
+				91CD82530D8C86190048A161 /* constants.h */,
 			);
 			name = "Other Sources";
 			path = src;
@@ -233,6 +245,8 @@
 				91A9F1E40D70D2F100CB6365 /* Sprite.cpp in Sources */,
 				91A9F1E70D70D5AF00CB6365 /* Surface.cpp in Sources */,
 				918D79430D8C470B00DF7AB3 /* BaseObject.cpp in Sources */,
+				91CD824D0D8C824D0048A161 /* State.cpp in Sources */,
+				91CD82560D8C882F0048A161 /* GameState.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,6 +273,8 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/src/Crab_Battle_Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = MAC_OS_X;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				PRODUCT_NAME = "Crab Battle";
