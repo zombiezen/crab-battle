@@ -15,7 +15,7 @@
    sodipodi:version="0.32"
    inkscape:version="0.45.1"
    version="1.0"
-   sodipodi:docbase="/Users/ross/Desktop"
+   sodipodi:docbase="/Users/ross/src/crab-battle/artwork/icon"
    sodipodi:docname="Crab.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
    inkscape:export-filename="/Users/ross/Desktop/Crab16.png"
@@ -33,7 +33,7 @@
      objecttolerance="10"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.3867187"
+     inkscape:zoom="0.96930899"
      inkscape:cx="302.46074"
      inkscape:cy="283.25182"
      inkscape:document-units="px"
@@ -167,15 +167,14 @@
      inkscape:label="Screenshot"
      inkscape:groupmode="layer"
      id="layer1"
-     sodipodi:insensitive="true"
-     style="opacity:0.90697674;display:none">
+     style="opacity:0.55813952;display:none"
+     sodipodi:insensitive="true">
     <image
        y="122.36902"
        x="0"
        id="image2233"
        height="267.26196"
        width="512"
-       sodipodi:absref="/Users/ross/Desktop/Picture 2.png"
-       xlink:href="Picture 2.png" />
+       xlink:href="CrabScreenshot.png" />
   </g>
 </svg>
