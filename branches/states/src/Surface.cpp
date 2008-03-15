@@ -116,6 +116,16 @@ void Surface::Update(Rect region)
                    (Uint32)region.GetHeight());
 }
 
+void Surface::Flip(void)
+{
+    SDL_Flip(surface);
+}
+
+Surface::operator SDL_Surface*(void)
+{
+    return surface;
+}
+
 Surface &Surface::operator=(const Surface &newSurf)
 {
     surface = newSurf.surface;

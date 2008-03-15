@@ -72,10 +72,14 @@ namespace CrabBattle
         void Blit(Surface *, Rect, Rect);
         // screen.Update(region)
         // Updates region on the screen.  This really only makes sense for
-        // the surface given by getVideoSurface().
+        // the surface given by Surface::GetVideoSurface()
         void Update(Rect);
+        // screen.Flip()
+        // Flips the second buffer onto the screen.  This really only makes
+        // sense for the surface given by Surface::GetVideoSurface()
+        void Flip(void);
         /*** OPERATORS ***/
-        operator SDL_Surface(void);
+        operator SDL_Surface*(void);
         Surface &operator=(const Surface &);
         Surface &operator=(SDL_Surface *);
         /*** DESTRUCTOR ***/
