@@ -79,10 +79,13 @@ extern "C" int main(int argc, char *argv[])
         exit(2);
     }
     
+    // Set up window manager
     SDL_WM_SetCaption("Crab Battle", NULL); // Sets the title of the window
-    
     screenObj = Surface::GetVideoSurface();
+    if (kMainVideoFlags & SDL_FULLSCREEN)
+        SDL_ShowCursor(SDL_DISABLE);
     
+    // Run main event loop
     while (!done)
     {
         while (SDL_PollEvent(&event))
