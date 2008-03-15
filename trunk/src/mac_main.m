@@ -17,9 +17,9 @@
 // Use this flag to determine whether we use CPS (docking) or not
 #define SDL_USE_CPS 1
 
-/* For some reaon, Apple removed setAppleMenu from the headers in 10.4,
- but the method still is there and works. To avoid warnings, we declare
- it ourselves here. */
+/* For some reason, Apple removed setAppleMenu from the headers in 10.4,
+ * but the method still is there and works. To avoid warnings, we declare
+ * it ourselves here. */
 @interface NSApplication(SDL_Missing_Methods)
 - (void)setAppleMenu:(NSMenu *)menu;
 @end
@@ -78,20 +78,15 @@ static NSString *getApplicationName(void)
 // Set the working directory to the .app's parent directory
 - (void)setupWorkingDirectory:(BOOL)shouldChdir
 {
-    if (shouldChdir)
+    char parentdir[MAXPATHLEN];
+    CFURLRef url = CFBundleCopyResourcesDirectoryURL(CFBundleGetMainBundle());
+    
+    if (CFURLGetFileSystemRepresentation(url, YES, (UInt8 *)parentdir, MAXPATHLEN))
     {
-        char parentdir[MAXPATHLEN];
-        CFURLRef url = CFBundleCopyBundleURL(CFBundleGetMainBundle());
-        CFURLRef url2 = CFURLCreateCopyDeletingLastPathComponent(0, url);
-        
-        if (CFURLGetFileSystemRepresentation(url2, YES, (UInt8 *)parentdir, MAXPATHLEN))
-        {
-            assert(chdir(parentdir) == 0);   // chdir to the binary app's parent
-        }
-        
-        CFRelease(url);
-        CFRelease(url2);
+        assert(chdir(parentdir) == 0);   // chdir to the binary app's parent
     }
+    
+    CFRelease(url);
 }
 
 static void setApplicationMenu(void)
@@ -294,9 +289,9 @@ int main(int argc, char **argv)
 {
     // Copy the arguments into a global variable
     // This is passed if we are launched by double-clicking
-    if (argc >= 2 && strncmp (argv[1], "-psn", 4) == 0)
+    if (argc >= 2 && (strncmp(argv[1], "-psn", 4) == 0))
     {
-        gArgv = (char **)SDL_malloc(sizeof (char *) * 2);
+        gArgv = (char **)SDL_malloc(sizeof(char *) * 2);
         gArgv[0] = argv[0];
         gArgv[1] = NULL;
         gArgc = 1;
@@ -312,6 +307,6 @@ int main(int argc, char **argv)
         gFinderLaunch = NO;
     }
     
-    CustomApplicationMain (argc, argv);
+    CustomApplicationMain(argc, argv);
     return 0;
 }
