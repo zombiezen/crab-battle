@@ -170,8 +170,6 @@ extern "C" int main(int argc, char *argv[])
         SDL_Flip(screen); // Flips second buffer
     }
     
-    delete screenObj;
-    
     // Clean up the SDL library
     SDL_Quit();
     return 0;
