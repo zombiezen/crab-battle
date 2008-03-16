@@ -15,12 +15,19 @@ const unsigned short kBoxSpeed = 20;
 
 GameState::GameState(void)
 {
+#ifdef NO_SDL_IMAGE
     SDL_Surface *bg, *p1, *p2;
+#endif
     
     // Set up player rectangles
     pcRect1 = Rect(160, 300, 64, 64);
     pcRect2 = Rect(400, 300, 64, 64);
     // Load images
+#ifndef NO_SDL_IMAGE
+    background = new Surface("images/bg.jpg");
+    player1 = new Surface("images/player.bmp");
+    player2 = new Surface("images/player2.bmp");
+#else
     bg = SDL_LoadBMP("images/bg.bmp");
     p1 = SDL_LoadBMP("images/player.bmp");
     p2 = SDL_LoadBMP("images/player2.bmp");
@@ -32,11 +39,11 @@ GameState::GameState(void)
     SDL_FreeSurface(bg);
     SDL_FreeSurface(p1);
     SDL_FreeSurface(p2);
+#endif
 }
 
 void GameState::HandleEvent(SDL_Event evt)
 {
-    
 }
 
 CrabBattle::State *GameState::Update(void)
