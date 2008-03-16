@@ -91,18 +91,8 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				918D79420D8C470B00DF7AB3 /* BaseObject.h */,
-				918D79410D8C470B00DF7AB3 /* BaseObject.cpp */,
-				91A9F1940D70C7F000CB6365 /* Rect.h */,
-				91A9F1950D70C7F000CB6365 /* Rect.cpp */,
-				91A9F1E20D70D2F100CB6365 /* Sprite.h */,
-				91A9F1E30D70D2F100CB6365 /* Sprite.cpp */,
-				91A9F1E50D70D5AF00CB6365 /* Surface.h */,
-				91A9F1E60D70D5AF00CB6365 /* Surface.cpp */,
-				91CD824B0D8C824D0048A161 /* State.h */,
-				91CD824C0D8C824D0048A161 /* State.cpp */,
-				91CD82540D8C882F0048A161 /* GameState.h */,
-				91CD82550D8C882F0048A161 /* GameState.cpp */,
+				91D2C7660D8C9FD000ADC6F4 /* Utility */,
+				91D2C7650D8C9FBE00ADC6F4 /* States */,
 			);
 			name = Classes;
 			path = src;
@@ -180,6 +170,32 @@
 				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		91D2C7650D8C9FBE00ADC6F4 /* States */ = {
+			isa = PBXGroup;
+			children = (
+				91CD824B0D8C824D0048A161 /* State.h */,
+				91CD824C0D8C824D0048A161 /* State.cpp */,
+				91CD82540D8C882F0048A161 /* GameState.h */,
+				91CD82550D8C882F0048A161 /* GameState.cpp */,
+			);
+			name = States;
+			sourceTree = "<group>";
+		};
+		91D2C7660D8C9FD000ADC6F4 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				918D79420D8C470B00DF7AB3 /* BaseObject.h */,
+				918D79410D8C470B00DF7AB3 /* BaseObject.cpp */,
+				91A9F1940D70C7F000CB6365 /* Rect.h */,
+				91A9F1950D70C7F000CB6365 /* Rect.cpp */,
+				91A9F1E20D70D2F100CB6365 /* Sprite.h */,
+				91A9F1E30D70D2F100CB6365 /* Sprite.cpp */,
+				91A9F1E50D70D5AF00CB6365 /* Surface.h */,
+				91A9F1E60D70D5AF00CB6365 /* Surface.cpp */,
+			);
+			name = Utility;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
