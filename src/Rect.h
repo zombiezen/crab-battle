@@ -42,7 +42,7 @@ namespace CrabBattle
         double GetY(void);
         // rect.SetY(y)
         void SetY(double);
-        //rect.SetXY(X, Y);
+        // rect.SetXY(x, y)
         void SetXY(double, double);
         // rect.Move(deltaX, deltaY)
         // Moves a rectangle to x + deltaX, y + deltaY
