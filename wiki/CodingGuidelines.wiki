@@ -75,7 +75,7 @@ private:
 public:
     Foo(int);
     Foo ReturnAnotherFoo(int);
-}
+};
 }}}
 
 = Miscellaneous =
