@@ -22,6 +22,8 @@
 		91A9F1E40D70D2F100CB6365 /* Sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91A9F1E30D70D2F100CB6365 /* Sprite.cpp */; };
 		91A9F1E70D70D5AF00CB6365 /* Surface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91A9F1E60D70D5AF00CB6365 /* Surface.cpp */; };
 		91CD821A0D8C7EA10048A161 /* CrabBattle.icns in Resources */ = {isa = PBXBuildFile; fileRef = 91CD82190D8C7EA10048A161 /* CrabBattle.icns */; };
+		91CD824D0D8C824D0048A161 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91CD824C0D8C824D0048A161 /* State.cpp */; };
+		91CD82560D8C882F0048A161 /* GameState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91CD82550D8C882F0048A161 /* GameState.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -63,6 +65,11 @@
 		91A9F1E50D70D5AF00CB6365 /* Surface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Surface.h; sourceTree = "<group>"; };
 		91A9F1E60D70D5AF00CB6365 /* Surface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Surface.cpp; sourceTree = "<group>"; };
 		91CD82190D8C7EA10048A161 /* CrabBattle.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = CrabBattle.icns; sourceTree = "<group>"; };
+		91CD824B0D8C824D0048A161 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
+		91CD824C0D8C824D0048A161 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
+		91CD82530D8C86190048A161 /* constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
+		91CD82540D8C882F0048A161 /* GameState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameState.h; sourceTree = "<group>"; };
+		91CD82550D8C882F0048A161 /* GameState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameState.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,14 +91,8 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				918D79420D8C470B00DF7AB3 /* BaseObject.h */,
-				918D79410D8C470B00DF7AB3 /* BaseObject.cpp */,
-				91A9F1940D70C7F000CB6365 /* Rect.h */,
-				91A9F1950D70C7F000CB6365 /* Rect.cpp */,
-				91A9F1E20D70D2F100CB6365 /* Sprite.h */,
-				91A9F1E30D70D2F100CB6365 /* Sprite.cpp */,
-				91A9F1E50D70D5AF00CB6365 /* Surface.h */,
-				91A9F1E60D70D5AF00CB6365 /* Surface.cpp */,
+				91D2C7660D8C9FD000ADC6F4 /* Utility */,
+				91D2C7650D8C9FBE00ADC6F4 /* States */,
 			);
 			name = Classes;
 			path = src;
@@ -145,6 +146,7 @@
 				91A9F1430D70B9E100CB6365 /* main.cpp */,
 				91A9F13F0D70B9B900CB6365 /* mac_main.h */,
 				91A9F13E0D70B9B900CB6365 /* mac_main.m */,
+				91CD82530D8C86190048A161 /* constants.h */,
 			);
 			name = "Other Sources";
 			path = src;
@@ -168,6 +170,32 @@
 				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		91D2C7650D8C9FBE00ADC6F4 /* States */ = {
+			isa = PBXGroup;
+			children = (
+				91CD824B0D8C824D0048A161 /* State.h */,
+				91CD824C0D8C824D0048A161 /* State.cpp */,
+				91CD82540D8C882F0048A161 /* GameState.h */,
+				91CD82550D8C882F0048A161 /* GameState.cpp */,
+			);
+			name = States;
+			sourceTree = "<group>";
+		};
+		91D2C7660D8C9FD000ADC6F4 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				918D79420D8C470B00DF7AB3 /* BaseObject.h */,
+				918D79410D8C470B00DF7AB3 /* BaseObject.cpp */,
+				91A9F1940D70C7F000CB6365 /* Rect.h */,
+				91A9F1950D70C7F000CB6365 /* Rect.cpp */,
+				91A9F1E20D70D2F100CB6365 /* Sprite.h */,
+				91A9F1E30D70D2F100CB6365 /* Sprite.cpp */,
+				91A9F1E50D70D5AF00CB6365 /* Surface.h */,
+				91A9F1E60D70D5AF00CB6365 /* Surface.cpp */,
+			);
+			name = Utility;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,6 +261,8 @@
 				91A9F1E40D70D2F100CB6365 /* Sprite.cpp in Sources */,
 				91A9F1E70D70D5AF00CB6365 /* Surface.cpp in Sources */,
 				918D79430D8C470B00DF7AB3 /* BaseObject.cpp in Sources */,
+				91CD824D0D8C824D0048A161 /* State.cpp in Sources */,
+				91CD82560D8C882F0048A161 /* GameState.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,33 +283,36 @@
 		C01FCF4B08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/src/Crab_Battle_Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = MAC_OS_X;
 				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(HOME)/Applications";
+				INSTALL_PATH = /Applications;
 				PRODUCT_NAME = "Crab Battle";
 				WRAPPER_EXTENSION = app;
-				ZERO_LINK = YES;
 			};
 			name = Debug;
 		};
 		C01FCF4C08A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = (
 					ppc,
 					i386,
 				);
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/src/Crab_Battle_Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = MAC_OS_X;
 				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(HOME)/Applications";
+				INSTALL_PATH = /Applications;
 				PRODUCT_NAME = "Crab Battle";
 				WRAPPER_EXTENSION = app;
 			};
@@ -288,11 +321,15 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ONLY_ACTIVE_ARCH_PRE_XCODE_3_1)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(HOME)/Library/Frameworks",
 					/Library/Frameworks,
 					"$(FRAMEWORK_SEARCH_PATHS)",
 				);
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
@@ -300,6 +337,7 @@
 					/Library/Frameworks/SDL.framework/Headers,
 					"$(HEADER_SEARCH_PATHS)",
 				);
+				ONLY_ACTIVE_ARCH_PRE_XCODE_3_1 = "$(NATIVE_ARCH)";
 				PREBINDING = NO;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 			};
@@ -308,6 +346,8 @@
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1 = "ppc i386";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(HOME)/Library/Frameworks",
 					/Library/Frameworks,
@@ -322,6 +362,7 @@
 				);
 				PREBINDING = NO;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				SEPARATE_STRIP = YES;
 			};
 			name = Release;
 		};
