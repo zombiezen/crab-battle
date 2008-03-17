@@ -35,11 +35,11 @@ namespace CrabBattle
         Rect(double, double, double, double);
         /*** ACCESSORS ***/
         // rect.GetX()
-        double GetX(void);
+        double GetX(void) const;
         // rect.SetX(x)
         void SetX(double);
         // rect.GetY()
-        double GetY(void);
+        double GetY(void) const;
         // rect.SetY(y)
         void SetY(double);
         // rect.SetXY(x, y)
@@ -48,26 +48,26 @@ namespace CrabBattle
         // Moves a rectangle to x + deltaX, y + deltaY
         void Move(double, double);
         // rect.GetWidth()
-        double GetWidth(void);
+        double GetWidth(void) const;
         // rect.SetWidth(width)
         void SetWidth(double);
         // rect.GetHeight()
-        double GetHeight(void);
+        double GetHeight(void) const;
         // rect.SetHeight(height)
         void SetHeight(double);
         // (SDL_Rect)rect
         // Converts the rectangle data to an SDL_Rect.  As long as you use the
         // classes, you shouldn't need to use this very often.
-        operator SDL_Rect(void);
+        operator SDL_Rect(void) const;
         /*** CONVENIENT ACCESSORS ***/
         /* All of these accessors move their respective side, but maintain the width and height. */
-        double GetTop(void);
+        double GetTop(void) const;
         void SetTop(double);
-        double GetBottom(void);
+        double GetBottom(void) const;
         void SetBottom(double);
-        double GetLeft(void);
+        double GetLeft(void) const;
         void SetLeft(double);
-        double GetRight(void);
+        double GetRight(void) const;
         void SetRight(double);
         ~Rect() {};
     };
