@@ -31,7 +31,7 @@ Rect::Rect(double ix, double iy, double width, double height)
     h = height;
 }
 
-double Rect::GetX(void)
+double Rect::GetX(void) const
 {
     return x;
 }
@@ -41,7 +41,7 @@ void Rect::SetX(double nx)
     x = nx;
 }
 
-double Rect::GetY(void)
+double Rect::GetY(void) const
 {
     return y;
 }
@@ -63,7 +63,7 @@ void Rect::Move(double dx, double dy)
     y += dy;
 }
 
-double Rect::GetWidth(void)
+double Rect::GetWidth(void) const
 {
     return w;
 }
@@ -73,7 +73,7 @@ void Rect::SetWidth(double nw)
     w = nw;
 }
 
-double Rect::GetHeight(void)
+double Rect::GetHeight(void) const
 {
     return h;
 }
@@ -83,12 +83,12 @@ void Rect::SetHeight(double nh)
     h = nh;
 }
 
-Rect::operator SDL_Rect(void)
+Rect::operator SDL_Rect(void) const
 {
     return (SDL_Rect){(Sint16)x, (Sint16)y, (Uint16)w, (Uint16)h};
 }
 
-double Rect::GetTop(void)
+double Rect::GetTop(void) const
 {
     return y;
 }
@@ -98,7 +98,7 @@ void Rect::SetTop(double top)
     y = top;
 }
 
-double Rect::GetBottom(void)
+double Rect::GetBottom(void) const
 {
     return y + h;
 }
@@ -108,7 +108,7 @@ void Rect::SetBottom(double bottom)
     y = bottom - h;
 }
 
-double Rect::GetLeft(void)
+double Rect::GetLeft(void) const
 {
     return x;
 }
@@ -118,7 +118,7 @@ void Rect::SetLeft(double left)
     x = left;
 }
 
-double Rect::GetRight(void)
+double Rect::GetRight(void) const
 {
     return x + w;
 }
