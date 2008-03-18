@@ -6,6 +6,8 @@
  *  $Id$
  */
 
+#include "SDL.h"
+#include "Surface.h"
 #include "State.h"
 #include "GameState.h"
 

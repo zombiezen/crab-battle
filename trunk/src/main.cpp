@@ -13,13 +13,10 @@
 #include <iostream>
 
 #include "SDL.h"
-#include "GameState.h"
 #include "State.h"
+#include "GameState.h"
 #include "Surface.h"
 #include "constants.h"
-
-using namespace std;
-using namespace CrabBattle;
 
 // CONSTANTS //
 
@@ -36,6 +33,9 @@ const int kMainBitsPerPixel = 0;
 #endif
 extern "C" int main(int argc, char *argv[])
 {
+    using namespace std;
+    using namespace CrabBattle;
+    
     SDL_Surface *screen;
     bool done = false;
     SDL_Event event;

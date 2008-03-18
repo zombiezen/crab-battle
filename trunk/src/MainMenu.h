@@ -6,6 +6,8 @@
  *  $Id$
  */
 
+#include "SDL.h"
+#include "Surface.h"
 #include "State.h"
 
 #ifndef _CRAB_BATTLE_MAINMENU_H_
