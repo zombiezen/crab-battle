@@ -1,3 +1,11 @@
+/*
+ *  PauseState.cpp
+ *  Crab Battle
+ *
+ *  Created by Ephraim Ruprecht on 3/19/08.
+ *  $Id: PauseState.cpp 115 2008-03-20 00:08:09Z v1g1lantenine $
+ */
+ 
 #include "PauseState.h"
 #include "constants.h"
 #include <fstream>
