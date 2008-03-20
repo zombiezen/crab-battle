@@ -41,7 +41,7 @@ extern "C" int main(int argc, char *argv[])
     bool done = false;
     SDL_Event event;
     Surface *screenObj = NULL;
-    State *state = NULL, *newState = NULL ,*state1 =NULL, *state2=NULL;
+    State *state = NULL, *newState = NULL , *state1=NULL;
     
     Uint32 cumulativeTime = 0;
     Uint32 lastTime = 0, currentTime = 0, deltaTime = 0;
@@ -73,8 +73,7 @@ extern "C" int main(int argc, char *argv[])
     
     // Run main event loop
     state = new GameState();
-    state1 = new PauseState();
-    state2=state;
+    state1 = state; //maybe this is a case for operator overloading?
     while (!done)
     {
         // Switch states, if necessary
@@ -101,16 +100,12 @@ extern "C" int main(int argc, char *argv[])
                 state->HandleEvent(event);
             }
         }
-                switch (event.key.keysym.sym) { //go to pause menu
-                    case SDLK_p:
-                        state1 = new PauseState();
-                        state = state1;
+                switch (event.key.keysym.sym) { 
+                    case SDLK_p: //go to pause menu
+                        state = new PauseState();
                         break;
-                }
-                switch (event.key.keysym.sym) { //resume gamestate
                     case SDLK_o:
-                        state1 = NULL;                   
-                        state = state2;
+                        state = state1;
                         break;
                 }
 		
