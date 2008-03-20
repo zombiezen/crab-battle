@@ -183,7 +183,7 @@ BuildCmd=
 [Unit13]
 FileName=src\GameState.h
 CompileCpp=1
-Folder=Classes
+Folder=Headers
 Compile=1
 Link=1
 Priority=1000
