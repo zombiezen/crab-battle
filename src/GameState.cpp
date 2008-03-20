@@ -8,6 +8,10 @@
 
 #include "GameState.h"
 #include "constants.h"
+#include <fstream>
+#include <iostream>
+
+using namespace std;
 
 using CrabBattle::GameState;
 
@@ -15,6 +19,54 @@ const unsigned short kBoxSpeed = 20;
 
 GameState::GameState(void)
 {
+    int count =0;
+    char value1[20];
+    char value2[20];
+    char value3[20];
+    char value4[20];
+    ifstream getTitles;
+    getTitles.open("titles.txt");
+
+    if (!getTitles.is_open())  // if failed to open file
+    {
+        cout << "Could not open the file " << endl;
+        cout << "Program terminating.\n";
+        cin.get();
+        exit(EXIT_FAILURE);
+    }
+    
+    //hard coded for base implementation
+    getTitles >> value1;
+    count++;
+    getTitles >> value2;
+    count++;
+    getTitles >> value3;
+    count++;
+    getTitles >> value4;
+        
+    cout << value1 << endl<< value2 <<endl<< value3<<endl<<value4<<endl;
+    /*
+    while (getTitles.good())   // while input good and not at EOF
+    {
+        count++;
+        cout << value <<endl;
+        getTitles >> value;    // get next value
+    }
+    */
+    if (getTitles.eof())
+        cout << "End of file reached.\n";
+    else if (getTitles.fail())
+        cout << "Input terminated by data mismatch.\n";
+    else
+        cout << "Input terminated for unknown reason.\n";
+    if (count == 0)
+        cout << "No data processed.\n";
+    else
+    {
+        cout << "# items read: " << count << endl;
+    }
+    getTitles.close();
+    
 #ifdef NO_SDL_IMAGE
     SDL_Surface *bg, *p1, *p2;
 #endif
@@ -24,13 +76,13 @@ GameState::GameState(void)
     pcRect2 = Rect(400, 300, 64, 64);
     // Load images
 #ifndef NO_SDL_IMAGE
-    background = new Surface("images/bg.jpg");
-    player1 = new Surface("images/player.bmp");
-    player2 = new Surface("images/player2.bmp");
+    background = new Surface(value1);
+    player1 = new Surface(value2);
+    player2 = new Surface(value3);
 #else
-    bg = SDL_LoadBMP("images/bg.bmp");
-    p1 = SDL_LoadBMP("images/player.bmp");
-    p2 = SDL_LoadBMP("images/player2.bmp");
+    bg = SDL_LoadBMP(value1);
+    p1 = SDL_LoadBMP(value2);
+    p2 = SDL_LoadBMP(value3);
     // Put into objects
     background = new Surface(bg);
     player1 = new Surface(p1);
