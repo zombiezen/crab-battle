@@ -22,7 +22,7 @@ namespace CrabBattle
         virtual void HandleEvent(SDL_Event);
         virtual State *Update(void);
         virtual void Display(Surface *);
-        ~MainMenu(void);
+        virtual ~MainMenu(void);
     };
 }
 

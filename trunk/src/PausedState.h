@@ -27,7 +27,7 @@ namespace CrabBattle
         virtual void HandleEvent(SDL_Event);
         virtual State *Update(void);
         virtual void Display(Surface *);
-        ~PausedState(void);
+        virtual ~PausedState(void);
     };
 }
 
