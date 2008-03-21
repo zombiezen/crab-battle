@@ -19,6 +19,7 @@ namespace CrabBattle
         private:
             Rect pcRect1, pcRect2;
             Surface *background, *player1, *player2;
+            bool shouldPause;
         public:
             GameState(void);
             virtual void HandleEvent(SDL_Event);

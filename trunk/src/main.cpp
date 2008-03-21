@@ -15,7 +15,6 @@
 #include "SDL.h"
 #include "State.h"
 #include "GameState.h"
-#include "PauseState.h"
 #include "Surface.h"
 #include "constants.h"
 
@@ -41,7 +40,7 @@ extern "C" int main(int argc, char *argv[])
     bool done = false;
     SDL_Event event;
     Surface *screenObj = NULL;
-    State *state = NULL, *newState = NULL , *state1=NULL;
+    State *state = NULL, *newState = NULL;
     
     Uint32 cumulativeTime = 0;
     Uint32 lastTime = 0, currentTime = 0, deltaTime = 0;
@@ -73,12 +72,16 @@ extern "C" int main(int argc, char *argv[])
     
     // Run main event loop
     state = new GameState();
-    state1 = state; //maybe this is a case for operator overloading?
     while (!done)
     {
         // Switch states, if necessary
         if (newState != NULL)
+        {
+            // Ordinarily, we would AddRef the newState, but we own the state.
+            state->DelRef();
             state = newState;
+            newState = NULL;
+        }
         // Get events
         while (SDL_PollEvent(&event))
         {
@@ -100,16 +103,6 @@ extern "C" int main(int argc, char *argv[])
                 state->HandleEvent(event);
             }
         }
-                switch (event.key.keysym.sym) { 
-                    case SDLK_p: //go to pause menu
-                        state = new PauseState();
-                        break;
-                    case SDLK_o:
-                        state = state1;
-                        break;
-                }
-		
-	
         // Update timer
         currentTime = SDL_GetTicks();
         deltaTime = currentTime - lastTime;
@@ -126,7 +119,8 @@ extern "C" int main(int argc, char *argv[])
         state->Display(screenObj);
     }
     
-    // Clean up the SDL library
+    // Clean up
+    state->DelRef();
     SDL_Quit();
     return 0;
 }

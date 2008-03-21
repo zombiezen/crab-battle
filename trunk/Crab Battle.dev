@@ -201,7 +201,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit15]
-FileName=src\PauseState.h
+FileName=src\PausedState.h
 CompileCpp=1
 Folder=Headers
 Compile=1
@@ -211,7 +211,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit16]
-FileName=src\PauseState.cpp
+FileName=src\PausedState.cpp
 CompileCpp=1
 Folder=Classes
 Compile=1

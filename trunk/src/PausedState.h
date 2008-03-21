@@ -1,4 +1,4 @@
-﻿/*
+/*
  *  PausedState.h
  *  Crab Battle
  *
@@ -20,6 +20,8 @@ namespace CrabBattle
     {
     private:
         GameState *previous; // The state we're pausing from
+        Surface *background;
+        bool done;
     public:
         PausedState(GameState *);
         virtual void HandleEvent(SDL_Event);
