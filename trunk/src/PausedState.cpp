@@ -50,7 +50,7 @@ PausedState::PausedState(GameState *prev)
     count++;
     getTitles >> value4;
 
-    cout << value1 << endl<< value2 <<endl<< value3<<endl<<value4<<endl;
+    cout << value1 << endl<< value2 <<endl<< value3<<endl;
     /*
     while (getTitles.good())   // while input good and not at EOF
     {
