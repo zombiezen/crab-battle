@@ -41,6 +41,9 @@ extern "C" int main(int argc, char *argv[])
     SDL_Event event;
     Surface *screenObj = NULL;
     State *state = NULL, *newState = NULL;
+#ifndef NO_SDL_IMAGE
+    Surface *icon = NULL;
+#endif
     
     Uint32 cumulativeTime = 0;
     Uint32 lastTime = 0, currentTime = 0, deltaTime = 0;
@@ -66,6 +69,10 @@ extern "C" int main(int argc, char *argv[])
     
     // Set up window manager
     SDL_WM_SetCaption("Crab Battle", NULL); // Sets the title of the window
+#ifndef NO_SDL_IMAGE
+    icon = new Surface("icon.png");
+    SDL_WM_SetIcon(icon->GetSurface(), NULL);
+#endif
     screenObj = Surface::GetVideoSurface();
     if (kMainVideoFlags & SDL_FULLSCREEN)
         SDL_ShowCursor(SDL_DISABLE);
