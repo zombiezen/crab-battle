@@ -7,6 +7,7 @@
  */
 
 #include "GameState.h"
+#include "PausedState.h"
 #include "constants.h"
 #include <fstream>
 #include <iostream>
@@ -92,16 +93,28 @@ GameState::GameState(void)
     SDL_FreeSurface(p1);
     SDL_FreeSurface(p2);
 #endif
+    // Don't pause yet
+    shouldPause = false;
 }
 
 void GameState::HandleEvent(SDL_Event evt)
 {
+    if (evt.type == SDL_KEYDOWN)
+    {
+        switch (evt.key.keysym.sym)
+        {
+            case SDLK_p:
+                shouldPause = true;
+                break;
+        }
+    }
 }
 
 CrabBattle::State *GameState::Update(void)
 {
     Uint8 *key;
-    key = SDL_GetKeyState(NULL); // holding down buttons repeats
+    key = SDL_GetKeyState(NULL);
+    // Check for keys
     if (key[SDLK_w])
     {
         pcRect1.Move(0, -kBoxSpeed);
@@ -150,7 +163,14 @@ CrabBattle::State *GameState::Update(void)
         if (pcRect2.GetRight() > kScreenWidth)
             pcRect2.SetRight(kScreenWidth);
     }
-    return NULL;
+    // Switch states
+    if (shouldPause)
+    {
+        shouldPause = false;
+        return (new PausedState(this));
+    }
+    else
+        return NULL;
 }
 
 void GameState::Display(Surface *screen)
