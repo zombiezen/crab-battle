@@ -25,7 +25,7 @@ $(builddir)/crab-battle : $(builddir) $(objects) build_resources
 $(builddir) :
 	mkdir $(builddir)
 
-build_resources : $(builddir)/images $(builddir)/titles.txt $(builddir)/titles1.txt
+build_resources : $(builddir)/images $(builddir)/titles.txt $(builddir)/titles1.txt $(builddir)/icon.png
 
 $(builddir)/%.o : $(srcdir)/%.cpp
 	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c $< -o $@
@@ -45,6 +45,8 @@ $(builddir)/titles.txt : $(resdir)/titles.txt
 	$(CP) $(resdir)/titles.txt $(builddir)/titles.txt
 $(builddir)/titles1.txt : $(resdir)/titles1.txt
 	$(CP) $(resdir)/titles1.txt $(builddir)/titles1.txt
+$(builddir)/icon.png : $(resdir)/icon.png
+	$(CP) $(resdir)/icon.png $(builddir)/icon.png
 
 .PHONY : clean build_resources
 clean :
