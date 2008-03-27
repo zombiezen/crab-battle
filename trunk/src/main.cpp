@@ -41,7 +41,7 @@ extern "C" int main(int argc, char *argv[])
     SDL_Event event;
     Surface *screenObj = NULL;
     State *state = NULL, *newState = NULL;
-#ifndef NO_SDL_IMAGE
+#if !defined(NO_SDL_IMAGE) && !defined(MAC_OS_X)
     Surface *icon = NULL;
 #endif
     
@@ -69,7 +69,7 @@ extern "C" int main(int argc, char *argv[])
     
     // Set up window manager
     SDL_WM_SetCaption("Crab Battle", NULL); // Sets the title of the window
-#ifndef NO_SDL_IMAGE
+#if !defined(NO_SDL_IMAGE) && !defined(MAC_OS_X)
     icon = new Surface("icon.png");
     SDL_WM_SetIcon(icon->GetSurface(), NULL);
 #endif
