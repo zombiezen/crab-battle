@@ -74,7 +74,7 @@ Section "Uninstall"
 	
     RMDir /r "$INSTDIR\images"
 	RMDir $INSTDIR
-	RMDir /r "$SMPROGRAMS\Crab Battle"
+	RMDir "$SMPROGRAMS\Crab Battle"
 SectionEnd
 
 ;--------------------------------
