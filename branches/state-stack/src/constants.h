@@ -6,9 +6,7 @@
  *  $Id$
  */
 
-#if !defined(__WIN32__) && !defined(WINDOWS)
 #include <sys/param.h> // for MAXPATHLEN
-#endif
 
 #ifndef _CRAB_BATTLE_CONSTANTS_H_
 #define _CRAB_BATTLE_CONSTANTS_H_
