@@ -11,6 +11,9 @@
 		002F3A0009D0884600EBEB88 /* SDL.framework in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = 002F39F909D0881F00EBEB88 /* SDL.framework */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		912DF83C0D9B2A1D00269FC5 /* titles.txt in Resources */ = {isa = PBXBuildFile; fileRef = 912DF83A0D9B2A1D00269FC5 /* titles.txt */; };
+		912DF83D0D9B2A1D00269FC5 /* titles1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 912DF83B0D9B2A1D00269FC5 /* titles1.txt */; };
+		912DF8550D9B2AC200269FC5 /* PausedState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 912DF8530D9B2AC200269FC5 /* PausedState.cpp */; };
 		918D79430D8C470B00DF7AB3 /* BaseObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 918D79410D8C470B00DF7AB3 /* BaseObject.cpp */; };
 		918D797D0D8C509F00DF7AB3 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 918D79780D8C509F00DF7AB3 /* images */; };
 		91A9F1400D70B9B900CB6365 /* mac_main.m in Sources */ = {isa = PBXBuildFile; fileRef = 91A9F13E0D70B9B900CB6365 /* mac_main.m */; };
@@ -48,6 +51,10 @@
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = SOURCE_ROOT; };
 		8D1107320486CEB800E47090 /* Crab Battle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Crab Battle.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		912DF83A0D9B2A1D00269FC5 /* titles.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = titles.txt; sourceTree = "<group>"; };
+		912DF83B0D9B2A1D00269FC5 /* titles1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = titles1.txt; sourceTree = "<group>"; };
+		912DF8530D9B2AC200269FC5 /* PausedState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PausedState.cpp; sourceTree = "<group>"; };
+		912DF8540D9B2AC200269FC5 /* PausedState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PausedState.h; sourceTree = "<group>"; };
 		918D79410D8C470B00DF7AB3 /* BaseObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseObject.cpp; sourceTree = "<group>"; };
 		918D79420D8C470B00DF7AB3 /* BaseObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseObject.h; sourceTree = "<group>"; };
 		918D79780D8C509F00DF7AB3 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
@@ -157,6 +164,8 @@
 			children = (
 				91CD82190D8C7EA10048A161 /* CrabBattle.icns */,
 				918D79780D8C509F00DF7AB3 /* images */,
+				912DF83A0D9B2A1D00269FC5 /* titles.txt */,
+				912DF83B0D9B2A1D00269FC5 /* titles1.txt */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 			);
@@ -179,6 +188,8 @@
 				91CD824C0D8C824D0048A161 /* State.cpp */,
 				91CD82540D8C882F0048A161 /* GameState.h */,
 				91CD82550D8C882F0048A161 /* GameState.cpp */,
+				912DF8540D9B2AC200269FC5 /* PausedState.h */,
+				912DF8530D9B2AC200269FC5 /* PausedState.cpp */,
 			);
 			name = States;
 			sourceTree = "<group>";
@@ -245,6 +256,8 @@
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				918D797D0D8C509F00DF7AB3 /* images in Resources */,
 				91CD821A0D8C7EA10048A161 /* CrabBattle.icns in Resources */,
+				912DF83C0D9B2A1D00269FC5 /* titles.txt in Resources */,
+				912DF83D0D9B2A1D00269FC5 /* titles1.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,6 +276,7 @@
 				918D79430D8C470B00DF7AB3 /* BaseObject.cpp in Sources */,
 				91CD824D0D8C824D0048A161 /* State.cpp in Sources */,
 				91CD82560D8C882F0048A161 /* GameState.cpp in Sources */,
+				912DF8550D9B2AC200269FC5 /* PausedState.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
