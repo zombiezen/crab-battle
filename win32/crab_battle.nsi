@@ -46,7 +46,7 @@ Section "Crab Battle" SecCrabBattle
   File SDL_image\bin\*.dll
   File SDL_mixer\bin\*.dll
   File SDL_ttf\bin\*.dll
-  File ..\Resources\images
+  File /r ..\Resources\images
   File ..\Resources\icon.png
   File ..\Resources\titles.txt
   File ..\Resources\titles1.txt
