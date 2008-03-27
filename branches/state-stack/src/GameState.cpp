@@ -21,11 +21,15 @@ const unsigned short kBoxSpeed = 20;
 GameState::GameState(void)
 {
     int count =0;
-    char value1[20];
-    char value2[20];
-    char value3[20];
-    char value4[20];
+    char value1[MAXPATHLEN];
+    char value2[MAXPATHLEN];
+    char value3[MAXPATHLEN];
+    char value4[MAXPATHLEN];
     ifstream getTitles;
+#ifdef NO_SDL_IMAGE
+    SDL_Surface *bg, *p1, *p2;
+#endif
+    
     getTitles.open("titles.txt");
 
     if (!getTitles.is_open())  // if failed to open file
@@ -67,10 +71,6 @@ GameState::GameState(void)
         cout << "# items read: " << count << endl;
     }
     getTitles.close();
-    
-#ifdef NO_SDL_IMAGE
-    SDL_Surface *bg, *p1, *p2;
-#endif
     
     // Set up player rectangles
     pcRect1 = Rect(160, 300, 64, 64);

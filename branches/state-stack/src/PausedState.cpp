@@ -21,10 +21,10 @@ PausedState::PausedState(GameState *prev)
     SDL_Surface *bg, *p1, *p2;
 #endif
     int count = 0;
-    char value1[20];
-    char value2[20];
-    char value3[20];
-    char value4[20];
+    char value1[MAXPATHLEN];
+    char value2[MAXPATHLEN];
+    char value3[MAXPATHLEN];
+    char value4[MAXPATHLEN];
     
     // Set previous to argument
     prev->AddRef();
