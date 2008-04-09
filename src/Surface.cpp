@@ -107,6 +107,14 @@ void Surface::Blit(Surface *src, Rect dest, Rect srcRegion)
     // TODO: Raise an error if SDL_BlitSurface doesn't return 0
 }
 
+void Surface::Blit(Surface *src, Rect dest, double dhp)
+{
+    SDL_Rect r_dest = dest;
+    Rect srcRegion = Rect(dhp , 30);//size of image
+    SDL_Rect r_src = srcRegion;
+    SDL_BlitSurface(src->GetSurface(), &r_src, surface, &r_dest);
+}
+
 void Surface::Update(Rect region)
 {
     SDL_UpdateRect(surface,

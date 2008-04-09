@@ -17,8 +17,8 @@ namespace CrabBattle
     class GameState : public State
         {
         private:
-            Rect pcRect1, pcRect2;
-            Surface *background, *player1, *player2;
+            Rect pcRect1, pcRect2, hpRect1, hpRect2;
+            Surface *background, *player1, *player2, *healthbar1;
             bool shouldPause;
         public:
             GameState(void);
