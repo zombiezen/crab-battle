@@ -70,6 +70,9 @@ namespace CrabBattle
         // Blends source onto destination at rectangle location, only copying
         // the portion of the image at srcArea.
         void Blit(Surface *, Rect, Rect);
+        //for use with the healthbar
+        //double changes value of bar
+        void Blit(Surface *, Rect, double);
         // screen.Update(region)
         // Updates region on the screen.  This really only makes sense for
         // the surface given by Surface::GetVideoSurface()

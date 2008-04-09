@@ -25,6 +25,7 @@ GameState::GameState(void)
     char value2[MAXPATHLEN];
     char value3[MAXPATHLEN];
     char value4[MAXPATHLEN];
+    char value5[MAXPATHLEN];
     ifstream getTitles;
 #ifdef NO_SDL_IMAGE
     SDL_Surface *bg, *p1, *p2;
@@ -48,8 +49,10 @@ GameState::GameState(void)
     getTitles >> value3;
     count++;
     getTitles >> value4;
+    count++;
+    getTitles >> value5;
         
-    cout << value1 << endl<< value2 <<endl<< value3<<endl;
+    cout << value1 << endl<< value2 <<endl<< value3<<endl<<value4<<endl;
     /*
     while (getTitles.good())   // while input good and not at EOF
     {
@@ -75,11 +78,14 @@ GameState::GameState(void)
     // Set up player rectangles
     pcRect1 = Rect(160, 300, 64, 64);
     pcRect2 = Rect(400, 300, 64, 64);
+    hpRect1 = Rect(60, 30, 200, 30);
+    hpRect2 = Rect(360, 30, 200, 30);
     // Load images
 #ifndef NO_SDL_IMAGE
     background = new Surface(value1);
     player1 = new Surface(value2);
     player2 = new Surface(value3);
+    healthbar1 = new Surface(value4);
 #else
     bg = SDL_LoadBMP(value1);
     p1 = SDL_LoadBMP(value2);
@@ -114,7 +120,20 @@ CrabBattle::State *GameState::Update(void)
 {
     Uint8 *key;
     key = SDL_GetKeyState(NULL);
+    if (pcRect1.GetHp()==0)
+    {
+     pcRect1.SetHp(200);   
+    }
+    if (pcRect2.GetHp()==0)
+    {
+     pcRect2.SetHp(200);
+    }
     // Check for keys
+    if (key[SDLK_q])//for testing
+    {
+      pcRect1.ModHp(-1);   
+      pcRect2.ModHp(-1);   
+    }
     if (key[SDLK_w])
     {
         pcRect1.Move(0, -kBoxSpeed);
@@ -177,6 +196,8 @@ void GameState::Display(Surface *screen)
 {
     screen->Fill(screen->GetRect(), 0, 0, 0); // Clears screen
     screen->Blit(background, background->GetRect()); // Blits the background
+    screen->Blit(healthbar1, hpRect1, pcRect1.GetHp());
+    screen->Blit(healthbar1, hpRect2, pcRect2.GetHp());
     screen->Blit(player1, pcRect1); // Blits player 1 image at pcRect
     screen->Blit(player2, pcRect2); // Blits player 2 image at pcRect2
     screen->Flip(); // Flips second buffer
@@ -187,4 +208,5 @@ GameState::~GameState(void)
     background->DelRef();
     player1->DelRef();
     player2->DelRef();
+    healthbar1->DelRef();
 }
