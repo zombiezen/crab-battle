@@ -6,6 +6,7 @@
  *  $Id$
  */
 
+#include <SDL_ttf/SDL_ttf.h>
 #include "GameState.h"
 #include "PausedState.h"
 #include "constants.h"
@@ -27,6 +28,14 @@ GameState::GameState(void)
     char value4[MAXPATHLEN];
     char value5[MAXPATHLEN];
     ifstream getTitles;
+    TTF_Init(); //apparently extremely important
+    //cout << "tff_init()= "<<TTF_WasInit()<<endl;
+
+    font = TTF_OpenFont( "lazy.ttf", 24 );
+    //if (font==NULL)cout<<TTF_GetError()<<endl;
+    
+    message = TTF_RenderText_Solid( font, "Look, text, yay!", textColor );
+    
 #ifdef NO_SDL_IMAGE
     SDL_Surface *bg, *p1, *p2;
 #endif
@@ -74,7 +83,7 @@ GameState::GameState(void)
         cout << "# items read: " << count << endl;
     }
     getTitles.close();
-    
+
     // Set up player rectangles
     pcRect1 = Rect(160, 300, 64, 64);
     pcRect2 = Rect(400, 300, 64, 64);
@@ -120,11 +129,11 @@ CrabBattle::State *GameState::Update(void)
 {
     Uint8 *key;
     key = SDL_GetKeyState(NULL);
-    if (pcRect1.GetHp()==0)
+    if (pcRect1.GetHp()<=0)
     {
      pcRect1.SetHp(200);   
     }
-    if (pcRect2.GetHp()==0)
+    if (pcRect2.GetHp()<=0)
     {
      pcRect2.SetHp(200);
     }
@@ -132,7 +141,16 @@ CrabBattle::State *GameState::Update(void)
     if (key[SDLK_q])//for testing
     {
       pcRect1.ModHp(-1);   
-      pcRect2.ModHp(-1);   
+      pcRect2.ModHp(-5); 
+      
+      outs << pcRect1.GetHp();
+      sOutput = outs.str();
+      
+      if(sOutput=="0")sOutput="200";
+      outs.str("");
+      
+      cout << pcRect1.GetHp() <<endl;
+      message = TTF_RenderText_Solid( font, sOutput.c_str(), textColor );
     }
     if (key[SDLK_w])
     {
@@ -200,6 +218,7 @@ void GameState::Display(Surface *screen)
     screen->Blit(healthbar1, hpRect2, pcRect2.GetHp());
     screen->Blit(player1, pcRect1); // Blits player 1 image at pcRect
     screen->Blit(player2, pcRect2); // Blits player 2 image at pcRect2
+    screen->Blit(message, hpRect1);
     screen->Flip(); // Flips second buffer
 }
 
@@ -209,4 +228,6 @@ GameState::~GameState(void)
     player1->DelRef();
     player2->DelRef();
     healthbar1->DelRef();
+    SDL_FreeSurface(message);
+    TTF_CloseFont(font);
 }

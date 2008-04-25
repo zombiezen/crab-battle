@@ -14,6 +14,7 @@
 const unsigned short kUpdateRate = 33; // in ms
 const int kScreenWidth = 640; // in pixels
 const int kScreenHeight = 480; // in pixels
+const SDL_Color textColor = { 255, 255, 255 };
 
 #ifndef MAXPATHLEN
 #define MAXPATHLEN 512 // a reasonable assumption, I hope :D
