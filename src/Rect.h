@@ -59,6 +59,7 @@ namespace CrabBattle
         void ModHp(double);
         void SetHp(double);
         double GetWins(void);
+        void AddWins(double dw);
         // (SDL_Rect)rect
         // Converts the rectangle data to an SDL_Rect.  As long as you use the
         // classes, you shouldn't need to use this very often.
