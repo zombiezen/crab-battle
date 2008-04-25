@@ -22,7 +22,7 @@ namespace CrabBattle
     class Rect : public BaseObject
     {
     private:
-        double x, y, w, h;
+        double x, y, w, h, hp ,wins;
     public:
         /*** CONSTRUCTORS ***/
         // Rect()
@@ -55,6 +55,10 @@ namespace CrabBattle
         double GetHeight(void) const;
         // rect.SetHeight(height)
         void SetHeight(double);
+        double GetHp(void);
+        void ModHp(double);
+        void SetHp(double);
+        double GetWins(void);
         // (SDL_Rect)rect
         // Converts the rectangle data to an SDL_Rect.  As long as you use the
         // classes, you shouldn't need to use this very often.
