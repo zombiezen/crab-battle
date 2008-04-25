@@ -1,7 +1,7 @@
 [Project]
 FileName=Crab Battle.dev
 Name=Crab Battle
-UnitCount=16
+UnitCount=18
 Type=0
 Ver=3
 IsCpp=1
@@ -214,6 +214,26 @@ BuildCmd=
 FileName=src\PausedState.cpp
 CompileCpp=1
 Folder=Classes
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit18]
+FileName=src\Player.cpp
+CompileCpp=1
+Folder=Classes
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit17]
+FileName=src\Player.h
+CompileCpp=1
+Folder=Headers
 Compile=1
 Link=1
 Priority=1000
