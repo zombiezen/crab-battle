@@ -23,14 +23,15 @@ namespace CrabBattle
         {
         private:
             TTF_Font *font;
-            SDL_Surface *message;
-            Rect pcRect1, pcRect2, hpRect1, hpRect2 , hptext1, hptext2;
+            SDL_Surface *messPc1, *messPc2, *wins1, *wins2;
+            Rect pcRect1, pcRect2, hpRect1, hpRect2 , hptext1, hptext2, winsRect1, winsRect2;
             Surface *background, *player1, *player2, *healthbar1;
             string sOutput;
             ostringstream outs;
             bool shouldPause;
         public:
             GameState(void);
+            SDL_Surface* render(double dh);
             virtual void HandleEvent(SDL_Event);
             virtual State *Update(void);
             virtual void Display(Surface *);

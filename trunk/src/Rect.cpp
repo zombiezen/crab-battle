@@ -98,8 +98,14 @@ void Rect::SetHp(double dh)
     hp = dh;
 }
 
-double Rect::GetWins(void){
+double Rect::GetWins(void)
+{
     return wins;
+}
+
+void Rect::AddWins(double dw)
+{
+    wins += dw;
 }
 
 Rect::operator SDL_Rect(void) const

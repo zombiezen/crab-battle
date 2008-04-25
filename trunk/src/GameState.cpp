@@ -31,10 +31,13 @@ GameState::GameState(void)
     TTF_Init(); //apparently extremely important
     //cout << "tff_init()= "<<TTF_WasInit()<<endl;
 
-    font = TTF_OpenFont( "lazy.ttf", 24 );
+    font = TTF_OpenFont( "times.ttf", 24 );
     //if (font==NULL)cout<<TTF_GetError()<<endl;
     
-    message = TTF_RenderText_Solid( font, "Look, text, yay!", textColor );
+    messPc1 = TTF_RenderText_Solid( font,"200", textColor );
+    messPc2 = TTF_RenderText_Solid( font, "200", textColor );
+    wins1 = TTF_RenderText_Solid( font, "0", textColor );
+    wins2 = TTF_RenderText_Solid( font, "0", textColor );
     
 #ifdef NO_SDL_IMAGE
     SDL_Surface *bg, *p1, *p2;
@@ -89,6 +92,8 @@ GameState::GameState(void)
     pcRect2 = Rect(400, 300, 64, 64);
     hpRect1 = Rect(60, 30, 200, 30);
     hpRect2 = Rect(360, 30, 200, 30);
+    winsRect1 = Rect(270 , 30 , 200 , 30);
+    winsRect2 = Rect(315 , 30 , 200 , 30);
     // Load images
 #ifndef NO_SDL_IMAGE
     background = new Surface(value1);
@@ -125,17 +130,29 @@ void GameState::HandleEvent(SDL_Event evt)
     }
 }
 
+SDL_Surface* GameState::render(double dh){
+    SDL_Surface *temp;
+    outs << dh;
+    sOutput = outs.str();
+    if(sOutput == "0" && dh != 0) sOutput = "200";
+    outs.str("");
+    temp = TTF_RenderText_Solid( font, sOutput.c_str(), textColor );
+ return temp;
+}
+
 CrabBattle::State *GameState::Update(void)
 {
     Uint8 *key;
     key = SDL_GetKeyState(NULL);
     if (pcRect1.GetHp()<=0)
     {
-     pcRect1.SetHp(200);   
+     pcRect1.SetHp(200);
+     pcRect2.AddWins(1);   
     }
     if (pcRect2.GetHp()<=0)
     {
-     pcRect2.SetHp(200);
+    pcRect2.SetHp(200);
+    pcRect1.AddWins(1);
     }
     // Check for keys
     if (key[SDLK_q])//for testing
@@ -143,14 +160,11 @@ CrabBattle::State *GameState::Update(void)
       pcRect1.ModHp(-1);   
       pcRect2.ModHp(-5); 
       
-      outs << pcRect1.GetHp();
-      sOutput = outs.str();
+      messPc1 = render(pcRect1.GetHp());
+      messPc2 = render(pcRect2.GetHp());
+      wins1 = render(pcRect1.GetWins());
+      wins2 = render(pcRect2.GetWins());
       
-      if(sOutput=="0")sOutput="200";
-      outs.str("");
-      
-      cout << pcRect1.GetHp() <<endl;
-      message = TTF_RenderText_Solid( font, sOutput.c_str(), textColor );
     }
     if (key[SDLK_w])
     {
@@ -218,7 +232,10 @@ void GameState::Display(Surface *screen)
     screen->Blit(healthbar1, hpRect2, pcRect2.GetHp());
     screen->Blit(player1, pcRect1); // Blits player 1 image at pcRect
     screen->Blit(player2, pcRect2); // Blits player 2 image at pcRect2
-    screen->Blit(message, hpRect1);
+    screen->Blit(messPc1, hpRect1);
+    screen->Blit(messPc2, hpRect2);
+    screen->Blit(wins1, winsRect1);
+    screen->Blit(wins2, winsRect2);
     screen->Flip(); // Flips second buffer
 }
 
@@ -228,6 +245,9 @@ GameState::~GameState(void)
     player1->DelRef();
     player2->DelRef();
     healthbar1->DelRef();
-    SDL_FreeSurface(message);
+    SDL_FreeSurface(messPc1);
+    SDL_FreeSurface(messPc2);
+    SDL_FreeSurface(wins1);
+    SDL_FreeSurface(wins2);
     TTF_CloseFont(font);
 }
