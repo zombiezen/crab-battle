@@ -29,8 +29,6 @@ Rect::Rect(double ix, double iy, double width, double height)
     y = iy;
     w = width;
     h = height;
-    hp = 200;
-    wins = 0;
 }
 
 double Rect::GetX(void) const
@@ -83,29 +81,6 @@ double Rect::GetHeight(void) const
 void Rect::SetHeight(double nh)
 {
     h = nh;
-}
-
-double Rect::GetHp(void)
-{
-    return hp;
-}
-void Rect::ModHp(double dh)
-{
-    hp += dh;
-}
-void Rect::SetHp(double dh)
-{
-    hp = dh;
-}
-
-double Rect::GetWins(void)
-{
-    return wins;
-}
-
-void Rect::AddWins(double dw)
-{
-    wins += dw;
 }
 
 Rect::operator SDL_Rect(void) const
