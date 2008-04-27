@@ -6,7 +6,11 @@
  *  $Id$
  */
 
+#if (defined(__WIN32__) || defined(WINDOWS)) || defined(MAC_OS_X)
 #include <SDL_ttf/SDL_ttf.h>
+#else
+#include <SDL/SDL_ttf.h>
+#endif
 #include "Rect.h"
 #include "Player.h"
 #include "State.h"
@@ -21,7 +25,7 @@ using namespace std;
 namespace CrabBattle
 {
     class GameState : public State
-        {
+    {
         private:
             TTF_Font *font;
             Player pcPlayer1, pcPlayer2;
@@ -38,7 +42,7 @@ namespace CrabBattle
             virtual State *Update(void);
             virtual void Display(Surface *);
             virtual ~GameState(void);
-        };
+    };
 }
 
 #endif
