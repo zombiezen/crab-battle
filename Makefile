@@ -39,7 +39,7 @@ $(builddir)/Rect.o : $(srcdir)/Rect.h $(srcdir)/BaseObject.h
 $(builddir)/Sprite.o : $(srcdir)/Sprite.h $(srcdir)/Rect.h $(srcdir)/Surface.h
 $(builddir)/State.o : $(srcdir)/State.h $(srcdir)/BaseObject.h $(srcdir)/Surface.h
 $(builddir)/Surface.o : $(srcdir)/Surface.h $(srcdir)/BaseObject.h $(srcdir)/Rect.h
-$(builddir)/Player.o : $(srcdir)/BaseObject.h $(srcdir)/Rect.h
+$(builddir)/Player.o : $(srcdir)/Sprite.h
 
 $(builddir)/images : $(resdir)/images
 	$(CP) -r $(resdir)/images $(builddir)/images

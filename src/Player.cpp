@@ -8,23 +8,16 @@
  
 #include "Player.h"
 
-using CrabBattle::BaseObject;
-using CrabBattle::Rect;
+using CrabBattle::Sprite;
 using CrabBattle::Player;
 
-Player::Player(void)
+Player::Player(Surface *surf) : Sprite(surf)
 {
     hp = 200;
     wins = 0;   
 }
 
-Player::Player(double width, double height) : Rect(width, height)
-{
-    hp = 200;
-    wins = 0;
-}
-
-Player::Player(double dx, double dy, double width, double height) : Rect(dx, dy, width, height)
+Player::Player(Surface *surf, Rect rect) : Sprite(surf, rect)
 {
     hp = 200;
     wins = 0;
