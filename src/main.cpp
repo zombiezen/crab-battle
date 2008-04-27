@@ -13,6 +13,11 @@
 #include <iostream>
 
 #include "SDL.h"
+#if (defined(__WIN32__) || defined(WINDOWS)) || defined(MAC_OS_X)
+#include <SDL_ttf/SDL_ttf.h>
+#else
+#include <SDL/SDL_ttf.h>
+#endif
 #include "State.h"
 #include "GameState.h"
 #include "Surface.h"
@@ -76,6 +81,8 @@ extern "C" int main(int argc, char *argv[])
     screenObj = Surface::GetVideoSurface();
     if (kMainVideoFlags & SDL_FULLSCREEN)
         SDL_ShowCursor(SDL_DISABLE);
+    // Set up SDL_ttf
+    TTF_Init();
     
     // Run main event loop
     state = new GameState();
@@ -128,6 +135,7 @@ extern "C" int main(int argc, char *argv[])
     
     // Clean up
     state->DelRef();
+    TTF_Quit();
     SDL_Quit();
     return 0;
 }
