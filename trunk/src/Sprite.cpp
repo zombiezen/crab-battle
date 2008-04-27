@@ -17,6 +17,7 @@ Sprite::Sprite(Surface *surf)
 {
     x = y = 0.0;
     surface = surf;
+    surface->AddRef();
 }
 
 Sprite::Sprite(Surface *surf, Rect pos)
@@ -24,6 +25,7 @@ Sprite::Sprite(Surface *surf, Rect pos)
     x = pos.GetX();
     y = pos.GetY();
     surface = surf;
+    surface->AddRef();
 }
 
 Rect Sprite::GetPosition(void)
