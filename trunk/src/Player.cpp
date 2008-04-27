@@ -3,7 +3,7 @@
  *  Crab Battle
  *
  *  Created by Ephraim Ruprecht on 4/25/08.
- *  $Id:
+ *  $Id$
  */
  
 #include "Player.h"
@@ -11,7 +11,6 @@
 using CrabBattle::BaseObject;
 using CrabBattle::Rect;
 using CrabBattle::Player;
-
 
 Player::Player(void)
 {

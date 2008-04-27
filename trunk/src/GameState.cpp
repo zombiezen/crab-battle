@@ -6,7 +6,6 @@
  *  $Id$
  */
 
-#include <SDL_ttf/SDL_ttf.h>
 #include "GameState.h"
 #include "PausedState.h"
 #include "constants.h"

@@ -3,7 +3,7 @@
 # TOOLS
 CP = /bin/cp
 
-LDFLAGS += -lSDL -lSDL_image -ggdb
+LDFLAGS += -lSDL -lSDL_image -lSDL_ttf -ggdb
 CPPFLAGS += -I/usr/include/SDL
 
 srcdir = src
@@ -17,7 +17,8 @@ objects = $(builddir)/BaseObject.o \
 		  $(builddir)/Rect.o \
 		  $(builddir)/Sprite.o \
 		  $(builddir)/State.o \
-		  $(builddir)/Surface.o
+		  $(builddir)/Surface.o \
+		  $(builddir)/Player.o
 
 $(builddir)/crab-battle : $(builddir) $(objects) build_resources
 	$(CXX) -o $(builddir)/crab-battle $(LDFLAGS) $(objects)
@@ -25,7 +26,7 @@ $(builddir)/crab-battle : $(builddir) $(objects) build_resources
 $(builddir) :
 	mkdir $(builddir)
 
-build_resources : $(builddir)/images $(builddir)/titles.txt $(builddir)/titles1.txt $(builddir)/icon.png
+build_resources : $(builddir)/images $(builddir)/titles.txt $(builddir)/titles1.txt $(builddir)/icon.png $(builddir)/times.ttf
 
 $(builddir)/%.o : $(srcdir)/%.cpp
 	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c $< -o $@
@@ -38,6 +39,7 @@ $(builddir)/Rect.o : $(srcdir)/Rect.h $(srcdir)/BaseObject.h
 $(builddir)/Sprite.o : $(srcdir)/Sprite.h $(srcdir)/Rect.h $(srcdir)/Surface.h
 $(builddir)/State.o : $(srcdir)/State.h $(srcdir)/BaseObject.h $(srcdir)/Surface.h
 $(builddir)/Surface.o : $(srcdir)/Surface.h $(srcdir)/BaseObject.h $(srcdir)/Rect.h
+$(builddir)/Player.o : $(srcdir)/BaseObject.h $(srcdir)/Rect.h
 
 $(builddir)/images : $(resdir)/images
 	$(CP) -r $(resdir)/images $(builddir)/images
@@ -47,6 +49,8 @@ $(builddir)/titles1.txt : $(resdir)/titles1.txt
 	$(CP) $(resdir)/titles1.txt $(builddir)/titles1.txt
 $(builddir)/icon.png : $(resdir)/icon.png
 	$(CP) $(resdir)/icon.png $(builddir)/icon.png
+$(builddir)/times.ttf : $(resdir)/times.ttf
+	$(CP) $(resdir)/times.ttf $(builddir)/times.ttf
 
 .PHONY : clean build_resources
 clean :
