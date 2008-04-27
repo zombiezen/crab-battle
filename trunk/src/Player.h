@@ -7,22 +7,20 @@
  */
  
 #include "SDL.h"
-#include "BaseObject.h"
-#include "Rect.h"
+#include "Sprite.h"
 
 #ifndef _CRAB_BATTLE_PLAYER_H_
 #define _CRAB_BATTLE_PLAYER_H_
 
 namespace CrabBattle
 {
-    class Player : public Rect
+    class Player : public Sprite
     {
         private:
             double hp, wins;
         public:    
-            Player(void);
-            Player(double, double);
-            Player(double, double, double, double);
+            Player(Surface *);
+            Player(Surface *, Rect);
             double GetHp(void);
             void ModHp(double);
             void SetHp(double);
