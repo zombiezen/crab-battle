@@ -7,6 +7,7 @@
  */
 
 #include "Sprite.h"
+#include "constants.h"
 
 using CrabBattle::BaseObject;
 using CrabBattle::Sprite;
@@ -18,6 +19,8 @@ Sprite::Sprite(Surface *surf)
     x = y = 0.0;
     surface = surf;
     surface->AddRef();
+    body = NULL;
+    geometry = NULL;
 }
 
 Sprite::Sprite(Surface *surf, Rect pos)
@@ -26,11 +29,26 @@ Sprite::Sprite(Surface *surf, Rect pos)
     y = pos.GetY();
     surface = surf;
     surface->AddRef();
+    body = NULL;
+    geometry = NULL;
 }
 
 Rect Sprite::GetPosition(void)
 {
-    return Rect(x, y, surface->GetWidth(), surface->GetHeight());
+    Rect posRect = Rect(surface->GetWidth(), surface->GetHeight());
+    const dReal *pos;
+    if (body == NULL)
+    {
+        posRect.SetX(x);
+        posRect.SetY(y);
+    }
+    else
+    {
+        pos = body->getPosition();
+        posRect.SetX(pos[0] * kPhysicsScreenScale - posRect.GetWidth() / 2);
+        posRect.SetY(pos[1] * kPhysicsScreenScale - posRect.GetHeight() / 2);
+    }
+    return posRect;
 }
 
 void Sprite::SetPosition(Rect pos)
@@ -53,6 +71,30 @@ void Sprite::SetSurface(Surface *surf)
         surface->AddRef();
 }
 
+dBody *Sprite::GetBody(void)
+{
+    return body;
+}
+
+void Sprite::SetBody(dBody *newBody)
+{
+    if (body != NULL)
+        delete body;
+    body = newBody;
+}
+
+dGeom *Sprite::GetGeometry(void)
+{
+    return geometry;
+}
+
+void Sprite::SetGeometry(dGeom *newGeom)
+{
+    if (geometry != NULL)
+        delete geometry;
+    geometry = newGeom;
+}
+
 void Sprite::Display(Surface *dest)
 {
     dest->Blit(surface, GetPosition());
@@ -61,4 +103,6 @@ void Sprite::Display(Surface *dest)
 Sprite::~Sprite(void)
 {
     SetSurface(NULL);
+    SetBody(NULL);
+    SetGeometry(NULL);
 }

@@ -12,11 +12,49 @@
 #include <fstream>
 #include <iostream>
 
+// Maximum contacts per collision per iteration
+const unsigned int kMaxContacts = 16;
+
 using namespace std;
 
 using CrabBattle::GameState;
 
 const unsigned short kBoxSpeed = 20;
+
+namespace CrabBattle
+{
+    void _game_state_collide(void *data, dGeomID geom1, dGeomID geom2)
+    {
+        GameState *state = (GameState *)data;
+        dContactGeom *contacts = NULL;
+        unsigned int contact_count, i;
+        
+        if (dGeomIsSpace(geom1) || dGeomIsSpace(geom2))
+        {
+            // Check for collisions between spaces
+            dSpaceCollide2(geom1, geom2, data, &_game_state_collide);
+            // Check for collisions inside spaces
+            if (dGeomIsSpace(geom1))
+                dSpaceCollide((dSpaceID)geom1, data, &_game_state_collide);
+            if (dGeomIsSpace(geom2))
+                dSpaceCollide((dSpaceID)geom2, data, &_game_state_collide);
+        }
+        else
+        {
+            // Non-space geometries; check for collision
+            contacts = new dContactGeom[kMaxContacts];
+            contact_count = dCollide(geom1, geom2, kMaxContacts,
+                                     contacts, sizeof(dContactGeom));
+            for (i = 0; i < contact_count; i++)
+            {
+                state->AddContact(contacts[i], geom1, geom2);
+            }
+            delete [] contacts;
+        }
+    }
+}
+
+using CrabBattle::_game_state_collide;
 
 GameState::GameState(void)
 {
@@ -28,6 +66,10 @@ GameState::GameState(void)
     char value5[MAXPATHLEN];
     ifstream getTitles;
     CrabBattle::Surface *surf_p1, *surf_p2;
+    dBody *newBody;
+    dMass *newMass;
+    dGeom *newGeom;
+    dJointID joint2d;
 #ifdef NO_SDL_IMAGE
     SDL_Surface *bg, *p1, *p2;
 #endif
@@ -119,6 +161,55 @@ GameState::GameState(void)
 #endif
     // Don't pause yet
     shouldPause = false;
+    // Set up physics
+    physicsWorld = new dWorld();
+    physicsSpace = new dHashSpace(NULL);
+    physicsWorld->setGravity(0.0, 9.81, 0.0); // gravity is positive to fit
+                                              // with SDL screen coordinates
+    joint2d = dJointCreatePlane2D(physicsWorld->id(), NULL);
+    allContacts = new dJointGroup(0);
+    // Player 1 Physics
+    newBody = new dBody(physicsWorld->id());
+    newMass = new dMass; // yeah, this'll leak memory
+    newMass->setBox(50.0,
+                    64.0 / kPhysicsScreenScale,
+                    64.0 / kPhysicsScreenScale,
+                    1.0 / kPhysicsScreenScale);
+    newBody->setMass(newMass);
+    newBody->setPosition((160.0 + 32.0) / kPhysicsScreenScale,
+                         (300.0 + 32.0) / kPhysicsScreenScale,
+                         0.0);
+    player1->SetBody(newBody);
+    dJointAttach(joint2d, newBody->id(), NULL);
+    // Player 1 Collision
+    newGeom = new dBox(physicsSpace->id(),
+                       64.0 / kPhysicsScreenScale,
+                       64.0 / kPhysicsScreenScale,
+                       1.0 / kPhysicsScreenScale);
+    newGeom->setBody(newBody->id());
+    // Player 2 Physics
+    newBody = new dBody(physicsWorld->id());
+    newMass = new dMass; // yeah, this'll leak memory
+    newMass->setBox(50.0,
+                    64.0 / kPhysicsScreenScale,
+                    64.0 / kPhysicsScreenScale,
+                    1.0 / kPhysicsScreenScale);
+    newBody->setMass(newMass);
+    newBody->setPosition((400.0 + 32.0) / kPhysicsScreenScale,
+                         (300.0 + 32.0) / kPhysicsScreenScale,
+                         0.0);
+    player2->SetBody(newBody);
+    dJointAttach(joint2d, newBody->id(), NULL);
+    // Player 2 Collision
+    newGeom = new dBox(physicsSpace->id(),
+                       64.0 / kPhysicsScreenScale,
+                       64.0 / kPhysicsScreenScale,
+                       1.0 / kPhysicsScreenScale);
+    newGeom->setBody(newBody->id());
+    // Floor
+    newGeom = new dPlane(physicsSpace->id(),
+                         0.0, -1.0, 0.0,
+                         -(kScreenHeight / kPhysicsScreenScale));
 }
 
 void GameState::HandleEvent(SDL_Event evt)
@@ -129,6 +220,12 @@ void GameState::HandleEvent(SDL_Event evt)
         {
             case SDLK_p:
                 shouldPause = true;
+                break;
+            case SDLK_w:
+                player1->GetBody()->addForce(0.0, -1000.0, 0.0);
+                break;
+            case SDLK_UP:
+                player2->GetBody()->addForce(0.0, -1000.0, 0.0);
                 break;
         }
     }
@@ -149,7 +246,6 @@ SDL_Surface *GameState::render(double dh)
 CrabBattle::State *GameState::Update(void)
 {
     Uint8 *key;
-    Rect p1rect = player1->GetPosition(), p2rect = player2->GetPosition();
     key = SDL_GetKeyState(NULL);
     if (player1->GetHp() <= 0)
     {
@@ -173,57 +269,10 @@ CrabBattle::State *GameState::Update(void)
       wins2 = render(player2->GetWins());
       
     }
-    if (key[SDLK_w])
-    {
-        p1rect.Move(0, -kBoxSpeed);
-        if (p1rect.GetTop() < 0)
-            p1rect.SetTop(0);
-    }
-    if (key[SDLK_s])
-    {
-        p1rect.Move(0, kBoxSpeed);
-        if (p1rect.GetBottom() > kScreenHeight)
-            p1rect.SetBottom(kScreenHeight);
-    }
-    if (key[SDLK_a])
-    {
-        p1rect.Move(-kBoxSpeed, 0);
-        if (p1rect.GetLeft() < 0)
-            p1rect.SetLeft(0);
-    }
-    if (key[SDLK_d])
-    {
-        p1rect.Move(kBoxSpeed, 0);
-        if (p1rect.GetRight() > kScreenWidth)
-            p1rect.SetRight(kScreenWidth);
-    }
-    if (key[SDLK_UP])
-    {
-        p2rect.Move(0, -kBoxSpeed);
-        if (p2rect.GetTop() < 0)
-            p2rect.SetTop(0);
-    }
-    if (key[SDLK_DOWN])
-    {
-        p2rect.Move(0, kBoxSpeed);
-        if (p2rect.GetBottom() > kScreenHeight)
-            p2rect.SetBottom(kScreenHeight);
-    }
-    if (key[SDLK_LEFT])
-    {
-        p2rect.Move(-kBoxSpeed, 0);
-        if (p2rect.GetLeft() < 0)
-            p2rect.SetLeft(0);
-    }
-    if (key[SDLK_RIGHT])
-    {
-        p2rect.Move(kBoxSpeed, 0);
-        if (p2rect.GetRight() > kScreenWidth)
-            p2rect.SetRight(kScreenWidth);
-    }
-    // Update player rectangles
-    player1->SetPosition(p1rect);
-    player2->SetPosition(p2rect);
+    // Update physics
+    physicsSpace->collide(this, &_game_state_collide);
+    physicsWorld->step((dReal)kUpdateRate / 1000.0);
+    allContacts->empty();
     // Switch states
     if (shouldPause)
     {
@@ -232,6 +281,27 @@ CrabBattle::State *GameState::Update(void)
     }
     else
         return NULL;
+}
+
+void GameState::AddContact(dContactGeom contactInfo, dGeomID geom1, dGeomID geom2)
+{
+    dContactJoint *joint;
+    dContact *contact;
+    if (allContacts == NULL)
+        return;
+    contact = new dContact;
+    // Set up contact
+    contact->geom = contactInfo;
+    contact->surface.mode = dContactBounce | dContactSoftCFM;
+    contact->surface.mu = dInfinity;
+    contact->surface.mu2 = 0.0;
+    contact->surface.bounce = 0.8;
+    contact->surface.bounce_vel = 0.1;
+    contact->surface.soft_cfm = 0.01;
+    // Create joint
+    joint = new dContactJoint(physicsWorld->id(), allContacts->id(), contact);
+    delete contact; // TODO: See if we can do this
+    joint->attach(dGeomGetBody(geom1), dGeomGetBody(geom2));
 }
 
 void GameState::Display(Surface *screen)
@@ -260,4 +330,6 @@ GameState::~GameState(void)
     SDL_FreeSurface(wins1);
     SDL_FreeSurface(wins2);
     TTF_CloseFont(font);
+    delete physicsWorld;
+    delete physicsSpace;
 }

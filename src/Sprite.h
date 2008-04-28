@@ -6,6 +6,7 @@
  *  $Id$
  */
 
+#include <ode/ode.h>
 #include "BaseObject.h"
 #include "Rect.h"
 #include "Surface.h"
@@ -26,6 +27,8 @@ namespace CrabBattle
     private:
         double x, y;
         Surface *surface;
+        dBody *body;
+        dGeom *geometry;
     public:
         /*** CONSTRUCTORS ***/
         // Sprite(surface)
@@ -43,6 +46,14 @@ namespace CrabBattle
         Surface *GetSurface(void);
         // sprite.SetSurface(surface)
         void SetSurface(Surface *);
+        // sprite.GetBody()
+        dBody *GetBody(void);
+        // sprite.SetBody(body)
+        void SetBody(dBody *);
+        // sprite.GetBody()
+        dGeom *GetGeometry(void);
+        // sprite.SetGeometry(geom)
+        void SetGeometry(dGeom *);
         /*** ACTIONS ***/
         // sprite.Display(screen)
         // Blits a sprite onto another surface
