@@ -14,6 +14,7 @@
 const unsigned short kUpdateRate = 33; // in ms
 const int kScreenWidth = 640; // in pixels
 const int kScreenHeight = 480; // in pixels
+const double kPhysicsScreenScale = 32.0; // pixels over meters
 const SDL_Color textColor = { 255, 255, 255 };
 
 #ifndef MAXPATHLEN

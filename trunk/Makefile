@@ -3,7 +3,7 @@
 # TOOLS
 CP = /bin/cp
 
-LDFLAGS += -lSDL -lSDL_image -lSDL_ttf -ggdb
+LDFLAGS += -lSDL -lSDL_image -lSDL_ttf -lode -ggdb
 CPPFLAGS += -I/usr/include/SDL
 
 srcdir = src
@@ -36,7 +36,7 @@ $(builddir)/GameState.o : $(srcdir)/GameState.h $(srcdir)/Rect.h $(srcdir)/State
 $(builddir)/main.o : $(srcdir)/State.h $(srcdir)/GameState.h $(srcdir)/Surface.h $(srcdir)/constants.h
 $(builddir)/PausedState.o : $(srcdir)/PausedState.h $(srcdir)/Rect.h $(srcdir)/State.h $(srcdir)/constants.h
 $(builddir)/Rect.o : $(srcdir)/Rect.h $(srcdir)/BaseObject.h
-$(builddir)/Sprite.o : $(srcdir)/Sprite.h $(srcdir)/Rect.h $(srcdir)/Surface.h
+$(builddir)/Sprite.o : $(srcdir)/Sprite.h $(srcdir)/Rect.h $(srcdir)/Surface.h $(srcdir)/constants.h
 $(builddir)/State.o : $(srcdir)/State.h $(srcdir)/BaseObject.h $(srcdir)/Surface.h
 $(builddir)/Surface.o : $(srcdir)/Surface.h $(srcdir)/BaseObject.h $(srcdir)/Rect.h
 $(builddir)/Player.o : $(srcdir)/Sprite.h
