@@ -11,12 +11,14 @@
 #include <cstdlib>
 #include <cstring>
 #include <iostream>
+#include <stack>
 
 #include "SDL.h"
 #include "State.h"
 #include "GameState.h"
 #include "Surface.h"
 #include "constants.h"
+
 
 // CONSTANTS //
 
@@ -41,6 +43,7 @@ extern "C" int main(int argc, char *argv[])
     SDL_Event event;
     Surface *screenObj = NULL;
     State *state = NULL, *newState = NULL;
+    stack<State*> state_stack;
 #if !defined(NO_SDL_IMAGE) && !defined(MAC_OS_X)
     Surface *icon = NULL;
 #endif
@@ -86,6 +89,7 @@ extern "C" int main(int argc, char *argv[])
         {
             // Ordinarily, we would AddRef the newState, but we own the state.
             state->DelRef();
+            state_stack.push(state);
             state = newState;
             newState = NULL;
         }
