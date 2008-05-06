@@ -42,7 +42,7 @@ extern "C" int main(int argc, char *argv[])
     bool done = false;
     SDL_Event event;
     Surface *screenObj = NULL;
-    State *state = NULL, *newState = NULL;
+    State *newState = NULL;
     stack<State*> state_stack;
 #if !defined(NO_SDL_IMAGE) && !defined(MAC_OS_X)
     Surface *icon = NULL;
@@ -81,16 +81,14 @@ extern "C" int main(int argc, char *argv[])
         SDL_ShowCursor(SDL_DISABLE);
     
     // Run main event loop
-    state = new GameState();
+    state_stack.push(new GameState());
     while (!done)
     {
         // Switch states, if necessary
         if (newState != NULL)
         {
             // Ordinarily, we would AddRef the newState, but we own the state.
-            state->DelRef();
-            state_stack.push(state);
-            state = newState;
+            state_stack.push(newState);
             newState = NULL;
         }
         // Get events
@@ -111,7 +109,7 @@ extern "C" int main(int argc, char *argv[])
             }
             else
             {
-                state->HandleEvent(event);
+                state_stack.top()->HandleEvent(event);
             }
         }
         // Update timer
@@ -122,16 +120,15 @@ extern "C" int main(int argc, char *argv[])
         if (cumulativeTime > kUpdateRate)
         {
             cumulativeTime -= kUpdateRate;
-            newState = state->Update();
+            newState = state_stack.top()->Update();
         }
         // Get ready for next timer loop
         lastTime = currentTime;
         // Draw
-        state->Display(screenObj);
+        state_stack.top()->Display(screenObj);
     }
     
     // Clean up
-    state->DelRef();
     SDL_Quit();
     return 0;
 }
