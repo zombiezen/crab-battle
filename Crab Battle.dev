@@ -1,7 +1,7 @@
 [Project]
 FileName=Crab Battle.dev
 Name=Crab Battle
-UnitCount=18
+UnitCount=20
 Type=0
 Ver=3
 IsCpp=1
@@ -240,3 +240,22 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
+[Unit19]
+FileName=src\exceptions.h
+CompileCpp=1
+Folder=Headers
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit20]
+FileName=src\exceptions.cpp
+CompileCpp=1
+Folder=Classes
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
