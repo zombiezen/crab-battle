@@ -55,6 +55,9 @@ namespace CrabBattle
         // sprite.SetGeometry(geom)
         void SetGeometry(dGeom *);
         /*** ACTIONS ***/
+        // sprite.FixPhysics()
+        // "Fix" the physics to 2D space
+        void FixPhysics();
         // sprite.Display(screen)
         // Blits a sprite onto another surface
         void Display(Surface *);
