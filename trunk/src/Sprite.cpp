@@ -95,6 +95,32 @@ void Sprite::SetGeometry(dGeom *newGeom)
     geometry = newGeom;
 }
 
+void Sprite::FixPhysics(void)
+{
+    const dReal *pos, *lvel, *rot;
+    const dReal *quat_ptr;
+    dReal quat[4], quat_len;
+    if (body == NULL)
+        return;
+    // Fix rotation
+    rot = body->getAngularVel();
+    quat_ptr = body->getQuaternion();
+    quat[0] = quat_ptr[0];
+    quat[1] = 0.0;
+    quat[2] = 0.0;
+    quat[3] = quat_ptr[3];
+    quat_len = sqrt(quat[0] * quat[0] + quat[3] * quat[3]);
+    quat[0] /= quat_len;
+    quat[3] /= quat_len;
+    body->setQuaternion(quat);
+    body->setAngularVel(0.0, 0.0, rot[2]);
+    // Fix position
+//    pos = body->getPosition();
+//    lvel = body->getLinearVel();
+//    body->setPosition(pos[0], pos[1], 0.0);
+//    body->setLinearVel(lvel[0], lvel[1], 0.0);
+}
+
 void Sprite::Display(Surface *dest)
 {
     dest->Blit(surface, GetPosition());

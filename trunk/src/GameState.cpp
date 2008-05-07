@@ -12,8 +12,16 @@
 #include <fstream>
 #include <iostream>
 
+// TODO: Remove
+#include <cstdio>
+using std::printf;
+
 // Maximum contacts per collision per iteration
 const unsigned int kMaxContacts = 16;
+
+const dReal kPhysicsGravity = 9.81;
+const dReal kPhysicsCFM = 20.0;
+const dReal kPhysicsERP = 0.5;
 
 using namespace std;
 
@@ -164,11 +172,11 @@ GameState::GameState(void)
     // Set up physics
     physicsWorld = new dWorld();
     physicsSpace = new dHashSpace(NULL);
-    physicsWorld->setGravity(0.0, 9.81, 0.0); // gravity is positive to fit
-                                              // with SDL screen coordinates
-    joint2d = dJointCreatePlane2D(physicsWorld->id(), NULL);
+    // Gravity is positive to fit with SDL screen coordinates
+    physicsWorld->setGravity(0.0, kPhysicsGravity, 0.0);
     allContacts = new dJointGroup(0);
     // Player 1 Physics
+    joint2d = dJointCreatePlane2D(physicsWorld->id(), NULL);
     newBody = new dBody(physicsWorld->id());
     newMass = new dMass; // yeah, this'll leak memory
     newMass->setBox(50.0,
@@ -187,7 +195,9 @@ GameState::GameState(void)
                        64.0 / kPhysicsScreenScale,
                        1.0 / kPhysicsScreenScale);
     newGeom->setBody(newBody->id());
+    player1->SetGeometry(newGeom);
     // Player 2 Physics
+    joint2d = dJointCreatePlane2D(physicsWorld->id(), NULL);
     newBody = new dBody(physicsWorld->id());
     newMass = new dMass; // yeah, this'll leak memory
     newMass->setBox(50.0,
@@ -206,10 +216,22 @@ GameState::GameState(void)
                        64.0 / kPhysicsScreenScale,
                        1.0 / kPhysicsScreenScale);
     newGeom->setBody(newBody->id());
+    player2->SetGeometry(newGeom);
     // Floor
     newGeom = new dPlane(physicsSpace->id(),
                          0.0, -1.0, 0.0,
                          -(kScreenHeight / kPhysicsScreenScale));
+    // Walls
+    newGeom = new dPlane(physicsSpace->id(),
+                         1.0, 0.0, 0.0,
+                         0.0);
+    newGeom = new dPlane(physicsSpace->id(),
+                         -1.0, 0.0, 0.0,
+                         -(kScreenWidth / kPhysicsScreenScale));
+    // Ceiling
+    newGeom = new dPlane(physicsSpace->id(),
+                         0.0, 1.0, 0.0,
+                         0.0);
 }
 
 void GameState::HandleEvent(SDL_Event evt)
@@ -224,8 +246,20 @@ void GameState::HandleEvent(SDL_Event evt)
             case SDLK_w:
                 player1->GetBody()->addForce(0.0, -1000.0, 0.0);
                 break;
+            case SDLK_a:
+                player1->GetBody()->addForce(-1000.0, 0.0, 0.0);
+                break;
+            case SDLK_d:
+                player1->GetBody()->addForce(1000.0, 0.0, 0.0);
+                break;
             case SDLK_UP:
                 player2->GetBody()->addForce(0.0, -1000.0, 0.0);
+                break;
+            case SDLK_LEFT:
+                player2->GetBody()->addForce(-1000.0, 0.0, 0.0);
+                break;
+            case SDLK_RIGHT:
+                player2->GetBody()->addForce(1000.0, 0.0, 0.0);
                 break;
         }
     }
@@ -271,8 +305,12 @@ CrabBattle::State *GameState::Update(void)
     }
     // Update physics
     physicsSpace->collide(this, &_game_state_collide);
+    player1->FixPhysics();
+    player2->FixPhysics();
     physicsWorld->step((dReal)kUpdateRate / 1000.0);
     allContacts->empty();
+    player1->FixPhysics();
+    player2->FixPhysics();
     // Switch states
     if (shouldPause)
     {
@@ -285,23 +323,47 @@ CrabBattle::State *GameState::Update(void)
 
 void GameState::AddContact(dContactGeom contactInfo, dGeomID geom1, dGeomID geom2)
 {
+    using std::cout;
+    using std::endl;
     dContactJoint *joint;
     dContact *contact;
+    const dReal *pos1, *pos2;
     if (allContacts == NULL)
         return;
+    pos1 = dGeomGetPosition(geom1);
+    pos2 = dGeomGetPosition(geom2);
     contact = new dContact;
     // Set up contact
     contact->geom = contactInfo;
-    contact->surface.mode = dContactBounce | dContactSoftCFM;
-    contact->surface.mu = dInfinity;
-    contact->surface.mu2 = 0.0;
-    contact->surface.bounce = 0.8;
-    contact->surface.bounce_vel = 0.1;
-    contact->surface.soft_cfm = 0.01;
+    if (dGeomGetBody(geom1) == NULL || dGeomGetBody(geom2) == NULL)
+    {
+        // Non-mobile collision
+        contact->surface.mode = dContactBounce | dContactSoftERP;
+        contact->surface.mu = 0.5;
+        contact->surface.mu2 = 0.0;
+        contact->surface.bounce = 0.25;
+        contact->surface.bounce_vel = 0.1;
+        contact->surface.soft_erp = kPhysicsERP;
+        contact->surface.soft_cfm = kPhysicsCFM;
+    }
+    else
+    {
+//        printf("(%4f, %4f, %4f); (%4f, %4f, %4f)\n",
+//               pos1[0], pos1[1], pos1[2],
+//               pos2[0], pos2[1], pos2[2]);
+        contact->surface.mode = dContactSoftERP | dContactSoftCFM;
+        contact->surface.mu = 25.0;
+        contact->surface.mu2 = 0.0;
+        contact->surface.bounce = 1.0;
+        contact->surface.bounce_vel = 0.1;
+        contact->surface.soft_erp = kPhysicsERP;
+        contact->surface.soft_cfm = kPhysicsCFM;
+    }
     // Create joint
     joint = new dContactJoint(physicsWorld->id(), allContacts->id(), contact);
     delete contact; // TODO: See if we can do this
     joint->attach(dGeomGetBody(geom1), dGeomGetBody(geom2));
+//    printf("COLLIDED: %#x/%#x\n", geom1, geom2);
 }
 
 void GameState::Display(Surface *screen)
