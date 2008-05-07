@@ -18,7 +18,8 @@ objects = $(builddir)/BaseObject.o \
 		  $(builddir)/Sprite.o \
 		  $(builddir)/State.o \
 		  $(builddir)/Surface.o \
-		  $(builddir)/Player.o
+		  $(builddir)/Player.o \
+		  $(builddir)/exceptions.o
 
 $(builddir)/crab-battle : $(builddir) $(objects) build_resources
 	$(CXX) -o $(builddir)/crab-battle $(LDFLAGS) $(objects)
@@ -32,14 +33,15 @@ $(builddir)/%.o : $(srcdir)/%.cpp
 	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c $< -o $@
 
 $(builddir)/BaseObject.o : $(srcdir)/BaseObject.h
-$(builddir)/GameState.o : $(srcdir)/GameState.h $(srcdir)/Rect.h $(srcdir)/State.h $(srcdir)/constants.h
+$(builddir)/GameState.o : $(srcdir)/GameState.h $(srcdir)/Rect.h $(srcdir)/State.h $(srcdir)/constants.h $(srcdir)/exceptions.h
 $(builddir)/main.o : $(srcdir)/State.h $(srcdir)/GameState.h $(srcdir)/Surface.h $(srcdir)/constants.h
-$(builddir)/PausedState.o : $(srcdir)/PausedState.h $(srcdir)/Rect.h $(srcdir)/State.h $(srcdir)/constants.h
+$(builddir)/PausedState.o : $(srcdir)/PausedState.h $(srcdir)/Rect.h $(srcdir)/State.h $(srcdir)/constants.h $(srcdir)/exceptions.h
 $(builddir)/Rect.o : $(srcdir)/Rect.h $(srcdir)/BaseObject.h
 $(builddir)/Sprite.o : $(srcdir)/Sprite.h $(srcdir)/Rect.h $(srcdir)/Surface.h $(srcdir)/constants.h
 $(builddir)/State.o : $(srcdir)/State.h $(srcdir)/BaseObject.h $(srcdir)/Surface.h
-$(builddir)/Surface.o : $(srcdir)/Surface.h $(srcdir)/BaseObject.h $(srcdir)/Rect.h
+$(builddir)/Surface.o : $(srcdir)/Surface.h $(srcdir)/BaseObject.h $(srcdir)/Rect.h $(srcdir)/exceptions.h
 $(builddir)/Player.o : $(srcdir)/Sprite.h
+$(builddir)/exceptions.o : 
 
 $(builddir)/images : $(resdir)/images
 	$(CP) -r $(resdir)/images $(builddir)/images

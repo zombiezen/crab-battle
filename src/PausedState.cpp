@@ -8,6 +8,7 @@
  
 #include "PausedState.h"
 #include "constants.h"
+#include "exceptions.h"
 #include <fstream>
 #include <iostream>
 
@@ -17,6 +18,7 @@ using CrabBattle::PausedState;
 
 PausedState::PausedState(GameState *prev)
 {
+    using CrabBattle::FileNotFoundError;
 #ifdef NO_SDL_IMAGE
     SDL_Surface *bg, *p1, *p2;
 #endif
@@ -35,10 +37,7 @@ PausedState::PausedState(GameState *prev)
 
     if (!getTitles.is_open())  // if failed to open file
     {
-        cout << "Could not open the file " << endl;
-        cout << "Program terminating.\n";
-        cin.get();
-        exit(EXIT_FAILURE);
+        throw FileNotFoundError("titles1.txt");
     }
 
     //hard coded for base implementation

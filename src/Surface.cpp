@@ -7,6 +7,7 @@
  */
 
 #include "Surface.h"
+#include "exceptions.h"
 #ifndef NO_SDL_IMAGE
 #  ifdef MAC_OS_X
 #include <SDL_image/SDL_image.h>
@@ -34,8 +35,10 @@ Surface::Surface(unsigned int w, unsigned int h)
 #ifndef NO_SDL_IMAGE
 Surface::Surface(const char *fname)
 {
+    using CrabBattle::FileNotFoundError;
     surface = IMG_Load(fname);
-    // TODO: If surface is NULL, raise an error
+    if (surface == NULL)
+        throw FileNotFoundError(fname);
 }
 #endif
 

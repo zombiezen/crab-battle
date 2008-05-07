@@ -9,6 +9,7 @@
 #include "GameState.h"
 #include "PausedState.h"
 #include "constants.h"
+#include "exceptions.h"
 #include <fstream>
 #include <iostream>
 
@@ -66,6 +67,7 @@ using CrabBattle::_game_state_collide;
 
 GameState::GameState(void)
 {
+    using CrabBattle::FileNotFoundError;
     int count =0;
     char value1[MAXPATHLEN];
     char value2[MAXPATHLEN];
@@ -82,9 +84,10 @@ GameState::GameState(void)
     SDL_Surface *bg, *p1, *p2;
 #endif
     //cout << "tff_init()= "<<TTF_WasInit()<<endl;
-
+    
     font = TTF_OpenFont( "times.ttf", 24 );
-    //if (font==NULL)cout<<TTF_GetError()<<endl;
+    if (font == NULL)
+        throw FileNotFoundError("times.ttf");
     
     messPc1 = TTF_RenderText_Solid( font,"200", textColor );
     messPc2 = TTF_RenderText_Solid( font, "200", textColor );
@@ -95,10 +98,7 @@ GameState::GameState(void)
 
     if (!getTitles.is_open())  // if failed to open file
     {
-        cout << "Could not open the file " << endl;
-        cout << "Program terminating.\n";
-        cin.get();
-        exit(EXIT_FAILURE);
+        throw FileNotFoundError("titles.txt");
     }
     
     //hard coded for base implementation
