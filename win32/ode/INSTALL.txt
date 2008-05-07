@@ -5,6 +5,7 @@ and another for just about everything else.
 2. Building with Autotools (Linux, OS X, etc.)
 3. Building with Code::Blocks
 4. Building with Something Else
+5. Installing for Crab Battle
 
  
 1. BUILDING WITH VISUAL STUDIO (2002 and up)
@@ -112,7 +113,11 @@ and another for just about everything else.
  and then follow the directions for Code::Blocks above, substituting your
  toolset target in place of `cb-gcc`.
  
- 
- 
 
- 
+5. Installing for Crab Battle
+
+This directory is used to help out Windows and wxDev-C++.  To install copy
+lib\releasedll\ode.dll into the wxDev-C++ bin directory, the
+lib\releasedll\libode.a into the wxDev-C++ lib directory, and the entire
+include\ode directory into the wxDev-C++ include directory (make sure you
+copy the entire directory, not just the headers inside it)
