@@ -51,6 +51,7 @@ Section "Crab Battle" SecCrabBattle
   File ..\Resources\icon.png
   File ..\Resources\titles.txt
   File ..\Resources\titles1.txt
+  File ..\Resources\times.ttf
   
   WriteUninstaller uninstall.exe
 SectionEnd
@@ -68,6 +69,7 @@ Section "Uninstall"
     Delete "$INSTDIR\icon.png"
     Delete "$INSTDIR\titles.txt"
     Delete "$INSTDIR\titles1.txt"
+    Delete "$INSTDIR\times.ttf"
 	Delete $INSTDIR\uninstall.exe
 	
 	Delete "$SMPROGRAMS\Crab Battle\*.lnk"
