@@ -327,11 +327,8 @@ void GameState::AddContact(dContactGeom contactInfo, dGeomID geom1, dGeomID geom
     using std::endl;
     dContactJoint *joint;
     dContact *contact;
-    const dReal *pos1, *pos2;
     if (allContacts == NULL)
         return;
-    pos1 = dGeomGetPosition(geom1);
-    pos2 = dGeomGetPosition(geom2);
     contact = new dContact;
     // Set up contact
     contact->geom = contactInfo;
@@ -348,9 +345,6 @@ void GameState::AddContact(dContactGeom contactInfo, dGeomID geom1, dGeomID geom
     }
     else
     {
-//        printf("(%4f, %4f, %4f); (%4f, %4f, %4f)\n",
-//               pos1[0], pos1[1], pos1[2],
-//               pos2[0], pos2[1], pos2[2]);
         contact->surface.mode = dContactSoftERP | dContactSoftCFM;
         contact->surface.mu = 25.0;
         contact->surface.mu2 = 0.0;
@@ -361,7 +355,7 @@ void GameState::AddContact(dContactGeom contactInfo, dGeomID geom1, dGeomID geom
     }
     // Create joint
     joint = new dContactJoint(physicsWorld->id(), allContacts->id(), contact);
-    delete contact; // TODO: See if we can do this
+    delete contact;
     joint->attach(dGeomGetBody(geom1), dGeomGetBody(geom2));
 //    printf("COLLIDED: %#x/%#x\n", geom1, geom2);
 }
