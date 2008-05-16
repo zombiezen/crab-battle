@@ -7,6 +7,7 @@
  */
 
 #include "Sprite.h"
+#include <cmath>
 #include "constants.h"
 
 using CrabBattle::BaseObject;
@@ -14,9 +15,126 @@ using CrabBattle::Sprite;
 using CrabBattle::Rect;
 using CrabBattle::Surface;
 
+const double kRotationTolerance = 2.0;
+
+// Wonderfully absent from SDL, so lovingly stolen from Pygame
+static void rotate (SDL_Surface *src, SDL_Surface *dst, Uint32 bgcolor, double sangle, double cangle)
+{
+    using namespace std;
+    int x, y, dx, dy;
+    
+    Uint8 *srcpix = (Uint8*) src->pixels;
+    Uint8 *dstrow = (Uint8*) dst->pixels;
+    int srcpitch = src->pitch;
+    int dstpitch = dst->pitch;
+    
+    int cy = dst->h / 2;
+    int xd = ((src->w - dst->w) << 15);
+    int yd = ((src->h - dst->h) << 15);
+    
+    int isin = (int)(sangle * 65536);
+    int icos = (int)(cangle * 65536);
+    
+    int ax = ((dst->w) << 15) - (int)(cangle * ((dst->w - 1) << 15));
+    int ay = ((dst->h) << 15) - (int)(sangle * ((dst->w - 1) << 15));
+    
+    int xmaxval = ((src->w) << 16) - 1;
+    int ymaxval = ((src->h) << 16) - 1;
+    
+    switch (src->format->BytesPerPixel)
+    {
+    case 1:
+        for (y = 0; y < dst->h; y++)
+        {
+            Uint8 *dstpos = (Uint8*)dstrow;
+            dx = (ax + (isin * (cy - y))) + xd;
+            dy = (ay - (icos * (cy - y))) + yd;
+            for (x = 0; x < dst->w; x++)
+            {
+                if(dx < 0 || dy < 0 || dx > xmaxval || dy > ymaxval)
+                    *dstpos++ = bgcolor;
+                else
+                    *dstpos++ = *(Uint8*)
+                        (srcpix + ((dy >> 16) * srcpitch) + (dx >> 16));
+                dx += icos;
+                dy += isin;
+            }
+            dstrow += dstpitch;
+        }
+        break;
+    case 2:
+        for (y = 0; y < dst->h; y++)
+        {
+            Uint16 *dstpos = (Uint16*)dstrow;
+            dx = (ax + (isin * (cy - y))) + xd;
+            dy = (ay - (icos * (cy - y))) + yd;
+            for (x = 0; x < dst->w; x++)
+            {
+                if (dx < 0 || dy < 0 || dx > xmaxval || dy > ymaxval)
+                    *dstpos++ = bgcolor;
+                else
+                    *dstpos++ = *(Uint16*)
+                        (srcpix + ((dy >> 16) * srcpitch) + (dx >> 16 << 1));
+                dx += icos;
+                dy += isin;
+            }
+            dstrow += dstpitch;
+        }
+        break;
+    case 4:
+        for (y = 0; y < dst->h; y++)
+        {
+            Uint32 *dstpos = (Uint32*)dstrow;
+            dx = (ax + (isin * (cy - y))) + xd;
+            dy = (ay - (icos * (cy - y))) + yd;
+            for (x = 0; x < dst->w; x++)
+            {
+                if (dx < 0 || dy < 0 || dx > xmaxval || dy > ymaxval)
+                    *dstpos++ = bgcolor;
+                else
+                    *dstpos++ = *(Uint32*)
+                        (srcpix + ((dy >> 16) * srcpitch) + (dx >> 16 << 2));
+                dx += icos;
+                dy += isin;
+            }
+            dstrow += dstpitch;
+        }
+        break;
+    default: /*case 3:*/
+        for (y = 0; y < dst->h; y++)
+        {
+            Uint8 *dstpos = (Uint8*)dstrow;
+            dx = (ax + (isin * (cy - y))) + xd;
+            dy = (ay - (icos * (cy - y))) + yd;
+            for (x = 0; x < dst->w; x++)
+            {
+                if (dx < 0 || dy < 0 || dx > xmaxval || dy > ymaxval)
+                {
+                    dstpos[0] = ((Uint8*) &bgcolor)[0];
+                    dstpos[1] = ((Uint8*) &bgcolor)[1];
+                    dstpos[2] = ((Uint8*) &bgcolor)[2];
+                    dstpos += 3;
+                }
+                else
+                {
+                    Uint8* srcpos = (Uint8*)
+                        (srcpix + ((dy >> 16) * srcpitch) + ((dx >> 16) * 3));
+                    dstpos[0] = srcpos[0];
+                    dstpos[1] = srcpos[1];
+                    dstpos[2] = srcpos[2];
+                    dstpos += 3;
+                }
+                dx += icos; dy += isin;
+            }
+            dstrow += dstpitch;
+        }
+        break;
+    }
+}
+
 Sprite::Sprite(Surface *surf)
 {
-    x = y = 0.0;
+    x = y = rot = 0.0;
     surface = surf;
     surface->AddRef();
     body = NULL;
@@ -27,6 +145,7 @@ Sprite::Sprite(Surface *surf, Rect pos)
 {
     x = pos.GetX();
     y = pos.GetY();
+    rot = 0.0;
     surface = surf;
     surface->AddRef();
     body = NULL;
@@ -55,6 +174,33 @@ void Sprite::SetPosition(Rect pos)
 {
     x = pos.GetX();
     y = pos.GetY();
+}
+
+double Sprite::GetRotation(void)
+{
+    using std::atan;
+    const dReal *quat;
+    double result;
+    if (body == NULL)
+    {
+        result = rot;
+    }
+    else
+    {
+        quat = body->getQuaternion();
+        result = atan((2 * (quat[0] * quat[3] + quat[1] * quat[2])) /
+                      (1 - 2 * (quat[2] * quat[2] + quat[3] * quat[3])));
+    }
+    while (result >= 360.0)
+        result -= 360.0;
+    while (result < 0.0)
+        result += 360.0;
+    return result;
+}
+
+void Sprite::SetRotation(double theta)
+{
+    rot = theta;
 }
 
 Surface *Sprite::GetSurface(void)
@@ -123,7 +269,58 @@ void Sprite::FixPhysics(void)
 
 void Sprite::Display(Surface *dest)
 {
-    dest->Blit(surface, GetPosition());
+    using std::sin;
+    using std::cos;
+    using std::fabs;
+    Surface *rotsurf;
+    SDL_Surface *surf = surface->GetSurface();
+    Uint32 bgcolor;
+    double angle, radangle, sangle, cangle;
+    double cx, cy, sx, sy;
+    int newx, newy, bps;
+    // Calculate angle
+    angle = GetRotation() + 90.0;
+    while (angle >= 360.0)
+        angle -= 360.0;
+    if (angle < kRotationTolerance || angle > 360.0 - kRotationTolerance)
+        angle = 0.0;
+    else if (angle > 90.0 - kRotationTolerance && angle < 90.0 + kRotationTolerance)
+        angle = 90.0;
+    else if (angle > 180.0 - kRotationTolerance && angle < 180.0 + kRotationTolerance)
+        angle = 180.0;
+    else if (angle > 270.0 - kRotationTolerance && angle < 270.0 + kRotationTolerance)
+        angle = 270.0;
+    if (angle != 90.0)
+    {
+        radangle = deg2rad(angle);
+        sangle = sin(radangle);
+        cangle = cos(radangle);
+        // Calculate new image size
+        cx = cangle * surface->GetWidth();
+        cy = cangle * surface->GetHeight();
+        sx = sangle * surface->GetWidth();
+        sy = sangle * surface->GetHeight();
+        newx = (int) (MAX(MAX(MAX(fabs (cx + sy), fabs (cx - sy)),
+                                  fabs (-cx + sy)), fabs (-cx - sy)));
+        newy = (int) (MAX(MAX(MAX(fabs (sx + cy), fabs (sx - cy)),
+                                  fabs (-sx + cy)), fabs (-sx - cy)));
+        // Get background color
+        bgcolor = SDL_MapRGBA(surf->format, 0, 0, 0, 0);
+        bps = surf->format->BitsPerPixel;
+        // TODO: Support alpha
+        // Rotate it!
+        rotsurf = new Surface(surf->flags | SDL_SRCALPHA, newx, newy, bps);
+        SDL_LockSurface(rotsurf->GetSurface());
+        rotate(surf, rotsurf->GetSurface(), bgcolor, cangle, sangle);
+        SDL_UnlockSurface(rotsurf->GetSurface());
+        // Display surface on screen
+        dest->Blit(rotsurf, GetPosition());
+        rotsurf->DelRef();
+    }
+    else
+    {
+        dest->Blit(surface, GetPosition());
+    }
 }
 
 Sprite::~Sprite(void)
