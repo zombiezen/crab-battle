@@ -23,6 +23,7 @@
 #include "GameState.h"
 #include "Surface.h"
 #include "constants.h"
+#include "MenuState.h"
 
 
 // CONSTANTS //
@@ -88,7 +89,7 @@ extern "C" int main(int argc, char *argv[])
     TTF_Init();
     
     // Run main event loop
-    state_stack.push(new GameState());
+    state_stack.push(new MenuState());
     while (!done)
     {
         // Switch states, if necessary
