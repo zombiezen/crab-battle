@@ -300,10 +300,10 @@ void Sprite::Display(Surface *dest)
         cy = cangle * surface->GetHeight();
         sx = sangle * surface->GetWidth();
         sy = sangle * surface->GetHeight();
-        newx = (int) (MAX(MAX(MAX(fabs (cx + sy), fabs (cx - sy)),
-                                  fabs (-cx + sy)), fabs (-cx - sy)));
-        newy = (int) (MAX(MAX(MAX(fabs (sx + cy), fabs (sx - cy)),
-                                  fabs (-sx + cy)), fabs (-sx - cy)));
+        //newx = (int) (MAX(MAX(MAX(fabs (cx + sy), fabs (cx - sy)),
+        //                          fabs (-cx + sy)), fabs (-cx - sy)));
+        //newy = (int) (MAX(MAX(MAX(fabs (sx + cy), fabs (sx - cy)),
+        //                          fabs (-sx + cy)), fabs (-sx - cy)));
         // Get background color
         bgcolor = SDL_MapRGBA(surf->format, 0, 0, 0, 0);
         bps = surf->format->BitsPerPixel;
