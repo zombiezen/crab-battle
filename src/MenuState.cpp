@@ -144,7 +144,7 @@ CrabBattle::State *MenuState::Update(void)
    // Switch states
     switch (action)
     {
-        case 0: return NULL;
+        case 0: return this;
         case 1:
             action = 0;
             return (new GameState());
@@ -152,7 +152,7 @@ CrabBattle::State *MenuState::Update(void)
             action = 0;
             quit_event.type = SDL_QUIT;
             SDL_PushEvent(&quit_event);
-            return NULL;
+            return this;
     }
 }
 

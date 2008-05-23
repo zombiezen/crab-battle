@@ -113,12 +113,9 @@ CrabBattle::State *PausedState::Update(void)
         return previous1;
     }*/
     if (done)
-    {
-        previous->AddRef(); // for main.cpp ownership
-        return previous;
-    }
-    else
         return NULL;
+    else
+        return this;
 }
 
 void PausedState::Display(Surface *screen)
