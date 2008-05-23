@@ -1,4 +1,10 @@
-
+/*
+ *  MenuState.cpp
+ *  Crab Battle
+ *
+ *  Created by Ephraim Ruprecht on 5/21/08.
+ *  $Id$
+ */
 
 #include "MenuState.h"
 #include "GameState.h"

@@ -2,10 +2,9 @@
  *  MenuState.h
  *  Crab Battle
  *
- *  Created by Ross Light on 3/15/08.
+ *  Created by Ephraim Ruprecht on 5/21/08.
  *  $Id$
  */
-
 
 #if (defined(__WIN32__) || defined(WINDOWS)) || defined(MAC_OS_X)
 #include <SDL_ttf/SDL_ttf.h>
