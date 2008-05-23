@@ -1,0 +1,407 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		002F39FA09D0881F00EBEB88 /* SDL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 002F39F909D0881F00EBEB88 /* SDL.framework */; };
+		002F3A0009D0884600EBEB88 /* SDL.framework in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = 002F39F909D0881F00EBEB88 /* SDL.framework */; };
+		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
+		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		912DF83C0D9B2A1D00269FC5 /* titles.txt in Resources */ = {isa = PBXBuildFile; fileRef = 912DF83A0D9B2A1D00269FC5 /* titles.txt */; };
+		912DF83D0D9B2A1D00269FC5 /* titles1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 912DF83B0D9B2A1D00269FC5 /* titles1.txt */; };
+		912DF8550D9B2AC200269FC5 /* PausedState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 912DF8530D9B2AC200269FC5 /* PausedState.cpp */; };
+		918D79430D8C470B00DF7AB3 /* BaseObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 918D79410D8C470B00DF7AB3 /* BaseObject.cpp */; };
+		918D797D0D8C509F00DF7AB3 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 918D79780D8C509F00DF7AB3 /* images */; };
+		91A9F1400D70B9B900CB6365 /* mac_main.m in Sources */ = {isa = PBXBuildFile; fileRef = 91A9F13E0D70B9B900CB6365 /* mac_main.m */; };
+		91A9F1440D70B9E100CB6365 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91A9F1430D70B9E100CB6365 /* main.cpp */; };
+		91A9F15C0D70BDAF00CB6365 /* SDL_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91A9F15B0D70BDAF00CB6365 /* SDL_image.framework */; };
+		91A9F17B0D70C38D00CB6365 /* SDL_mixer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91A9F1790D70C38D00CB6365 /* SDL_mixer.framework */; };
+		91A9F17C0D70C38D00CB6365 /* SDL_ttf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91A9F17A0D70C38D00CB6365 /* SDL_ttf.framework */; };
+		91A9F1960D70C7F000CB6365 /* Rect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91A9F1950D70C7F000CB6365 /* Rect.cpp */; };
+		91A9F1E40D70D2F100CB6365 /* Sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91A9F1E30D70D2F100CB6365 /* Sprite.cpp */; };
+		91A9F1E70D70D5AF00CB6365 /* Surface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91A9F1E60D70D5AF00CB6365 /* Surface.cpp */; };
+		91CD821A0D8C7EA10048A161 /* CrabBattle.icns in Resources */ = {isa = PBXBuildFile; fileRef = 91CD82190D8C7EA10048A161 /* CrabBattle.icns */; };
+		91CD824D0D8C824D0048A161 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91CD824C0D8C824D0048A161 /* State.cpp */; };
+		91CD82560D8C882F0048A161 /* GameState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91CD82550D8C882F0048A161 /* GameState.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		002F39FD09D0883400EBEB88 /* Copy Frameworks into .app bundle */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				002F3A0009D0884600EBEB88 /* SDL.framework in Copy Frameworks into .app bundle */,
+			);
+			name = "Copy Frameworks into .app bundle";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		002F39F909D0881F00EBEB88 /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL.framework; path = /Library/Frameworks/SDL.framework; sourceTree = "<absolute>"; };
+		089C165DFE840E0CC02AAC07 /* InfoPlist.strings */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = InfoPlist.strings; path = English.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
+		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = SOURCE_ROOT; };
+		8D1107320486CEB800E47090 /* Crab Battle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Crab Battle.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		912DF83A0D9B2A1D00269FC5 /* titles.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = titles.txt; sourceTree = "<group>"; };
+		912DF83B0D9B2A1D00269FC5 /* titles1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = titles1.txt; sourceTree = "<group>"; };
+		912DF8530D9B2AC200269FC5 /* PausedState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PausedState.cpp; sourceTree = "<group>"; };
+		912DF8540D9B2AC200269FC5 /* PausedState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PausedState.h; sourceTree = "<group>"; };
+		918D79410D8C470B00DF7AB3 /* BaseObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseObject.cpp; sourceTree = "<group>"; };
+		918D79420D8C470B00DF7AB3 /* BaseObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseObject.h; sourceTree = "<group>"; };
+		918D79780D8C509F00DF7AB3 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
+		91A9F13E0D70B9B900CB6365 /* mac_main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mac_main.m; sourceTree = "<group>"; };
+		91A9F13F0D70B9B900CB6365 /* mac_main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mac_main.h; sourceTree = "<group>"; };
+		91A9F1430D70B9E100CB6365 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		91A9F1490D70BAF400CB6365 /* Crab_Battle_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Crab_Battle_Prefix.pch; sourceTree = "<group>"; };
+		91A9F15B0D70BDAF00CB6365 /* SDL_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL_image.framework; path = /Library/Frameworks/SDL_image.framework; sourceTree = "<absolute>"; };
+		91A9F1790D70C38D00CB6365 /* SDL_mixer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL_mixer.framework; path = /Library/Frameworks/SDL_mixer.framework; sourceTree = "<absolute>"; };
+		91A9F17A0D70C38D00CB6365 /* SDL_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL_ttf.framework; path = /Library/Frameworks/SDL_ttf.framework; sourceTree = "<absolute>"; };
+		91A9F1940D70C7F000CB6365 /* Rect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rect.h; sourceTree = "<group>"; };
+		91A9F1950D70C7F000CB6365 /* Rect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Rect.cpp; sourceTree = "<group>"; };
+		91A9F1E20D70D2F100CB6365 /* Sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sprite.h; sourceTree = "<group>"; };
+		91A9F1E30D70D2F100CB6365 /* Sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sprite.cpp; sourceTree = "<group>"; };
+		91A9F1E50D70D5AF00CB6365 /* Surface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Surface.h; sourceTree = "<group>"; };
+		91A9F1E60D70D5AF00CB6365 /* Surface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Surface.cpp; sourceTree = "<group>"; };
+		91CD82190D8C7EA10048A161 /* CrabBattle.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = CrabBattle.icns; sourceTree = "<group>"; };
+		91CD824B0D8C824D0048A161 /* State.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = State.h; sourceTree = "<group>"; };
+		91CD824C0D8C824D0048A161 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
+		91CD82530D8C86190048A161 /* constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
+		91CD82540D8C882F0048A161 /* GameState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameState.h; sourceTree = "<group>"; };
+		91CD82550D8C882F0048A161 /* GameState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameState.cpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D11072E0486CEB800E47090 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				002F39FA09D0881F00EBEB88 /* SDL.framework in Frameworks */,
+				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
+				91A9F15C0D70BDAF00CB6365 /* SDL_image.framework in Frameworks */,
+				91A9F17B0D70C38D00CB6365 /* SDL_mixer.framework in Frameworks */,
+				91A9F17C0D70C38D00CB6365 /* SDL_ttf.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				91D2C7660D8C9FD000ADC6F4 /* Utility */,
+				91D2C7650D8C9FBE00ADC6F4 /* States */,
+			);
+			name = Classes;
+			path = src;
+			sourceTree = "<group>";
+		};
+		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				002F39F909D0881F00EBEB88 /* SDL.framework */,
+				91A9F15B0D70BDAF00CB6365 /* SDL_image.framework */,
+				91A9F1790D70C38D00CB6365 /* SDL_mixer.framework */,
+				91A9F17A0D70C38D00CB6365 /* SDL_ttf.framework */,
+				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
+			);
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
+				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107320486CEB800E47090 /* Crab Battle.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* Crab Battle */ = {
+			isa = PBXGroup;
+			children = (
+				080E96DDFE201D6D7F000001 /* Classes */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = "Crab Battle";
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				91A9F1490D70BAF400CB6365 /* Crab_Battle_Prefix.pch */,
+				91A9F1430D70B9E100CB6365 /* main.cpp */,
+				91A9F13F0D70B9B900CB6365 /* mac_main.h */,
+				91A9F13E0D70B9B900CB6365 /* mac_main.m */,
+				91CD82530D8C86190048A161 /* constants.h */,
+			);
+			name = "Other Sources";
+			path = src;
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				91CD82190D8C7EA10048A161 /* CrabBattle.icns */,
+				918D79780D8C509F00DF7AB3 /* images */,
+				912DF83A0D9B2A1D00269FC5 /* titles.txt */,
+				912DF83B0D9B2A1D00269FC5 /* titles1.txt */,
+				8D1107310486CEB800E47090 /* Info.plist */,
+				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
+				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		91D2C7650D8C9FBE00ADC6F4 /* States */ = {
+			isa = PBXGroup;
+			children = (
+				91CD824B0D8C824D0048A161 /* State.h */,
+				91CD824C0D8C824D0048A161 /* State.cpp */,
+				91CD82540D8C882F0048A161 /* GameState.h */,
+				91CD82550D8C882F0048A161 /* GameState.cpp */,
+				912DF8540D9B2AC200269FC5 /* PausedState.h */,
+				912DF8530D9B2AC200269FC5 /* PausedState.cpp */,
+			);
+			name = States;
+			sourceTree = "<group>";
+		};
+		91D2C7660D8C9FD000ADC6F4 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				918D79420D8C470B00DF7AB3 /* BaseObject.h */,
+				918D79410D8C470B00DF7AB3 /* BaseObject.cpp */,
+				91A9F1940D70C7F000CB6365 /* Rect.h */,
+				91A9F1950D70C7F000CB6365 /* Rect.cpp */,
+				91A9F1E20D70D2F100CB6365 /* Sprite.h */,
+				91A9F1E30D70D2F100CB6365 /* Sprite.cpp */,
+				91A9F1E50D70D5AF00CB6365 /* Surface.h */,
+				91A9F1E60D70D5AF00CB6365 /* Surface.cpp */,
+			);
+			name = Utility;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8D1107260486CEB800E47090 /* Crab Battle */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "Crab Battle" */;
+			buildPhases = (
+				8D1107290486CEB800E47090 /* Resources */,
+				8D11072C0486CEB800E47090 /* Sources */,
+				8D11072E0486CEB800E47090 /* Frameworks */,
+				002F39FD09D0883400EBEB88 /* Copy Frameworks into .app bundle */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Crab Battle";
+			productInstallPath = "$(HOME)/Applications";
+			productName = "Crab Battle";
+			productReference = 8D1107320486CEB800E47090 /* Crab Battle.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Crab Battle" */;
+			compatibilityVersion = "Xcode 2.4";
+			hasScannedForEncodings = 1;
+			mainGroup = 29B97314FDCFA39411CA2CEA /* Crab Battle */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8D1107260486CEB800E47090 /* Crab Battle */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D1107290486CEB800E47090 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
+				918D797D0D8C509F00DF7AB3 /* images in Resources */,
+				91CD821A0D8C7EA10048A161 /* CrabBattle.icns in Resources */,
+				912DF83C0D9B2A1D00269FC5 /* titles.txt in Resources */,
+				912DF83D0D9B2A1D00269FC5 /* titles1.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D11072C0486CEB800E47090 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				91A9F1400D70B9B900CB6365 /* mac_main.m in Sources */,
+				91A9F1440D70B9E100CB6365 /* main.cpp in Sources */,
+				91A9F1960D70C7F000CB6365 /* Rect.cpp in Sources */,
+				91A9F1E40D70D2F100CB6365 /* Sprite.cpp in Sources */,
+				91A9F1E70D70D5AF00CB6365 /* Surface.cpp in Sources */,
+				918D79430D8C470B00DF7AB3 /* BaseObject.cpp in Sources */,
+				91CD824D0D8C824D0048A161 /* State.cpp in Sources */,
+				91CD82560D8C882F0048A161 /* GameState.cpp in Sources */,
+				912DF8550D9B2AC200269FC5 /* PausedState.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		089C165CFE840E0CC02AAC07 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				089C165DFE840E0CC02AAC07 /* InfoPlist.strings */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C01FCF4B08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/src/Crab_Battle_Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = MAC_OS_X;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = /Applications;
+				PRODUCT_NAME = "Crab Battle";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		C01FCF4C08A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					ppc,
+					i386,
+				);
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/src/Crab_Battle_Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = MAC_OS_X;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = /Applications;
+				PRODUCT_NAME = "Crab Battle";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ONLY_ACTIVE_ARCH_PRE_XCODE_3_1)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(HOME)/Library/Frameworks",
+					/Library/Frameworks,
+					"$(FRAMEWORK_SEARCH_PATHS)",
+				);
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(HOME)/Library/Frameworks/SDL.framework/Headers",
+					/Library/Frameworks/SDL.framework/Headers,
+					"$(HEADER_SEARCH_PATHS)",
+				);
+				ONLY_ACTIVE_ARCH_PRE_XCODE_3_1 = "$(NATIVE_ARCH)";
+				PREBINDING = NO;
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1 = "ppc i386";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(HOME)/Library/Frameworks",
+					/Library/Frameworks,
+					"$(FRAMEWORK_SEARCH_PATHS)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(HOME)/Library/Frameworks/SDL.framework/Headers",
+					/Library/Frameworks/SDL.framework/Headers,
+					"$(HEADER_SEARCH_PATHS)",
+				);
+				PREBINDING = NO;
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				SEPARATE_STRIP = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "Crab Battle" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4B08A954540054247B /* Debug */,
+				C01FCF4C08A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Crab Battle" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}
