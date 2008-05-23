@@ -31,7 +31,8 @@ MenuState::MenuState(void)
    //cout << "tff_init()= "<<TTF_WasInit()<<endl;
 
    font = TTF_OpenFont( "times.ttf", 24 );
-   //if (font==NULL)cout<<TTF_GetError()<<endl;
+   if (font == NULL)
+    throw FileNotFoundError("times.ttf");
    
    messPc1 = TTF_RenderText_Solid( font,"New Game", textColor );
    messPc2 = TTF_RenderText_Solid( font, "Quit", textColor );
@@ -46,13 +47,8 @@ MenuState::MenuState(void)
    
    getTitles.open("titles-menu.txt");
 
-   if (!getTitles.is_open())  // if failed to open file
-   {
-       cout << "Could not open the file " << endl;
-       cout << "Program terminating.\n";
-       cin.get();
-       exit(EXIT_FAILURE);
-   }
+    if (!getTitles.is_open())  // if failed to open file
+        throw FileNotFoundError("titles-menu.txt");
    
    //hard coded for base implementation
    getTitles >> value1;
