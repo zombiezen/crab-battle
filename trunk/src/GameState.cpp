@@ -347,7 +347,7 @@ void GameState::AddContact(dContactGeom contactInfo, dGeomID geom1, dGeomID geom
     contact->geom = contactInfo;
     if (dGeomGetBody(geom1) == NULL || dGeomGetBody(geom2) == NULL)
     {
-        // Non-mobile collision
+        // Plane Boundries Detection
         contact->surface.mode = dContactBounce | dContactSoftERP;
         contact->surface.mu = 20.0;
         contact->surface.mu2 = 0.0;
@@ -358,6 +358,7 @@ void GameState::AddContact(dContactGeom contactInfo, dGeomID geom1, dGeomID geom
     }
     else
     {
+        // Collisions with anything else
         contact->surface.mode = dContactSoftERP | dContactSoftCFM;
         contact->surface.mu = 25.0;
         contact->surface.mu2 = 0.0;
@@ -365,6 +366,23 @@ void GameState::AddContact(dContactGeom contactInfo, dGeomID geom1, dGeomID geom
         contact->surface.bounce_vel = 0.1;
         contact->surface.soft_erp = kPhysicsERP;
         contact->surface.soft_cfm = kPhysicsCFM;
+        // checks to see if players are colliding
+        if(player1->GetGeometry()->id()==geom1||player1->GetGeometry()->id()==geom2)
+        {
+            if(player1->GetGeometry()->getPosition()[1]> player2->GetGeometry()->getPosition()[1])
+            {
+                player1->ModHp(-1);
+                wins1 = render(player1->GetWins());
+            }
+        }
+        if(player2->GetGeometry()->id()==geom1||player2->GetGeometry()->id()==geom2)
+        {
+            if(player2->GetGeometry()->getPosition()[1]> player1->GetGeometry()->getPosition()[1])
+            {
+                player2->ModHp(-1);
+                wins2 = render(player2->GetWins());
+            }
+        }
     }
     // Create joint
     joint = new dContactJoint(physicsWorld->id(), allContacts->id(), contact);
