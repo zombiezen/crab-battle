@@ -90,14 +90,23 @@ extern "C" int main(int argc, char *argv[])
     
     // Run main event loop
     state_stack.push(new MenuState());
+    newState = state_stack.top();
     while (!done)
     {
         // Switch states, if necessary
-        if (newState != NULL)
+        if (newState != state_stack.top())
         {
-            // Ordinarily, we would AddRef the newState, but we own the state.
-            state_stack.push(newState);
-            newState = NULL;
+            if (newState == NULL)
+            {
+                state_stack.top()->DelRef();
+                state_stack.pop();
+            }
+            else
+            {
+                // Ordinarily, we would AddRef the newState, but we own the state.
+                state_stack.push(newState);
+            }
+            newState = state_stack.top();
         }
         // Get events
         while (SDL_PollEvent(&event))
@@ -112,23 +121,13 @@ extern "C" int main(int argc, char *argv[])
                 done = true;
                 break;
             }
-            else if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
-            {
-                state_stack.top()->DelRef();
-                state_stack.pop();
-                if (state_stack.empty())
-                {
-                    done = true;
-                    break;
-                }
-            }
             else
             {
                 state_stack.top()->HandleEvent(event);
             }
         }
-        // Check to see whether we're out of states
-        if (state_stack.empty())
+        // Check to see whether we're done
+        if (done)
             break;
         // Update timer
         currentTime = SDL_GetTicks();

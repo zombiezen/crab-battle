@@ -168,7 +168,7 @@ GameState::GameState(void)
     SDL_FreeSurface(p2);
 #endif
     // Don't pause yet
-    shouldPause = false;
+    shouldPause = shouldQuit = false;
     // Set up physics
     physicsWorld = new dWorld();
     physicsSpace = new dHashSpace(NULL);
@@ -261,6 +261,9 @@ void GameState::HandleEvent(SDL_Event evt)
             case SDLK_RIGHT:
                 player2->GetBody()->addForce(1000.0, 0.0, 0.0);
                 break;
+            case SDLK_ESCAPE:
+                shouldQuit = true;
+                break;
         }
     }
 }
@@ -317,8 +320,13 @@ CrabBattle::State *GameState::Update(void)
         shouldPause = false;
         return (new PausedState(this));
     }
-    else
+    else if (shouldQuit)
+    {
+        shouldQuit = false;
         return NULL;
+    }
+    else
+        return this;
 }
 
 void GameState::AddContact(dContactGeom contactInfo, dGeomID geom1, dGeomID geom2)

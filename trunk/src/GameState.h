@@ -39,7 +39,7 @@ namespace CrabBattle
             dJointGroup *allContacts;
             string sOutput;
             ostringstream outs;
-            bool shouldPause;
+            bool shouldPause, shouldQuit;
             friend void _game_state_collide(void *, dGeomID, dGeomID);
         protected:
             void AddContact(dContactGeom, dGeomID, dGeomID);
