@@ -11,20 +11,12 @@
 #include <cstdlib>
 #include <cstring>
 #include <iostream>
-#include <stack>
 
 #include "SDL.h"
-#if (defined(__WIN32__) || defined(WINDOWS)) || defined(MAC_OS_X)
-#include <SDL_ttf/SDL_ttf.h>
-#else
-#include <SDL/SDL_ttf.h>
-#endif
 #include "State.h"
 #include "GameState.h"
 #include "Surface.h"
 #include "constants.h"
-#include "MenuState.h"
-
 
 // CONSTANTS //
 
@@ -48,8 +40,7 @@ extern "C" int main(int argc, char *argv[])
     bool done = false;
     SDL_Event event;
     Surface *screenObj = NULL;
-    State *newState = NULL;
-    stack<State*> state_stack;
+    State *state = NULL, *newState = NULL;
 #if !defined(NO_SDL_IMAGE) && !defined(MAC_OS_X)
     Surface *icon = NULL;
 #endif
@@ -85,28 +76,18 @@ extern "C" int main(int argc, char *argv[])
     screenObj = Surface::GetVideoSurface();
     if (kMainVideoFlags & SDL_FULLSCREEN)
         SDL_ShowCursor(SDL_DISABLE);
-    // Set up SDL_ttf
-    TTF_Init();
     
     // Run main event loop
-    state_stack.push(new MenuState());
-    newState = state_stack.top();
+    state = new GameState();
     while (!done)
     {
         // Switch states, if necessary
-        if (newState != state_stack.top())
+        if (newState != NULL)
         {
-            if (newState == NULL)
-            {
-                state_stack.top()->DelRef();
-                state_stack.pop();
-            }
-            else
-            {
-                // Ordinarily, we would AddRef the newState, but we own the state.
-                state_stack.push(newState);
-            }
-            newState = state_stack.top();
+            // Ordinarily, we would AddRef the newState, but we own the state.
+            state->DelRef();
+            state = newState;
+            newState = NULL;
         }
         // Get events
         while (SDL_PollEvent(&event))
@@ -119,16 +100,16 @@ extern "C" int main(int argc, char *argv[])
                 // If this is removed, the user cannot quit by using the
                 // close button or by other OS-specific means.
                 done = true;
-                break;
+            }
+            else if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
+            {
+                done = true; 
             }
             else
             {
-                state_stack.top()->HandleEvent(event);
+                state->HandleEvent(event);
             }
         }
-        // Check to see whether we're done
-        if (done)
-            break;
         // Update timer
         currentTime = SDL_GetTicks();
         deltaTime = currentTime - lastTime;
@@ -137,16 +118,16 @@ extern "C" int main(int argc, char *argv[])
         if (cumulativeTime > kUpdateRate)
         {
             cumulativeTime -= kUpdateRate;
-            newState = state_stack.top()->Update();
+            newState = state->Update();
         }
         // Get ready for next timer loop
         lastTime = currentTime;
         // Draw
-        state_stack.top()->Display(screenObj);
+        state->Display(screenObj);
     }
     
     // Clean up
-    TTF_Quit();
+    state->DelRef();
     SDL_Quit();
     return 0;
 }

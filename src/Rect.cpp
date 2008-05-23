@@ -127,4 +127,3 @@ void Rect::SetRight(double right)
 {
     x = right - w;
 }
-

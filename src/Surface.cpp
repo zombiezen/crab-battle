@@ -7,7 +7,6 @@
  */
 
 #include "Surface.h"
-#include "exceptions.h"
 #ifndef NO_SDL_IMAGE
 #  ifdef MAC_OS_X
 #include <SDL_image/SDL_image.h>
@@ -35,10 +34,8 @@ Surface::Surface(unsigned int w, unsigned int h)
 #ifndef NO_SDL_IMAGE
 Surface::Surface(const char *fname)
 {
-    using CrabBattle::FileNotFoundError;
     surface = IMG_Load(fname);
-    if (surface == NULL)
-        throw FileNotFoundError(fname);
+    // TODO: If surface is NULL, raise an error
 }
 #endif
 
@@ -108,14 +105,6 @@ void Surface::Blit(Surface *src, Rect dest, Rect srcRegion)
     SDL_Rect r_src = srcRegion;
     SDL_BlitSurface(src->GetSurface(), &r_src, surface, &r_dest);
     // TODO: Raise an error if SDL_BlitSurface doesn't return 0
-}
-
-void Surface::Blit(Surface *src, Rect dest, double dhp)
-{
-    SDL_Rect r_dest = dest;
-    Rect srcRegion = Rect(dhp , 30);//size of image
-    SDL_Rect r_src = srcRegion;
-    SDL_BlitSurface(src->GetSurface(), &r_src, surface, &r_dest);
 }
 
 void Surface::Update(Rect region)

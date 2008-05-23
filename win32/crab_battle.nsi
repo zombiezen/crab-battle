@@ -46,12 +46,10 @@ Section "Crab Battle" SecCrabBattle
   File SDL_image\bin\*.dll
   File SDL_mixer\bin\*.dll
   File SDL_ttf\bin\*.dll
-  File ode\lib\releasedll\*.dll
   File /r ..\Resources\images
   File ..\Resources\icon.png
   File ..\Resources\titles.txt
   File ..\Resources\titles1.txt
-  File ..\Resources\times.ttf
   
   WriteUninstaller uninstall.exe
 SectionEnd
@@ -69,7 +67,6 @@ Section "Uninstall"
     Delete "$INSTDIR\icon.png"
     Delete "$INSTDIR\titles.txt"
     Delete "$INSTDIR\titles1.txt"
-    Delete "$INSTDIR\times.ttf"
 	Delete $INSTDIR\uninstall.exe
 	
 	Delete "$SMPROGRAMS\Crab Battle\*.lnk"

@@ -6,7 +6,6 @@
  *  $Id$
  */
 
-#include <ode/ode.h>
 #include "BaseObject.h"
 #include "Rect.h"
 #include "Surface.h"
@@ -25,10 +24,8 @@ namespace CrabBattle
     class Sprite : public BaseObject
     {
     private:
-        double x, y, rot;
+        double x, y;
         Surface *surface;
-        dBody *body;
-        dGeom *geometry;
     public:
         /*** CONSTRUCTORS ***/
         // Sprite(surface)
@@ -42,31 +39,16 @@ namespace CrabBattle
         Rect GetPosition(void);
         // sprite.SetPosition(rect)
         void SetPosition(Rect);
-        // sprite.GetRotation()
-        double GetRotation(void);
-        // sprite.SetRotation(theta)
-        void SetRotation(double);
         // sprite.GetSurface()
         Surface *GetSurface(void);
         // sprite.SetSurface(surface)
         void SetSurface(Surface *);
-        // sprite.GetBody()
-        dBody *GetBody(void);
-        // sprite.SetBody(body)
-        void SetBody(dBody *);
-        // sprite.GetBody()
-        dGeom *GetGeometry(void);
-        // sprite.SetGeometry(geom)
-        void SetGeometry(dGeom *);
         /*** ACTIONS ***/
-        // sprite.FixPhysics()
-        // "Fix" the physics to 2D space
-        void FixPhysics();
         // sprite.Display(screen)
         // Blits a sprite onto another surface
-        virtual void Display(Surface *);
+        void Display(Surface *);
         /*** DESTRUCTOR ***/
-        virtual ~Sprite(void);
+        ~Sprite(void);
     };
 }
 
