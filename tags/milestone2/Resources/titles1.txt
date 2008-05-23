@@ -1,0 +1,3 @@
+images/pausemenu.bmp
+images/pause1.bmp
+images/pause2.bmp
