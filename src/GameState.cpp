@@ -21,8 +21,8 @@ using std::printf;
 const unsigned int kMaxContacts = 16;
 
 const dReal kPhysicsGravity = 9.81;
-const dReal kPhysicsCFM = 20.0;
-const dReal kPhysicsERP = 0.5;
+const dReal kPhysicsCFM = 0.0;
+const dReal kPhysicsERP = 0.0;
 
 using namespace std;
 
@@ -76,6 +76,7 @@ GameState::GameState(void)
     char value5[MAXPATHLEN];
     ifstream getTitles;
     CrabBattle::Surface *surf_p1, *surf_p2;
+    CrabBattle::Sprite *sprite;
     dBody *newBody;
     dMass *newMass;
     dGeom *newGeom;
@@ -184,16 +185,13 @@ GameState::GameState(void)
                     64.0 / kPhysicsScreenScale,
                     1.0 / kPhysicsScreenScale);
     newBody->setMass(newMass);
-    newBody->setPosition((160.0 + 32.0) / kPhysicsScreenScale,
-                         (300.0 + 32.0) / kPhysicsScreenScale,
-                         0.0);
     player1->SetBody(newBody);
     dJointAttach(joint2d, newBody->id(), NULL);
     // Player 1 Collision
     newGeom = new dBox(physicsSpace->id(),
                        64.0 / kPhysicsScreenScale,
                        64.0 / kPhysicsScreenScale,
-                       1.0 / kPhysicsScreenScale);
+                       1.0);
     newGeom->setBody(newBody->id());
     player1->SetGeometry(newGeom);
     // Player 2 Physics
@@ -205,16 +203,13 @@ GameState::GameState(void)
                     64.0 / kPhysicsScreenScale,
                     1.0 / kPhysicsScreenScale);
     newBody->setMass(newMass);
-    newBody->setPosition((400.0 + 32.0) / kPhysicsScreenScale,
-                         (300.0 + 32.0) / kPhysicsScreenScale,
-                         0.0);
     player2->SetBody(newBody);
     dJointAttach(joint2d, newBody->id(), NULL);
     // Player 2 Collision
     newGeom = new dBox(physicsSpace->id(),
                        64.0 / kPhysicsScreenScale,
                        64.0 / kPhysicsScreenScale,
-                       1.0 / kPhysicsScreenScale);
+                       1.0);
     newGeom->setBody(newBody->id());
     player2->SetGeometry(newGeom);
     // Floor
@@ -232,6 +227,16 @@ GameState::GameState(void)
     newGeom = new dPlane(physicsSpace->id(),
                          0.0, 1.0, 0.0,
                          0.0);
+    // Platforms
+    // TODO: Fix surface memory leak
+    sprite = new Sprite(new Surface("images/platform.bmp"),
+                        CrabBattle::Rect(160, 100, 300, 100));
+    newGeom = new dBox(physicsSpace->id(),
+                       300.0 / kPhysicsScreenScale,
+                       100.0 / kPhysicsScreenScale,
+                       1.0);
+    sprite->SetGeometry(newGeom);
+    envsprites.push_back(sprite);
 }
 
 void GameState::HandleEvent(SDL_Event evt)
@@ -344,7 +349,7 @@ void GameState::AddContact(dContactGeom contactInfo, dGeomID geom1, dGeomID geom
     {
         // Non-mobile collision
         contact->surface.mode = dContactBounce | dContactSoftERP;
-        contact->surface.mu = 0.5;
+        contact->surface.mu = 20.0;
         contact->surface.mu2 = 0.0;
         contact->surface.bounce = 0.25;
         contact->surface.bounce_vel = 0.1;
@@ -370,21 +375,29 @@ void GameState::AddContact(dContactGeom contactInfo, dGeomID geom1, dGeomID geom
 
 void GameState::Display(Surface *screen)
 {
+    vector<Sprite *>::const_iterator i;
     screen->Fill(screen->GetRect(), 0, 0, 0); // Clears screen
     screen->Blit(background, background->GetRect()); // Blits the background
-    screen->Blit(healthbar1, hpRect1, player1->GetHp());
-    screen->Blit(healthbar1, hpRect2, player2->GetHp());
     player1->Display(screen);
     player2->Display(screen);
+    for (i = envsprites.begin(); i < envsprites.end(); i++)
+    {
+        (*i)->Display(screen);
+    }
     screen->Blit(messPc1, hpRect1);
     screen->Blit(messPc2, hpRect2);
     screen->Blit(wins1, winsRect1);
     screen->Blit(wins2, winsRect2);
+    screen->Blit(healthbar1, hpRect1, player1->GetHp());
+    screen->Blit(healthbar1, hpRect2, player2->GetHp());
     screen->Flip(); // Flips second buffer
 }
 
 GameState::~GameState(void)
 {
+    vector<Sprite *>::const_iterator i;
+    for (i = envsprites.begin(); i < envsprites.end(); i++)
+        (*i)->DelRef();
     background->DelRef();
     player1->DelRef();
     player2->DelRef();
