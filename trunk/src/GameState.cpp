@@ -364,11 +364,13 @@ void GameState::AddContact(dContactGeom contactInfo, dGeomID geom1, dGeomID geom
         {
             player1->ModHp(-1);
             wins2 = render(player2->GetWins());
+            messPc1 = render(player1->GetHp());
         }
         else
         {
             player2->ModHp(-1);
             wins1 = render(player1->GetWins());
+            messPc2 = render(player2->GetHp());
         }
     }
     else if (player1->GetGeometry()->id() == geom1 ||
