@@ -111,15 +111,6 @@ extern "C" int main(int argc, char *argv[])
         // Get events
         while (SDL_PollEvent(&event))
         {
-if (event.type == SDL_KEYDOWN)
-    {
-        switch (event.key.keysym.sym)
-        {
-            case SDLK_o:
-                state_stack.push(new GameState());
-            break;
-        }
-    }
             if (event.type == SDL_QUIT)
             {
                 // !DO NOT REMOVE!
