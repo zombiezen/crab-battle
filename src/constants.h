@@ -15,6 +15,13 @@
 #define deg2rad(deg) ((deg) / 180.0 * M_PI)
 #define rad2deg(rad) ((rad) / M_PI * 180.0)
 
+#ifndef MIN
+#define MIN(a, b) (((a) < (b)) ? (a) : (b))
+#endif
+#ifndef MAX
+#define MAX(a, b) (((a) > (b)) ? (a) : (b))
+#endif
+
 const unsigned short kUpdateRate = 33; // in ms
 const int kScreenWidth = 640; // in pixels
 const int kScreenHeight = 480; // in pixels
