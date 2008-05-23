@@ -7,13 +7,9 @@
  */
 
 #include <sys/param.h> // for MAXPATHLEN
-#include <cmath>
 
 #ifndef _CRAB_BATTLE_CONSTANTS_H_
 #define _CRAB_BATTLE_CONSTANTS_H_
-
-#define deg2rad(deg) ((deg) / 180.0 * M_PI)
-#define rad2deg(rad) ((rad) / M_PI * 180.0)
 
 const unsigned short kUpdateRate = 33; // in ms
 const int kScreenWidth = 640; // in pixels

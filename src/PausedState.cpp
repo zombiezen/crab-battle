@@ -86,11 +86,6 @@ PausedState::PausedState(GameState *prev)
     done = false;
 }
 
-PausedState::PausedState(MenuState *prev)
-{
-    done = false;
-}
-
 void PausedState::HandleEvent(SDL_Event evt)
 {
     if (evt.type == SDL_KEYDOWN)
@@ -106,16 +101,13 @@ void PausedState::HandleEvent(SDL_Event evt)
 
 CrabBattle::State *PausedState::Update(void)
 {
-    /*
-    if(qwe)
-    {
-        previous1->AddRef();
-        return previous1;
-    }*/
     if (done)
-        return NULL;
+    {
+        previous->AddRef(); // for main.cpp ownership
+        return previous;
+    }
     else
-        return this;
+        return NULL;
 }
 
 void PausedState::Display(Surface *screen)

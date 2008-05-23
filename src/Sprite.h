@@ -25,7 +25,7 @@ namespace CrabBattle
     class Sprite : public BaseObject
     {
     private:
-        double x, y, rot;
+        double x, y;
         Surface *surface;
         dBody *body;
         dGeom *geometry;
@@ -42,10 +42,6 @@ namespace CrabBattle
         Rect GetPosition(void);
         // sprite.SetPosition(rect)
         void SetPosition(Rect);
-        // sprite.GetRotation()
-        double GetRotation(void);
-        // sprite.SetRotation(theta)
-        void SetRotation(double);
         // sprite.GetSurface()
         Surface *GetSurface(void);
         // sprite.SetSurface(surface)
@@ -64,9 +60,9 @@ namespace CrabBattle
         void FixPhysics();
         // sprite.Display(screen)
         // Blits a sprite onto another surface
-        virtual void Display(Surface *);
+        void Display(Surface *);
         /*** DESTRUCTOR ***/
-        virtual ~Sprite(void);
+        ~Sprite(void);
     };
 }
 

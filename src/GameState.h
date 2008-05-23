@@ -14,7 +14,6 @@
 #include <SDL/SDL_ttf.h>
 #endif
 #include <ode/ode.h>
-#include <vector>
 
 #include "Rect.h"
 #include "Player.h"
@@ -32,7 +31,6 @@ namespace CrabBattle
         private:
             TTF_Font *font;
             Player *player1, *player2;
-            vector<Sprite *> envsprites;
             SDL_Surface *messPc1, *messPc2, *wins1, *wins2;
             Rect hpRect1, hpRect2 , hptext1, hptext2, winsRect1, winsRect2;
             Surface *background, *healthbar1;
@@ -41,7 +39,7 @@ namespace CrabBattle
             dJointGroup *allContacts;
             string sOutput;
             ostringstream outs;
-            bool shouldPause, shouldQuit;
+            bool shouldPause;
             friend void _game_state_collide(void *, dGeomID, dGeomID);
         protected:
             void AddContact(dContactGeom, dGeomID, dGeomID);

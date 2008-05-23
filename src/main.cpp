@@ -23,7 +23,6 @@
 #include "GameState.h"
 #include "Surface.h"
 #include "constants.h"
-#include "MenuState.h"
 
 
 // CONSTANTS //
@@ -89,24 +88,15 @@ extern "C" int main(int argc, char *argv[])
     TTF_Init();
     
     // Run main event loop
-    state_stack.push(new MenuState());
-    newState = state_stack.top();
+    state_stack.push(new GameState());
     while (!done)
     {
         // Switch states, if necessary
-        if (newState != state_stack.top())
+        if (newState != NULL)
         {
-            if (newState == NULL)
-            {
-                state_stack.top()->DelRef();
-                state_stack.pop();
-            }
-            else
-            {
-                // Ordinarily, we would AddRef the newState, but we own the state.
-                state_stack.push(newState);
-            }
-            newState = state_stack.top();
+            // Ordinarily, we would AddRef the newState, but we own the state.
+            state_stack.push(newState);
+            newState = NULL;
         }
         // Get events
         while (SDL_PollEvent(&event))
@@ -119,16 +109,16 @@ extern "C" int main(int argc, char *argv[])
                 // If this is removed, the user cannot quit by using the
                 // close button or by other OS-specific means.
                 done = true;
-                break;
+            }
+            else if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
+            {
+                done = true; 
             }
             else
             {
                 state_stack.top()->HandleEvent(event);
             }
         }
-        // Check to see whether we're done
-        if (done)
-            break;
         // Update timer
         currentTime = SDL_GetTicks();
         deltaTime = currentTime - lastTime;
