@@ -156,16 +156,22 @@ Rect Sprite::GetPosition(void)
 {
     Rect posRect = Rect(surface->GetWidth(), surface->GetHeight());
     const dReal *pos;
-    if (body == NULL)
-    {
-        posRect.SetX(x);
-        posRect.SetY(y);
-    }
-    else
+    if (body != NULL)
     {
         pos = body->getPosition();
         posRect.SetX(pos[0] * kPhysicsScreenScale - posRect.GetWidth() / 2);
         posRect.SetY(pos[1] * kPhysicsScreenScale - posRect.GetHeight() / 2);
+    }
+    else if (geometry != NULL)
+    {
+        pos = geometry->getPosition();
+        posRect.SetX(pos[0] * kPhysicsScreenScale - posRect.GetWidth() / 2);
+        posRect.SetY(pos[1] * kPhysicsScreenScale - posRect.GetHeight() / 2);
+    }
+    else
+    {
+        posRect.SetX(x);
+        posRect.SetY(y);
     }
     return posRect;
 }
@@ -227,6 +233,13 @@ void Sprite::SetBody(dBody *newBody)
     if (body != NULL)
         delete body;
     body = newBody;
+    if (body != NULL)
+    {
+        body->setData((void *)this);
+        body->setPosition((x + ((double)surface->GetWidth() / 2.0)) / kPhysicsScreenScale,
+                          (y + ((double)surface->GetHeight() / 2.0)) / kPhysicsScreenScale,
+                          0.0);
+    }
 }
 
 dGeom *Sprite::GetGeometry(void)
@@ -239,6 +252,14 @@ void Sprite::SetGeometry(dGeom *newGeom)
     if (geometry != NULL)
         delete geometry;
     geometry = newGeom;
+    if (geometry != NULL && !geometry->getBody())
+    {
+        geometry->setData((void *)this);
+        geometry->setPosition(
+            (x + ((double)surface->GetWidth() / 2.0)) / kPhysicsScreenScale,
+            (y + ((double)surface->GetHeight() / 2.0)) / kPhysicsScreenScale,
+            0.0);
+    }
 }
 
 void Sprite::FixPhysics(void)
