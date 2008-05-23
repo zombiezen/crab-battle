@@ -28,8 +28,8 @@ namespace CrabBattle
         {
         private:
             TTF_Font *font;
-            SDL_Surface *messPc1, *messPc2, *debugtext;
-            Rect startRect, quitRect , debugRect, choiceRect;
+            SDL_Surface *messPc1, *messPc2;
+            Rect startRect, quitRect , choiceRect;
             Surface *background, *choice;
             string sOutput;
             ostringstream outs;
