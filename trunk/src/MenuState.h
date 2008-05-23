@@ -6,7 +6,12 @@
  *  $Id$
  */
 
+
+#if (defined(__WIN32__) || defined(WINDOWS)) || defined(MAC_OS_X)
 #include <SDL_ttf/SDL_ttf.h>
+#else
+#include <SDL/SDL_ttf.h>
+#endif
 #include "Rect.h"
 #include "Player.h"
 #include "State.h"
@@ -28,11 +33,11 @@ namespace CrabBattle
             Surface *background, *choice;
             string sOutput;
             ostringstream outs;
-            bool shouldPause;
+            unsigned short action;
         public:
             MenuState(void);
             SDL_Surface* render(double dh);
-            SDL_Surface* render(char * dh);
+            SDL_Surface* render(const char * dh);
             virtual void HandleEvent(SDL_Event);
             virtual State *Update(void);
             virtual void Display(Surface *);

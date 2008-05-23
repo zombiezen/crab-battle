@@ -1,8 +1,7 @@
 
 
-#include <SDL_ttf/SDL_ttf.h>
 #include "MenuState.h"
-#include "PausedState.h"
+#include "GameState.h"
 #include "constants.h"
 #include <fstream>
 #include <iostream>
@@ -90,8 +89,8 @@ MenuState::MenuState(void)
    SDL_FreeSurface(p1);
    SDL_FreeSurface(p2);
 #endif
-   // Don't pause yet
-   shouldPause = false;
+   // Don't advance yet
+   action = 0;
 }
 
 void MenuState::HandleEvent(SDL_Event evt)
@@ -112,19 +111,18 @@ void MenuState::HandleEvent(SDL_Event evt)
            case SDLK_RETURN:
            case SDLK_KP_ENTER:
                 if(choiceRect.GetY()==300)
+                {
                     debugtext=render("you started a new game");
+                    action = 1;
+                }
                 else 
                 {
                 //TTF_Quit();
                 //SDL_Quit();
                 debugtext=render("you exited the game");
-                //shouldPause=true; //works just as well =p
+                action = 2;
                 }
                 break;
-                
-           case SDLK_p:
-               shouldPause = true;
-               break;
        }
    }
 }
@@ -139,7 +137,7 @@ SDL_Surface* MenuState::render(double dh){
 return temp;
 }
 
-SDL_Surface* MenuState::render(char * dh){
+SDL_Surface* MenuState::render(const char * dh){
    SDL_Surface *temp;
    temp = TTF_RenderText_Solid( font, dh, textColor );
 return temp;
@@ -147,27 +145,17 @@ return temp;
 
 CrabBattle::State *MenuState::Update(void)
 {
-   Uint8 *key;
-   key = SDL_GetKeyState(NULL);
-   
-   // Check for keys
-   if (key[SDLK_q])//for testing
-   {
-    //debugtext=render(startRect.GetY());
-    //startRect.Move(0,1);
-    //debugtext = render("test");
-     
-   }
-
-   
    // Switch states
-   if (shouldPause)
-   {
-       shouldPause = false;
-       return (new PausedState(this));
-   }
-   else
-       return NULL;
+    switch (action)
+    {
+        case 0: return NULL;
+        case 1:
+            action = 0;
+            return (new GameState());
+        case 2:
+            action = 0;
+            return NULL;
+    }
 }
 
 
