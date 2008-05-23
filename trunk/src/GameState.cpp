@@ -367,20 +367,18 @@ void GameState::AddContact(dContactGeom contactInfo, dGeomID geom1, dGeomID geom
         contact->surface.soft_erp = kPhysicsERP;
         contact->surface.soft_cfm = kPhysicsCFM;
         // checks to see if players are colliding
-        if(player1->GetGeometry()->id()==geom1||player1->GetGeometry()->id()==geom2)
+        if (player1->GetGeometry()->id()==geom1 || player1->GetGeometry()->id()==geom2 &&
+            player2->GetGeometry()->id()==geom1 || player2->GetGeometry()->id()==geom2)
         {
-            if(player1->GetGeometry()->getPosition()[1]> player2->GetGeometry()->getPosition()[1])
+            if(player1->GetGeometry()->getPosition()[1] > player2->GetGeometry()->getPosition()[1])
             {
                 player1->ModHp(-1);
                 wins2 = render(player2->GetWins());
             }
-        }
-        if(player2->GetGeometry()->id()==geom1||player2->GetGeometry()->id()==geom2)
-        {
-            if(player2->GetGeometry()->getPosition()[1]> player1->GetGeometry()->getPosition()[1])
+            else
             {
                 player2->ModHp(-1);
-                wins1 = render(player1->GetWins());
+                wins2 = render(player2->GetWins());
             }
         }
     }
