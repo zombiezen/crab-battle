@@ -372,7 +372,7 @@ void GameState::AddContact(dContactGeom contactInfo, dGeomID geom1, dGeomID geom
             if(player1->GetGeometry()->getPosition()[1]> player2->GetGeometry()->getPosition()[1])
             {
                 player1->ModHp(-1);
-                wins1 = render(player1->GetWins());
+                wins2 = render(player2->GetWins());
             }
         }
         if(player2->GetGeometry()->id()==geom1||player2->GetGeometry()->id()==geom2)
@@ -380,7 +380,7 @@ void GameState::AddContact(dContactGeom contactInfo, dGeomID geom1, dGeomID geom
             if(player2->GetGeometry()->getPosition()[1]> player1->GetGeometry()->getPosition()[1])
             {
                 player2->ModHp(-1);
-                wins2 = render(player2->GetWins());
+                wins1 = render(player1->GetWins());
             }
         }
     }
@@ -402,12 +402,12 @@ void GameState::Display(Surface *screen)
     {
         (*i)->Display(screen);
     }
-    screen->Blit(messPc1, hpRect1);
-    screen->Blit(messPc2, hpRect2);
     screen->Blit(wins1, winsRect1);
     screen->Blit(wins2, winsRect2);
     screen->Blit(healthbar1, hpRect1, player1->GetHp());
     screen->Blit(healthbar1, hpRect2, player2->GetHp());
+    screen->Blit(messPc1, hpRect1);
+    screen->Blit(messPc2, hpRect2);
     screen->Flip(); // Flips second buffer
 }
 
