@@ -29,7 +29,6 @@ MenuState::MenuState(void)
    
    messPc1 = TTF_RenderText_Solid( font,"New Game", textColor );
    messPc2 = TTF_RenderText_Solid( font, "Quit", textColor );
-   debugtext = TTF_RenderText_Solid( font, "", textColor );
    startRect = Rect(300, 300, 200, 30);
    quitRect = Rect(300, 330, 200, 30);
    choiceRect = Rect(250, 300, 200, 30); 
@@ -112,14 +111,10 @@ void MenuState::HandleEvent(SDL_Event evt)
            case SDLK_KP_ENTER:
                 if(choiceRect.GetY()==300)
                 {
-                    debugtext=render("you started a new game");
                     action = 1;
                 }
                 else 
                 {
-                //TTF_Quit();
-                //SDL_Quit();
-                debugtext=render("you exited the game");
                 action = 2;
                 }
                 break;
@@ -145,6 +140,7 @@ return temp;
 
 CrabBattle::State *MenuState::Update(void)
 {
+    SDL_Event quit_event;
    // Switch states
     switch (action)
     {
@@ -154,6 +150,8 @@ CrabBattle::State *MenuState::Update(void)
             return (new GameState());
         case 2:
             action = 0;
+            quit_event.type = SDL_QUIT;
+            SDL_PushEvent(&quit_event);
             return NULL;
     }
 }
@@ -166,7 +164,6 @@ void MenuState::Display(Surface *screen)
    screen->Blit(messPc1, startRect);
    screen->Blit(messPc2, quitRect);
    screen->Blit(choice, choiceRect);
-   screen->Blit(debugtext, debugRect);
    screen->Flip(); // Flips second buffer
 }
 
@@ -175,7 +172,6 @@ MenuState::~MenuState(void)
    background->DelRef();
    SDL_FreeSurface(messPc1);
    SDL_FreeSurface(messPc2);
-   SDL_FreeSurface(debugtext);
    //SDL_FreeSurface(wins2);
    TTF_CloseFont(font);
 }

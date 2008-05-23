@@ -110,16 +110,26 @@ extern "C" int main(int argc, char *argv[])
                 // If this is removed, the user cannot quit by using the
                 // close button or by other OS-specific means.
                 done = true;
+                break;
             }
             else if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
             {
-                done = true; 
+                state_stack.top()->DelRef();
+                state_stack.pop();
+                if (state_stack.empty())
+                {
+                    done = true;
+                    break;
+                }
             }
             else
             {
                 state_stack.top()->HandleEvent(event);
             }
         }
+        // Check to see whether we're out of states
+        if (state_stack.empty())
+            break;
         // Update timer
         currentTime = SDL_GetTicks();
         deltaTime = currentTime - lastTime;
