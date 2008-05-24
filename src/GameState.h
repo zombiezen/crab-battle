@@ -19,6 +19,7 @@
 #include "Rect.h"
 #include "Player.h"
 #include "State.h"
+#include "SDL_mixer/SDL_mixer.h"
 
 using namespace std;
 
@@ -30,6 +31,7 @@ namespace CrabBattle
     class GameState : public State
     {
         private:
+            Mix_Music *music;
             TTF_Font *font;
             Player *player1, *player2;
             vector<Sprite *> envsprites;

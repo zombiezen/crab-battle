@@ -10,6 +10,7 @@
 #include "PausedState.h"
 #include "constants.h"
 #include "exceptions.h"
+#include "SDL_mixer/SDL_mixer.h"
 #include <fstream>
 #include <iostream>
 
@@ -81,6 +82,10 @@ GameState::GameState(void)
     dMass *newMass;
     dGeom *newGeom;
     dJointID joint2d;
+    Mix_OpenAudio( 22050, MIX_DEFAULT_FORMAT, 2, 4096 );
+    music = Mix_LoadMUS( "audio/GameState.mp3" );
+    Mix_PlayMusic( music, -1 );
+    
 #ifdef NO_SDL_IMAGE
     SDL_Surface *bg, *p1, *p2;
 #endif
@@ -230,7 +235,7 @@ GameState::GameState(void)
     // Platforms
     // TODO: Fix surface memory leak
     sprite = new Sprite(new Surface("images/platform.bmp"),
-                        CrabBattle::Rect(160, 100, 300, 100));
+                        CrabBattle::Rect(160, 200, 300, 100));
     newGeom = new dBox(physicsSpace->id(),
                        300.0 / kPhysicsScreenScale,
                        100.0 / kPhysicsScreenScale,
@@ -267,6 +272,7 @@ void GameState::HandleEvent(SDL_Event evt)
                 player2->GetBody()->addForce(1000.0, 0.0, 0.0);
                 break;
             case SDLK_ESCAPE:
+                //Mix_HaltMusic();
                 shouldQuit = true;
                 break;
         }
@@ -426,6 +432,8 @@ void GameState::Display(Surface *screen)
 
 GameState::~GameState(void)
 {
+    Mix_FreeMusic(music);
+    Mix_CloseAudio();
     vector<Sprite *>::const_iterator i;
     for (i = envsprites.begin(); i < envsprites.end(); i++)
         (*i)->DelRef();
