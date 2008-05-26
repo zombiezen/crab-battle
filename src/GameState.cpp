@@ -10,7 +10,6 @@
 #include "PausedState.h"
 #include "constants.h"
 #include "exceptions.h"
-#include "SDL_mixer/SDL_mixer.h"
 #include <fstream>
 #include <iostream>
 
