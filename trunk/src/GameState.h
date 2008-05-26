@@ -10,8 +10,10 @@
 #include <sstream>
 #if (defined(__WIN32__) || defined(WINDOWS)) || defined(MAC_OS_X)
 #include <SDL_ttf/SDL_ttf.h>
+#include <SDL_mixer/SDL_mixer.h>
 #else
 #include <SDL/SDL_ttf.h>
+#include <SDL/SDL_mixer.h>
 #endif
 #include <ode/ode.h>
 #include <vector>
@@ -19,7 +21,6 @@
 #include "Rect.h"
 #include "Player.h"
 #include "State.h"
-#include "SDL_mixer/SDL_mixer.h"
 
 using namespace std;
 
