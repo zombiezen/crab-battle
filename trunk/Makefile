@@ -34,16 +34,16 @@ $(builddir)/%.o : $(srcdir)/%.cpp
 	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c $< -o $@
 
 $(builddir)/BaseObject.o : $(srcdir)/BaseObject.h
-$(builddir)/GameState.o : $(srcdir)/GameState.h $(srcdir)/Rect.h $(srcdir)/State.h $(srcdir)/constants.h $(srcdir)/exceptions.h
-$(builddir)/main.o : $(srcdir)/State.h $(srcdir)/GameState.h $(srcdir)/Surface.h $(srcdir)/constants.h
-$(builddir)/PausedState.o : $(srcdir)/PausedState.h $(srcdir)/Rect.h $(srcdir)/State.h $(srcdir)/constants.h $(srcdir)/exceptions.h
-$(builddir)/MenuState.o : $(srcdir)/MenuState.h $(srcdir)/Rect.h $(srcdir)/Player.h $(srcdir)/State.h $(srcdir)/GameState.h $(srcdir)/constants.h
+$(builddir)/GameState.o : $(srcdir)/GameState.h $(srcdir)/Rect.h $(srcdir)/State.h $(srcdir)/constants.h $(srcdir)/exceptions.h $(srcdir)/Player.h $(srcdir)/PausedState.h
+$(builddir)/main.o : $(srcdir)/State.h $(srcdir)/Surface.h $(srcdir)/constants.h $(srcdir)/MenuState.h
+$(builddir)/MenuState.o : $(srcdir)/MenuState.h $(srcdir)/Rect.h $(srcdir)/Player.h $(srcdir)/State.h $(srcdir)/GameState.h $(srcdir)/constants.h $(srcdir)/exceptions.h
+$(builddir)/PausedState.o : $(srcdir)/PausedState.h $(srcdir)/State.h $(srcdir)/constants.h $(srcdir)/exceptions.h $(srcdir)/Surface.h
+$(builddir)/Player.o : $(srcdir)/Sprite.h
 $(builddir)/Rect.o : $(srcdir)/Rect.h $(srcdir)/BaseObject.h
-$(builddir)/Sprite.o : $(srcdir)/Sprite.h $(srcdir)/Rect.h $(srcdir)/Surface.h $(srcdir)/constants.h
+$(builddir)/Sprite.o : $(srcdir)/BaseObject.h $(srcdir)/Sprite.h $(srcdir)/Rect.h $(srcdir)/Surface.h $(srcdir)/constants.h
 $(builddir)/State.o : $(srcdir)/State.h $(srcdir)/BaseObject.h $(srcdir)/Surface.h
 $(builddir)/Surface.o : $(srcdir)/Surface.h $(srcdir)/BaseObject.h $(srcdir)/Rect.h $(srcdir)/exceptions.h
-$(builddir)/Player.o : $(srcdir)/Sprite.h
-$(builddir)/exceptions.o : 
+$(builddir)/exceptions.o : $(srcdir)/exceptions.h
 
 $(builddir)/images : $(resdir)/images
 	$(CP) -r $(resdir)/images $(builddir)/images

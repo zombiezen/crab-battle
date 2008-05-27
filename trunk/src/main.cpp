@@ -20,7 +20,6 @@
 #include <SDL/SDL_ttf.h>
 #endif
 #include "State.h"
-#include "GameState.h"
 #include "Surface.h"
 #include "constants.h"
 #include "MenuState.h"

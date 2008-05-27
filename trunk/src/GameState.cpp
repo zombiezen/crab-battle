@@ -344,6 +344,11 @@ CrabBattle::State *GameState::Update(void)
       wins2 = render(player2->GetWins());
       
     }
+    // Clear sprite colliders
+    player1->ClearColliders();
+    player2->ClearColliders();
+    for (i = envsprites.begin(); i < envsprites.end(); i++)
+        (*i)->ClearColliders();
     // Update physics
     physicsSpace->collide(this, &_game_state_collide);
     player1->FixPhysics();
@@ -354,19 +359,14 @@ CrabBattle::State *GameState::Update(void)
     player2->FixPhysics();
     // Update sprites
     player1->Update();
-    player1->ClearColliders();
     player2->Update();
-    player2->ClearColliders();
     for (i = envsprites.begin(); i < envsprites.end(); i++)
-    {
         (*i)->Update();
-        (*i)->ClearColliders();
-    }
     // Switch states
     if (shouldPause)
     {
         shouldPause = false;
-        return (new PausedState(this));
+        return (new PausedState());
     }
     else if (shouldQuit)
     {
