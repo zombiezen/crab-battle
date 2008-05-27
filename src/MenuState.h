@@ -18,8 +18,8 @@
 #include <sstream>
 using namespace std;
 
-#ifndef _CRAB_BATTLE_MenuState_H_
-#define _CRAB_BATTLE_MenuState_H_
+#ifndef _CRAB_BATTLE_MENUSTATE_H_
+#define _CRAB_BATTLE_MENUSTATE_H_
 
 namespace CrabBattle
 {
