@@ -198,6 +198,8 @@ GameState::GameState(void)
                        1.0);
     newGeom->setBody(newBody->id());
     player1->SetGeometry(newGeom);
+    // Player 1 Motor
+    player1->CreateMotor(physicsWorld);
     // Player 2 Physics
     joint2d = dJointCreatePlane2D(physicsWorld->id(), NULL);
     newBody = new dBody(physicsWorld->id());
@@ -216,6 +218,8 @@ GameState::GameState(void)
                        1.0);
     newGeom->setBody(newBody->id());
     player2->SetGeometry(newGeom);
+    // Player 2 Motor
+    player2->CreateMotor(physicsWorld);
     // Floor
     newGeom = new dPlane(physicsSpace->id(),
                          0.0, -1.0, 0.0,
@@ -253,26 +257,52 @@ void GameState::HandleEvent(SDL_Event evt)
                 shouldPause = true;
                 break;
             case SDLK_w:
-                player1->GetBody()->addForce(0.0, -1000.0, 0.0);
+                player1->Jump();
                 break;
             case SDLK_a:
-                player1->GetBody()->addForce(-1000.0, 0.0, 0.0);
+                player1->GoLeft();
                 break;
             case SDLK_d:
-                player1->GetBody()->addForce(1000.0, 0.0, 0.0);
+                player1->GoRight();
                 break;
             case SDLK_UP:
-                player2->GetBody()->addForce(0.0, -1000.0, 0.0);
+                player2->Jump();
                 break;
             case SDLK_LEFT:
-                player2->GetBody()->addForce(-1000.0, 0.0, 0.0);
+                player2->GoLeft();
                 break;
             case SDLK_RIGHT:
-                player2->GetBody()->addForce(1000.0, 0.0, 0.0);
+                player2->GoRight();
                 break;
             case SDLK_ESCAPE:
                 //Mix_HaltMusic();
                 shouldQuit = true;
+                break;
+        }
+    }
+    else if (evt.type == SDL_KEYUP)
+    {
+        switch (evt.key.keysym.sym)
+        {
+            case SDLK_w:
+                player1->StopJump();
+                break;
+            case SDLK_a:
+                player1->StopLeft();
+                break;
+            case SDLK_d:
+                player1->StopRight();
+                break;
+            case SDLK_UP:
+                player2->StopJump();
+                break;
+            case SDLK_LEFT:
+                player2->StopLeft();
+                break;
+            case SDLK_RIGHT:
+                player2->StopRight();
+                break;
+            default:
                 break;
         }
     }

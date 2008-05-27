@@ -6,6 +6,7 @@
  *  $Id$
  */
  
+#include <ode/ode.h>
 #include "SDL.h"
 #include "Sprite.h"
 
@@ -18,6 +19,7 @@ namespace CrabBattle
     {
         private:
             double hp, wins;
+            dLMotorJoint *motor;
         public:    
             Player(Surface *);
             Player(Surface *, Rect);
@@ -26,6 +28,13 @@ namespace CrabBattle
             void SetHp(double);
             double GetWins(void);
             void AddWins(double);
+            void CreateMotor(dWorld *);
+            void GoLeft(void);
+            void StopLeft(void);
+            void GoRight(void);
+            void StopRight(void);
+            void Jump(void);
+            void StopJump(void);
             virtual ~Player(void) {};
     };
 }
