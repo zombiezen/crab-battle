@@ -139,6 +139,7 @@ Sprite::Sprite(Surface *surf)
     surface->AddRef();
     body = NULL;
     geometry = NULL;
+    env = false;
 }
 
 Sprite::Sprite(Surface *surf, Rect pos)
@@ -150,6 +151,7 @@ Sprite::Sprite(Surface *surf, Rect pos)
     surface->AddRef();
     body = NULL;
     geometry = NULL;
+    env = false;
 }
 
 Rect Sprite::GetPosition(void)
@@ -252,14 +254,27 @@ void Sprite::SetGeometry(dGeom *newGeom)
     if (geometry != NULL)
         delete geometry;
     geometry = newGeom;
-    if (geometry != NULL && !geometry->getBody())
+    if (geometry != NULL)
     {
         geometry->setData((void *)this);
-        geometry->setPosition(
-            (x + ((double)surface->GetWidth() / 2.0)) / kPhysicsScreenScale,
-            (y + ((double)surface->GetHeight() / 2.0)) / kPhysicsScreenScale,
-            0.0);
+        if (!geometry->getBody())
+        {
+            geometry->setPosition(
+                (x + ((double)surface->GetWidth() / 2.0)) / kPhysicsScreenScale,
+                (y + ((double)surface->GetHeight() / 2.0)) / kPhysicsScreenScale,
+                0.0);
+        }
     }
+}
+
+bool Sprite::GetIsEnv(void)
+{
+    return env;
+}
+
+void Sprite::SetIsEnv(bool flag)
+{
+    env = flag;
 }
 
 void Sprite::FixPhysics(void)
@@ -344,8 +359,27 @@ void Sprite::Display(Surface *dest)
     }
 }
 
+void Sprite::AddCollider(Sprite *collider)
+{
+    if (collider != NULL)
+        collider->AddRef();
+    colliders.push_back(collider);
+}
+
+void Sprite::ClearColliders(void)
+{
+    std::vector<Sprite *>::const_iterator i;
+    for (i = colliders.begin(); i < colliders.end(); i++)
+    {
+        if ((*i) != NULL)
+            ((Sprite *)*i)->DelRef();
+    }
+    colliders.erase(colliders.begin(), colliders.end());
+}
+
 Sprite::~Sprite(void)
 {
+    ClearColliders();
     SetSurface(NULL);
     SetBody(NULL);
     SetGeometry(NULL);

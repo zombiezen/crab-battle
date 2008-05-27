@@ -20,6 +20,7 @@ namespace CrabBattle
         private:
             double hp, wins;
             dLMotorJoint *motor;
+            short jumpCount, jumpTicks;
         public:    
             Player(Surface *);
             Player(Surface *, Rect);
@@ -29,12 +30,12 @@ namespace CrabBattle
             double GetWins(void);
             void AddWins(double);
             void CreateMotor(dWorld *);
+            virtual void Update(void);
             void GoLeft(void);
             void StopLeft(void);
             void GoRight(void);
             void StopRight(void);
             void Jump(void);
-            void StopJump(void);
             virtual ~Player(void) {};
     };
 }

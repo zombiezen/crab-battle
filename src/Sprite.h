@@ -6,6 +6,7 @@
  *  $Id$
  */
 
+#include <vector>
 #include <ode/ode.h>
 #include "BaseObject.h"
 #include "Rect.h"
@@ -16,12 +17,13 @@
 
 namespace CrabBattle
 {
-    /*  Sprite class
+    /*  Sprite semi-abstract class
      *
      *  Sprites are a convenience class for encapsulating position and
      *  image data.  A sprite can be described as any object that could possibly
      *  move.
      */
+    
     class Sprite : public BaseObject
     {
     private:
@@ -29,6 +31,9 @@ namespace CrabBattle
         Surface *surface;
         dBody *body;
         dGeom *geometry;
+        bool env;
+    protected:
+        std::vector<Sprite *> colliders;
     public:
         /*** CONSTRUCTORS ***/
         // Sprite(surface)
@@ -58,6 +63,12 @@ namespace CrabBattle
         dGeom *GetGeometry(void);
         // sprite.SetGeometry(geom)
         void SetGeometry(dGeom *);
+        // sprite.GetIsEnv()
+        // Checks whether this sprite is part of the environment
+        bool GetIsEnv(void);
+        // sprite.SetIsEnv(flag)
+        // Sets whether this sprite is part of the environment
+        void SetIsEnv(bool);
         /*** ACTIONS ***/
         // sprite.FixPhysics()
         // "Fix" the physics to 2D space
@@ -65,6 +76,10 @@ namespace CrabBattle
         // sprite.Display(screen)
         // Blits a sprite onto another surface
         virtual void Display(Surface *);
+        virtual void Update(void) { };
+        /*** COLLISIONS ***/
+        void AddCollider(Sprite *);
+        void ClearColliders(void);
         /*** DESTRUCTOR ***/
         virtual ~Sprite(void);
     };
