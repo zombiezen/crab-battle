@@ -16,7 +16,7 @@ using namespace std;
 
 using CrabBattle::PausedState;
 
-PausedState::PausedState(GameState *prev)
+PausedState::PausedState()
 {
     using CrabBattle::FileNotFoundError;
 #ifdef NO_SDL_IMAGE
@@ -28,9 +28,6 @@ PausedState::PausedState(GameState *prev)
     char value3[MAXPATHLEN];
     char value4[MAXPATHLEN];
     
-    // Set previous to argument
-    prev->AddRef();
-    previous = prev;
     // Read file
     ifstream getTitles;
     getTitles.open("titles1.txt");
@@ -86,11 +83,6 @@ PausedState::PausedState(GameState *prev)
     done = false;
 }
 
-PausedState::PausedState(MenuState *prev)
-{
-    done = false;
-}
-
 void PausedState::HandleEvent(SDL_Event evt)
 {
     if (evt.type == SDL_KEYDOWN)
@@ -108,12 +100,6 @@ void PausedState::HandleEvent(SDL_Event evt)
 
 CrabBattle::State *PausedState::Update(void)
 {
-    /*
-    if(qwe)
-    {
-        previous1->AddRef();
-        return previous1;
-    }*/
     if (done)
         return NULL;
     else
@@ -129,6 +115,5 @@ void PausedState::Display(Surface *screen)
 
 PausedState::~PausedState(void)
 {
-    previous->DelRef();
     background->DelRef();
 }

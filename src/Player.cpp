@@ -24,6 +24,7 @@ Player::Player(Surface *surf) : Sprite(surf)
     wins = 0;
     jumpCount = -1;
     jumpTicks = -1;
+    jumpTouchedOff = false;
 }
 
 Player::Player(Surface *surf, Rect rect) : Sprite(surf, rect)
@@ -32,6 +33,7 @@ Player::Player(Surface *surf, Rect rect) : Sprite(surf, rect)
     wins = 0;
     jumpCount = -1;
     jumpTicks = -1;
+    jumpTouchedOff = false;
 }
 
 double Player::GetHp(void)
@@ -101,8 +103,9 @@ void Player::Update(void)
     // Check collisions
     if (colliders.size() == 0)
     {
-        // We're in mid-air by unknown means, disable X movement
+        // We're in mid-air, disable X movement
         motor->setParam(dParamFMax, 0.0);
+        jumpTouchedOff = true;
     }
     else
     {
@@ -115,12 +118,13 @@ void Player::Update(void)
             if (currSprite == NULL || currSprite->GetIsEnv())
                 anyenv = true;
         }
-        if (anyenv && (jumpTicks > 2 || jumpTicks < 0))
+        if (anyenv && jumpTouchedOff)
         {
             // If we're on ground, allow jumping
-            // (We check for jumpTicks > 2 to ensure that this isn't a remnant
+            // (We check on jumpTicks to ensure that this isn't a remnant
             // collision)
             jumpCount = 0;
+            jumpTouchedOff = false;
         }
         else if (!anyenv && jumpCount == 0)
         {
@@ -169,4 +173,9 @@ void Player::Jump(void)
         jumpCount++;
         jumpTicks = 0;
     }
+}
+
+Player::~Player(void)
+{
+    delete motor;
 }
