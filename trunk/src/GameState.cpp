@@ -244,6 +244,7 @@ GameState::GameState(void)
                        100.0 / kPhysicsScreenScale,
                        1.0);
     sprite->SetGeometry(newGeom);
+    sprite->SetIsEnv(true);
     envsprites.push_back(sprite);
 }
 
@@ -278,23 +279,19 @@ void GameState::HandleEvent(SDL_Event evt)
                 //Mix_HaltMusic();
                 shouldQuit = true;
                 break;
+            default:
+                break;
         }
     }
     else if (evt.type == SDL_KEYUP)
     {
         switch (evt.key.keysym.sym)
         {
-            case SDLK_w:
-                player1->StopJump();
-                break;
             case SDLK_a:
                 player1->StopLeft();
                 break;
             case SDLK_d:
                 player1->StopRight();
-                break;
-            case SDLK_UP:
-                player2->StopJump();
                 break;
             case SDLK_LEFT:
                 player2->StopLeft();
@@ -322,6 +319,7 @@ SDL_Surface *GameState::render(double dh)
 
 CrabBattle::State *GameState::Update(void)
 {
+    vector<Sprite *>::const_iterator i;
     Uint8 *key;
     key = SDL_GetKeyState(NULL);
     if (player1->GetHp() <= 0)
@@ -354,6 +352,16 @@ CrabBattle::State *GameState::Update(void)
     allContacts->empty();
     player1->FixPhysics();
     player2->FixPhysics();
+    // Update sprites
+    player1->Update();
+    player1->ClearColliders();
+    player2->Update();
+    player2->ClearColliders();
+    for (i = envsprites.begin(); i < envsprites.end(); i++)
+    {
+        (*i)->Update();
+        (*i)->ClearColliders();
+    }
     // Switch states
     if (shouldPause)
     {
@@ -375,9 +383,24 @@ void GameState::AddContact(dContactGeom contactInfo, dGeomID geom1, dGeomID geom
     using std::endl;
     dContactJoint *joint;
     dContact *contact;
+    Sprite *sprite1, *sprite2;
     if (allContacts == NULL)
         return;
     contact = new dContact;
+    // Determine sprites
+    if (dGeomGetData(geom1) != NULL)
+        sprite1 = (Sprite *)dGeomGetData(geom1);
+    else
+        sprite1 = NULL;
+    if (dGeomGetData(geom2) != NULL)
+        sprite2 = (Sprite *)dGeomGetData(geom2);
+    else
+        sprite2 = NULL;
+    // Add colliders
+    if (sprite1 != NULL)
+        sprite1->AddCollider(sprite2);
+    if (sprite2 != NULL)
+        sprite2->AddCollider(sprite1);
     // Set up contact
     contact->geom = contactInfo;
     if ((player1->GetGeometry()->id() == geom1 ||
