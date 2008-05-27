@@ -17,6 +17,10 @@
 #include <cstdio>
 using std::printf;
 
+const unsigned int kCountdownDuration = 30;
+const unsigned int kCountdownPosX = 256;
+const unsigned int kCountdownPosY = 216;
+
 // Maximum contacts per collision per iteration
 const unsigned int kMaxContacts = 16;
 
@@ -81,9 +85,13 @@ GameState::GameState(void)
     dMass *newMass;
     dGeom *newGeom;
     dJointID joint2d;
+    
     Mix_OpenAudio( 22050, MIX_DEFAULT_FORMAT, 2, 4096 );
     music = Mix_LoadMUS( "audio/GameState.mp3" );
     Mix_PlayMusic( music, -1 );
+    
+    countdownTimer = 0;
+    countdownSurface = NULL;
     
 #ifdef NO_SDL_IMAGE
     SDL_Surface *bg, *p1, *p2;
@@ -320,8 +328,7 @@ SDL_Surface *GameState::render(double dh)
 CrabBattle::State *GameState::Update(void)
 {
     vector<Sprite *>::const_iterator i;
-    Uint8 *key;
-    key = SDL_GetKeyState(NULL);
+    // Redraw player HP
     if (player1->GetHp() <= 0)
     {
         player1->SetHp(200);
@@ -332,37 +339,33 @@ CrabBattle::State *GameState::Update(void)
         player2->SetHp(200);
         player1->AddWins(1);
     }
-    // Check for keys
-    if (key[SDLK_q])//for testing
+    // Update physics if we're after countdown
+    if (countdownTimer >= kCountdownDuration * 3)
     {
-      player1->ModHp(-1);   
-      player2->ModHp(-5); 
-      
-      messPc1 = render(player1->GetHp());
-      messPc2 = render(player2->GetHp());
-      wins1 = render(player1->GetWins());
-      wins2 = render(player2->GetWins());
-      
+        // Clear sprite colliders
+        player1->ClearColliders();
+        player2->ClearColliders();
+        for (i = envsprites.begin(); i < envsprites.end(); i++)
+            (*i)->ClearColliders();
+        // Update physics
+        physicsSpace->collide(this, &_game_state_collide);
+        player1->FixPhysics();
+        player2->FixPhysics();
+        physicsWorld->step((dReal)kUpdateRate / 1000.0);
+        allContacts->empty();
+        player1->FixPhysics();
+        player2->FixPhysics();
+        // Update sprites
+        player1->Update();
+        player2->Update();
+        for (i = envsprites.begin(); i < envsprites.end(); i++)
+            (*i)->Update();
     }
-    // Clear sprite colliders
-    player1->ClearColliders();
-    player2->ClearColliders();
-    for (i = envsprites.begin(); i < envsprites.end(); i++)
-        (*i)->ClearColliders();
-    // Update physics
-    physicsSpace->collide(this, &_game_state_collide);
-    player1->FixPhysics();
-    player2->FixPhysics();
-    physicsWorld->step((dReal)kUpdateRate / 1000.0);
-    allContacts->empty();
-    player1->FixPhysics();
-    player2->FixPhysics();
-    // Update sprites
-    player1->Update();
-    player2->Update();
-    for (i = envsprites.begin(); i < envsprites.end(); i++)
-        (*i)->Update();
-    // Switch states
+    if (countdownTimer < kCountdownDuration * 4)
+    {
+        countdownTimer++;
+    }
+    // Switch states if we're done
     if (shouldPause)
     {
         shouldPause = false;
@@ -465,21 +468,52 @@ void GameState::AddContact(dContactGeom contactInfo, dGeomID geom1, dGeomID geom
 void GameState::Display(Surface *screen)
 {
     vector<Sprite *>::const_iterator i;
+    // Display background
     screen->Fill(screen->GetRect(), 0, 0, 0); // Clears screen
     screen->Blit(background, background->GetRect()); // Blits the background
-    player1->Display(screen);
-    player2->Display(screen);
+    // Display environment
     for (i = envsprites.begin(); i < envsprites.end(); i++)
     {
         (*i)->Display(screen);
     }
+    // Display players
+    player1->Display(screen);
+    player2->Display(screen);
+    // Display HUD
     screen->Blit(wins1, winsRect1);
     screen->Blit(wins2, winsRect2);
     screen->Blit(healthbar1, hpRect1, player1->GetHp());
     screen->Blit(healthbar1, hpRect2, player2->GetHp());
     screen->Blit(messPc1, hpRect1);
     screen->Blit(messPc2, hpRect2);
-    screen->Flip(); // Flips second buffer
+    // Display countdown
+    if (countdownSurface == NULL)
+    {
+        countdownSurface = new Surface("images/count3.png");
+    }
+    else if (countdownTimer == kCountdownDuration)
+    {
+        countdownSurface->DelRef();
+        countdownSurface = new Surface("images/count2.png");
+    }
+    else if (countdownTimer == kCountdownDuration * 2)
+    {
+        countdownSurface->DelRef();
+        countdownSurface = new Surface("images/count1.png");
+    }
+    else if (countdownTimer == kCountdownDuration * 3)
+    {
+        countdownSurface->DelRef();
+        countdownSurface = new Surface("images/countgo.png");
+    }
+    if (countdownTimer < kCountdownDuration * 4)
+    {
+        screen->Blit(countdownSurface, Rect(kCountdownPosX, kCountdownPosY,
+                                            countdownSurface->GetWidth(),
+                                            countdownSurface->GetHeight()));
+    }
+    // Updates the screen
+    screen->Flip();
 }
 
 GameState::~GameState(void)
