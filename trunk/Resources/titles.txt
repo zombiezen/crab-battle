@@ -1,4 +1,4 @@
 images/bg.jpg
-images/player.bmp
-images/player2.bmp
+images/player.gif
+images/player2.gif
 images/healthbar1.jpg
