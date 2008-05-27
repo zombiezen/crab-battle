@@ -100,6 +100,8 @@ void PausedState::HandleEvent(SDL_Event evt)
             case SDLK_p:
                 done = true;
                 break;
+            default:
+                break;
         }
     }
 }

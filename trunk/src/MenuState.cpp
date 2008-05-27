@@ -97,6 +97,8 @@ void MenuState::HandleEvent(SDL_Event evt)
                 else
                     action = 2;
                 break;
+            default:
+                break;
         }
     }
 }
@@ -135,6 +137,8 @@ CrabBattle::State *MenuState::Update(void)
             action = 0;
             quit_event.type = SDL_QUIT;
             SDL_PushEvent(&quit_event);
+            return this;
+        default:
             return this;
     }
 }
