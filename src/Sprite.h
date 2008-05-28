@@ -27,13 +27,15 @@ namespace CrabBattle
     class Sprite : public BaseObject
     {
     private:
-        double x, y, rot;
+        double rot;
         Surface *surface;
         dBody *body;
         dGeom *geometry;
         bool env;
     protected:
+        double x, y;
         std::vector<Sprite *> colliders;
+        Sprite(void);
     public:
         /*** CONSTRUCTORS ***/
         // Sprite(surface)
@@ -44,9 +46,9 @@ namespace CrabBattle
         Sprite(Surface *, Rect);
         /*** ACCESSORS ***/
         // sprite.GetPosition()
-        Rect GetPosition(void);
+        virtual Rect GetPosition(void);
         // sprite.SetPosition(rect)
-        void SetPosition(Rect);
+        virtual void SetPosition(Rect);
         // sprite.GetRotation()
         double GetRotation(void);
         // sprite.SetRotation(theta)
@@ -82,6 +84,17 @@ namespace CrabBattle
         void ClearColliders(void);
         /*** DESTRUCTOR ***/
         virtual ~Sprite(void);
+    };
+    
+    class InvisibleSprite : public Sprite
+    {
+    private:
+        double width, height;
+    public:
+        InvisibleSprite(Rect);
+        virtual Rect GetPosition(void);
+        virtual void SetPosition(Rect);
+        virtual void Display(Surface *) { };
     };
 }
 
