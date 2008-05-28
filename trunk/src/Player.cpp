@@ -18,8 +18,12 @@ const dReal kPhysicsMaxPlayerForce = 500.0;
 const dReal kPhysicsPlayerVelocity = 10.0;
 const dReal kPhysicsPlayerJumpVelocity = 10.0;
 
-Player::Player(Surface *surf) : Sprite(surf)
+Player::Player(Surface *newSurfL, Surface *newSurfR) : Sprite(newSurfL)
 {
+    lSurf = newSurfL;
+    rSurf = newSurfR;
+    lSurf->AddRef();
+    rSurf->AddRef();
     hp = 200;
     wins = 0;
     jumpCount = -1;
@@ -27,8 +31,12 @@ Player::Player(Surface *surf) : Sprite(surf)
     jumpTouchedOff = false;
 }
 
-Player::Player(Surface *surf, Rect rect) : Sprite(surf, rect)
+Player::Player(Surface *newSurfL, Surface *newSurfR, Rect rect) : Sprite(newSurfL, rect)
 {
+    lSurf = newSurfL;
+    rSurf = newSurfR;
+    lSurf->AddRef();
+    rSurf->AddRef();
     hp = 200;
     wins = 0;
     jumpCount = -1;
@@ -140,6 +148,7 @@ void Player::GoLeft(void)
     {
         motor->setParam(dParamVel, -kPhysicsPlayerVelocity);
     }
+    TurnLeft();
 }
 
 void Player::StopLeft(void)
@@ -156,6 +165,7 @@ void Player::GoRight(void)
     {
         motor->setParam(dParamVel, kPhysicsPlayerVelocity);
     }
+    TurnRight();
 }
 
 void Player::StopRight(void)
@@ -175,7 +185,19 @@ void Player::Jump(void)
     }
 }
 
+void Player::TurnLeft(void)
+{
+    SetSurface(lSurf);
+}
+
+void Player::TurnRight(void)
+{
+    SetSurface(rSurf);
+}
+
 Player::~Player(void)
 {
+    lSurf->DelRef();
+    rSurf->DelRef();
     delete motor;
 }

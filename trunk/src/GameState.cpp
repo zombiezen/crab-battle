@@ -76,7 +76,7 @@ GameState::GameState(void)
     using CrabBattle::FileNotFoundError;
     int count =0;
     vector<string> paths;
-    CrabBattle::Surface *surf_p1, *surf_p2;
+    CrabBattle::Surface *surf_p1L, *surf_p1R, *surf_p2L, *surf_p2R;
     CrabBattle::Sprite *sprite;
     dBody *newBody;
     dMass *newMass;
@@ -89,11 +89,6 @@ GameState::GameState(void)
     
     countdownTimer = 0;
     countdownSurface = NULL;
-    
-#ifdef NO_SDL_IMAGE
-    SDL_Surface *bg, *p1, *p2;
-#endif
-    //cout << "tff_init()= "<<TTF_WasInit()<<endl;
     
     font = TTF_OpenFont( "times.ttf", 24 );
     if (font == NULL)
@@ -112,32 +107,21 @@ GameState::GameState(void)
     winsRect1 = Rect(270 , 30 , 200 , 30);
     winsRect2 = Rect(315 , 30 , 200 , 30);
     // Load images
-#ifndef NO_SDL_IMAGE
     background = new Surface(paths[0]);
-    surf_p1 = new Surface(paths[1]);
-    surf_p2 = new Surface(paths[3]);
-    healthbar1 = new Surface(paths[4]);
-#else
-    bg = SDL_LoadBMP(paths[0].c_str());
-    p1 = SDL_LoadBMP(paths[1].c_str());
-    p2 = SDL_LoadBMP(paths[2].c_str());
-    // Put into objects
-    background = new Surface(bg);
-    surf_p1 = new Surface(p1);
-    surf_p2 = new Surface(p2);
-#endif
+    healthbar1 = new Surface(paths[1]);
+    surf_p1L = new Surface(paths[2]);
+    surf_p1R = new Surface(paths[3]);
+    surf_p2L = new Surface(paths[6]);
+    surf_p2R = new Surface(paths[7]);
     // Create players
-    player1 = new Player(surf_p1, CrabBattle::Rect(160, 350, 64, 64));
-    player2 = new Player(surf_p2, CrabBattle::Rect(400, 350, 64, 64));
+    player1 = new Player(surf_p1L, surf_p1R, CrabBattle::Rect(160, 350, 64, 64));
+    player2 = new Player(surf_p2L, surf_p2R, CrabBattle::Rect(400, 350, 64, 64));
+    player1->TurnRight();
     // Clean up images
-    surf_p1->DelRef();
-    surf_p2->DelRef();
-#ifdef NO_SDL_IMAGE
-    // Decrement surface reference counts (Surface class automatically increments)
-    SDL_FreeSurface(bg);
-    SDL_FreeSurface(p1);
-    SDL_FreeSurface(p2);
-#endif
+    surf_p1L->DelRef();
+    surf_p1R->DelRef();
+    surf_p2L->DelRef();
+    surf_p2R->DelRef();
     // Don't pause yet
     shouldPause = shouldQuit = false;
     // Set up physics

@@ -18,13 +18,14 @@ namespace CrabBattle
     class Player : public Sprite
     {
         private:
+            Surface *lSurf, *rSurf;
             double hp, wins;
             dLMotorJoint *motor;
             short jumpCount, jumpTicks;
             bool jumpTouchedOff;
         public:    
-            Player(Surface *);
-            Player(Surface *, Rect);
+            Player(Surface *, Surface *);
+            Player(Surface *, Surface *, Rect);
             double GetHp(void);
             void ModHp(double);
             void SetHp(double);
@@ -37,6 +38,8 @@ namespace CrabBattle
             void GoRight(void);
             void StopRight(void);
             void Jump(void);
+            void TurnLeft(void);
+            void TurnRight(void);
             virtual ~Player(void);
     };
 }
