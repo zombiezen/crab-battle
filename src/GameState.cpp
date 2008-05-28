@@ -143,8 +143,8 @@ GameState::GameState(void)
     dJointAttach(joint2d, newBody->id(), NULL);
     // Player 1 Collision
     newGeom = new dBox(physicsSpace->id(),
-                       64.0 / kPhysicsScreenScale,
-                       64.0 / kPhysicsScreenScale,
+                       player1->GetPosition().GetWidth() / kPhysicsScreenScale,
+                       player1->GetPosition().GetHeight() / kPhysicsScreenScale,
                        1.0);
     newGeom->setBody(newBody->id());
     player1->SetGeometry(newGeom);
@@ -163,8 +163,8 @@ GameState::GameState(void)
     dJointAttach(joint2d, newBody->id(), NULL);
     // Player 2 Collision
     newGeom = new dBox(physicsSpace->id(),
-                       64.0 / kPhysicsScreenScale,
-                       64.0 / kPhysicsScreenScale,
+                       player2->GetPosition().GetWidth() / kPhysicsScreenScale,
+                       player2->GetPosition().GetHeight() / kPhysicsScreenScale,
                        1.0);
     newGeom->setBody(newBody->id());
     player2->SetGeometry(newGeom);
