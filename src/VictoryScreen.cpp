@@ -37,10 +37,7 @@ void VictoryScreen::HandleEvent(SDL_Event evt)
     {
         switch (evt.key.keysym.sym)
         {
-            case SDLK_SPACE:
-                done = true;
-                break;
-            case SDLK_RETURN:
+            case SDLK_ESCAPE:
                 done = true;
                 break;
             default:
