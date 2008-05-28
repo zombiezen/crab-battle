@@ -98,21 +98,22 @@ GameState::GameState(void)
 //    messPc2 = TTF_RenderText_Solid( font, "200", textColor );
 //    lives1 = TTF_RenderText_Solid( font, "0", textColor );
 //    lives2 = TTF_RenderText_Solid( font, "0", textColor );
-    
-    paths = LoadConfigFile("titles.txt");
 
     // Set up player rectangles
     hpRect1 = Rect(60, 30, 200, 30);
     hpRect2 = Rect(360, 30, 200, 30);
     winsRect1 = Rect(270 , 30 , 200 , 30);
     winsRect2 = Rect(315 , 30 , 200 , 30);
-    // Load images
+    // Load HUD images
+    paths = LoadConfigFile("titles.txt");
     background = new Surface(paths[0]);
     healthbar1 = new Surface(paths[1]);
-    surf_p1L = new Surface(paths[2]);
-    surf_p1R = new Surface(paths[3]);
-    surf_p2L = new Surface(paths[6]);
-    surf_p2R = new Surface(paths[7]);
+    // Load player images
+    paths = LoadConfigFile("players.txt");
+    surf_p1L = new Surface(paths[0]);
+    surf_p1R = new Surface(paths[1]);
+    surf_p2L = new Surface(paths[4]);
+    surf_p2R = new Surface(paths[5]);
     // Create players
     player1 = new Player(surf_p1L, surf_p1R, CrabBattle::Rect(160, 350, 64, 64));
     player2 = new Player(surf_p2L, surf_p2R, CrabBattle::Rect(400, 350, 64, 64));

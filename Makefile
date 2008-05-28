@@ -30,7 +30,7 @@ $(builddir)/crab-battle : $(builddir) $(objects) build_resources
 $(builddir) :
 	mkdir $(builddir)
 
-build_resources : $(builddir)/images $(builddir)/audio $(builddir)/titles.txt $(builddir)/titles1.txt $(builddir)/icon.png $(builddir)/times.ttf $(builddir)/titles-menu.txt $(builddir)/platforms.txt
+build_resources : $(builddir)/images $(builddir)/audio $(builddir)/titles.txt $(builddir)/titles1.txt $(builddir)/icon.png $(builddir)/times.ttf $(builddir)/titles-menu.txt $(builddir)/platforms.txt $(builddir)/players.txt
 
 $(builddir)/%.o : $(srcdir)/%.cpp
 	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c $< -o $@
@@ -61,6 +61,8 @@ $(builddir)/titles-menu.txt : $(resdir)/titles-menu.txt
 	$(CP) $(resdir)/titles-menu.txt $(builddir)/titles-menu.txt
 $(builddir)/platforms.txt : $(resdir)/platforms.txt
 	$(CP) $(resdir)/platforms.txt $(builddir)/platforms.txt
+$(builddir)/players.txt : $(resdir)/players.txt
+	$(CP) $(resdir)/players.txt $(builddir)/players.txt
 $(builddir)/icon.png : $(resdir)/icon.png
 	$(CP) $(resdir)/icon.png $(builddir)/icon.png
 $(builddir)/times.ttf : $(resdir)/times.ttf
