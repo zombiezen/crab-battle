@@ -95,8 +95,8 @@ GameState::GameState(void)
     lastHP1 = lastHP2 = -1;
 //    messPc1 = TTF_RenderText_Solid( font,"200", textColor );
 //    messPc2 = TTF_RenderText_Solid( font, "200", textColor );
-//    wins1 = TTF_RenderText_Solid( font, "0", textColor );
-//    wins2 = TTF_RenderText_Solid( font, "0", textColor );
+//    lives1 = TTF_RenderText_Solid( font, "0", textColor );
+//    lives2 = TTF_RenderText_Solid( font, "0", textColor );
     
     paths = LoadConfigFile("titles.txt");
 
@@ -294,17 +294,6 @@ SDL_Surface *GameState::render(double dh)
 CrabBattle::State *GameState::Update(void)
 {
     vector<Sprite *>::const_iterator i;
-    // Examine wins
-    if (player1->GetHp() <= 0)
-    {
-        player1->SetHp(200);
-        player2->AddWins(1);   
-    }
-    if (player2->GetHp() <= 0)
-    {
-        player2->SetHp(200);
-        player1->AddWins(1);
-    }
     // Update physics if we're after countdown
     if (countdownTimer >= kCountdownDuration * 3)
     {
@@ -331,6 +320,8 @@ CrabBattle::State *GameState::Update(void)
     {
         countdownTimer++;
     }
+    if (player1->GetLives() == 0 || player2->GetLives() == 0)
+        shouldQuit = true;
     // Switch states if we're done
     if (shouldPause)
     {
@@ -392,17 +383,9 @@ void GameState::AddContact(dContactGeom contactInfo, dGeomID geom1, dGeomID geom
         p1Height = player1->GetGeometry()->getPosition()[1];
         p2Height = player2->GetGeometry()->getPosition()[1];
         if (p1Height > p2Height + kDamageHeightTolerance)
-        {
             player1->ModHp(-1);
-            wins2 = render(player2->GetWins());
-            messPc1 = render(player1->GetHp());
-        }
         else if (p1Height + kDamageHeightTolerance < p2Height)
-        {
             player2->ModHp(-1);
-            wins1 = render(player1->GetWins());
-            messPc2 = render(player2->GetHp());
-        }
     }
     else if (player1->GetGeometry()->id() == geom1 ||
              player1->GetGeometry()->id() == geom2 ||
@@ -452,18 +435,18 @@ void GameState::Display(Surface *screen)
     // Display HUD
     if (lastHP1 != player1->GetHp())
     {
-        wins2 = render(player2->GetWins());
+        lives1 = render(player1->GetLives());
         messPc1 = render(player1->GetHp());
         lastHP1 = player1->GetHp();
     }
     if (lastHP2 != player2->GetHp())
     {
-        wins1 = render(player1->GetWins());
+        lives2 = render(player2->GetLives());
         messPc2 = render(player2->GetHp());
         lastHP2 = player2->GetHp();
     }
-    screen->Blit(wins1, winsRect1);
-    screen->Blit(wins2, winsRect2);
+    screen->Blit(lives1, winsRect1);
+    screen->Blit(lives2, winsRect2);
     screen->Blit(healthbar1, hpRect1, player1->GetHp());
     screen->Blit(healthbar1, hpRect2, player2->GetHp());
     screen->Blit(messPc1, hpRect1);
@@ -511,8 +494,8 @@ GameState::~GameState(void)
     healthbar1->DelRef();
     SDL_FreeSurface(messPc1);
     SDL_FreeSurface(messPc2);
-    SDL_FreeSurface(wins1);
-    SDL_FreeSurface(wins2);
+    SDL_FreeSurface(lives1);
+    SDL_FreeSurface(lives2);
     TTF_CloseFont(font);
     delete physicsWorld;
     delete physicsSpace;

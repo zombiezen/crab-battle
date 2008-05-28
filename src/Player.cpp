@@ -27,7 +27,7 @@ Player::Player(Surface *newSurfL, Surface *newSurfR) : Sprite(newSurfR)
     lSurf->AddRef();
     rSurf->AddRef();
     hp = 200;
-    wins = 0;
+    lives = 5;
     jumpCount = -1;
     jumpTicks = -1;
     jumpTouchedOff = false;
@@ -41,7 +41,7 @@ Player::Player(Surface *newSurfL, Surface *newSurfR, Rect rect) : Sprite(newSurf
     lSurf->AddRef();
     rSurf->AddRef();
     hp = 200;
-    wins = 0;
+    lives = 5;
     jumpCount = -1;
     jumpTicks = -1;
     jumpTouchedOff = false;
@@ -56,21 +56,33 @@ double Player::GetHp(void)
 void Player::ModHp(double dh)
 {
     hp += dh;
+    while (hp <= 0)
+    {
+        hp += 200;
+        if (lives != 0)
+            lives--;
+    }
 }
 
 void Player::SetHp(double dh)
 {
     hp = dh;
+    while (hp <= 0)
+    {
+        hp += 200;
+        if (lives != 0)
+            lives--;
+    }
 }
 
-double Player::GetWins(void)
+unsigned short Player::GetLives(void)
 {
-    return wins;
+    return lives;
 }
 
-void Player::AddWins(double dw)
+void Player::SetLives(unsigned short newCount)
 {
-    wins += dw;
+    lives = newCount;
 }
 
 void Player::CreateMotor(dWorld *world)
