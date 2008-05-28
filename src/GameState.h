@@ -54,7 +54,7 @@ namespace CrabBattle
         protected:
             void AddContact(dContactGeom, dGeomID, dGeomID);
         public:
-            GameState(void);
+            GameState(unsigned short, unsigned short);
             virtual void HandleEvent(SDL_Event);
             virtual State *Update(void);
             virtual void Display(Surface *);
