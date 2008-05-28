@@ -9,6 +9,14 @@
 /* Begin PBXBuildFile section */
 		002F39FA09D0881F00EBEB88 /* SDL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 002F39F909D0881F00EBEB88 /* SDL.framework */; };
 		002F3A0009D0884600EBEB88 /* SDL.framework in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = 002F39F909D0881F00EBEB88 /* SDL.framework */; };
+		4518FB440DDDE09700212A0D /* libode.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4518FB430DDDE09700212A0D /* libode.dylib */; };
+		4535F5680DDDE17E003496B1 /* exceptions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4535F5640DDDE17E003496B1 /* exceptions.cpp */; };
+		4535F5690DDDE17E003496B1 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4535F5660DDDE17E003496B1 /* Player.cpp */; };
+		4535F57B0DDDE1BC003496B1 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4535F5790DDDE1BC003496B1 /* icon.png */; };
+		4535F57C0DDDE1BC003496B1 /* times.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4535F57A0DDDE1BC003496B1 /* times.ttf */; };
+		457166030DECC5D3002C69E5 /* MenuState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 457166010DECC5D3002C69E5 /* MenuState.cpp */; };
+		457166090DECC607002C69E5 /* titles-menu.txt in Resources */ = {isa = PBXBuildFile; fileRef = 457166080DECC607002C69E5 /* titles-menu.txt */; };
+		4571660D0DECC61A002C69E5 /* audio in Resources */ = {isa = PBXBuildFile; fileRef = 4571660A0DECC61A002C69E5 /* audio */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		912DF83C0D9B2A1D00269FC5 /* titles.txt in Resources */ = {isa = PBXBuildFile; fileRef = 912DF83A0D9B2A1D00269FC5 /* titles.txt */; };
@@ -49,6 +57,17 @@
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		4518FB430DDDE09700212A0D /* libode.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libode.dylib; path = /usr/local/lib/libode.dylib; sourceTree = "<absolute>"; };
+		4535F5640DDDE17E003496B1 /* exceptions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = exceptions.cpp; sourceTree = "<group>"; };
+		4535F5650DDDE17E003496B1 /* exceptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = exceptions.h; sourceTree = "<group>"; };
+		4535F5660DDDE17E003496B1 /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
+		4535F5670DDDE17E003496B1 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		4535F5790DDDE1BC003496B1 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		4535F57A0DDDE1BC003496B1 /* times.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = times.ttf; sourceTree = "<group>"; };
+		457166010DECC5D3002C69E5 /* MenuState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MenuState.cpp; sourceTree = "<group>"; };
+		457166020DECC5D3002C69E5 /* MenuState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuState.h; sourceTree = "<group>"; };
+		457166080DECC607002C69E5 /* titles-menu.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "titles-menu.txt"; sourceTree = "<group>"; };
+		4571660A0DECC61A002C69E5 /* audio */ = {isa = PBXFileReference; lastKnownFileType = folder; path = audio; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = SOURCE_ROOT; };
 		8D1107320486CEB800E47090 /* Crab Battle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Crab Battle.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		912DF83A0D9B2A1D00269FC5 /* titles.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = titles.txt; sourceTree = "<group>"; };
@@ -89,6 +108,7 @@
 				91A9F15C0D70BDAF00CB6365 /* SDL_image.framework in Frameworks */,
 				91A9F17B0D70C38D00CB6365 /* SDL_mixer.framework in Frameworks */,
 				91A9F17C0D70C38D00CB6365 /* SDL_ttf.framework in Frameworks */,
+				4518FB440DDDE09700212A0D /* libode.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,6 +128,7 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4518FB430DDDE09700212A0D /* libode.dylib */,
 				002F39F909D0881F00EBEB88 /* SDL.framework */,
 				91A9F15B0D70BDAF00CB6365 /* SDL_image.framework */,
 				91A9F1790D70C38D00CB6365 /* SDL_mixer.framework */,
@@ -162,6 +183,10 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4571660A0DECC61A002C69E5 /* audio */,
+				457166080DECC607002C69E5 /* titles-menu.txt */,
+				4535F5790DDDE1BC003496B1 /* icon.png */,
+				4535F57A0DDDE1BC003496B1 /* times.ttf */,
 				91CD82190D8C7EA10048A161 /* CrabBattle.icns */,
 				918D79780D8C509F00DF7AB3 /* images */,
 				912DF83A0D9B2A1D00269FC5 /* titles.txt */,
@@ -184,6 +209,8 @@
 		91D2C7650D8C9FBE00ADC6F4 /* States */ = {
 			isa = PBXGroup;
 			children = (
+				457166010DECC5D3002C69E5 /* MenuState.cpp */,
+				457166020DECC5D3002C69E5 /* MenuState.h */,
 				91CD824B0D8C824D0048A161 /* State.h */,
 				91CD824C0D8C824D0048A161 /* State.cpp */,
 				91CD82540D8C882F0048A161 /* GameState.h */,
@@ -197,6 +224,10 @@
 		91D2C7660D8C9FD000ADC6F4 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				4535F5640DDDE17E003496B1 /* exceptions.cpp */,
+				4535F5650DDDE17E003496B1 /* exceptions.h */,
+				4535F5660DDDE17E003496B1 /* Player.cpp */,
+				4535F5670DDDE17E003496B1 /* Player.h */,
 				918D79420D8C470B00DF7AB3 /* BaseObject.h */,
 				918D79410D8C470B00DF7AB3 /* BaseObject.cpp */,
 				91A9F1940D70C7F000CB6365 /* Rect.h */,
@@ -258,6 +289,10 @@
 				91CD821A0D8C7EA10048A161 /* CrabBattle.icns in Resources */,
 				912DF83C0D9B2A1D00269FC5 /* titles.txt in Resources */,
 				912DF83D0D9B2A1D00269FC5 /* titles1.txt in Resources */,
+				4535F57B0DDDE1BC003496B1 /* icon.png in Resources */,
+				4535F57C0DDDE1BC003496B1 /* times.ttf in Resources */,
+				457166090DECC607002C69E5 /* titles-menu.txt in Resources */,
+				4571660D0DECC61A002C69E5 /* audio in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,6 +312,9 @@
 				91CD824D0D8C824D0048A161 /* State.cpp in Sources */,
 				91CD82560D8C882F0048A161 /* GameState.cpp in Sources */,
 				912DF8550D9B2AC200269FC5 /* PausedState.cpp in Sources */,
+				4535F5680DDDE17E003496B1 /* exceptions.cpp in Sources */,
+				4535F5690DDDE17E003496B1 /* Player.cpp in Sources */,
+				457166030DECC5D3002C69E5 /* MenuState.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,6 +385,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
+					/usr/local/include,
 					"$(HOME)/Library/Frameworks/SDL.framework/Headers",
 					/Library/Frameworks/SDL.framework/Headers,
 					"$(HEADER_SEARCH_PATHS)",
