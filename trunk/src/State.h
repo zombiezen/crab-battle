@@ -40,6 +40,24 @@ namespace CrabBattle
         // Destructor
         virtual ~State(void) {};
     };
+    
+    /* A special return value to go to a specific state
+     *
+     * If a jump state is returned from Update, then the given index in the
+     * stack will be used.  If a negative index is given, then the program
+     * terminates.
+     */
+    class JumpState : public State
+    {
+    private:
+        short index;
+    public:
+        JumpState(short);
+        short GetIndex(void);
+        virtual void HandleEvent(SDL_Event);
+        virtual State *Update(void);
+        virtual void Display(Surface *);
+    };
 }
 
 #endif

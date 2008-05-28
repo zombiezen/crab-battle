@@ -74,7 +74,7 @@ namespace CrabBattle
         /*** ACTIONS ***/
         // sprite.FixPhysics()
         // "Fix" the physics to 2D space
-        void FixPhysics();
+        virtual void FixPhysics();
         // sprite.Display(screen)
         // Blits a sprite onto another surface
         virtual void Display(Surface *);

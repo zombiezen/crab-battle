@@ -49,6 +49,7 @@ extern "C" int main(int argc, char *argv[])
     Surface *screenObj = NULL;
     State *newState = NULL;
     stack<State*> state_stack;
+    JumpState *jump;
 #if !defined(NO_SDL_IMAGE) && !defined(MAC_OS_X)
     Surface *icon = NULL;
 #endif
@@ -102,11 +103,40 @@ extern "C" int main(int argc, char *argv[])
             }
             else
             {
-                // Ordinarily, we would AddRef the newState, but we own the state.
-                state_stack.push(newState);
+                jump = dynamic_cast<JumpState *>(newState);
+                if (jump == NULL)
+                {
+                    // Normal state
+                    // Ordinarily, we would AddRef the newState, but we own the state.
+                    state_stack.push(newState);
+                }
+                else
+                {
+                    // Jump state
+                    // Jump to the requested state
+                    if (jump->GetIndex() < 0)
+                    {
+                        done = true;
+                    }
+                    else
+                    {
+                        while (state_stack.size() > jump->GetIndex() + 1)
+                        {
+                            state_stack.top()->DelRef();
+                            state_stack.pop();
+                        }
+                    }
+                    jump->DelRef();
+                }
             }
-            newState = state_stack.top();
+            // Check if the game is complete
+            if (state_stack.size() == 0)
+                done = true;
+            else
+                newState = state_stack.top();
         }
+        if (done)
+            break;
         // Get events
         while (SDL_PollEvent(&event))
         {
@@ -141,7 +171,10 @@ extern "C" int main(int argc, char *argv[])
         // Get ready for next timer loop
         lastTime = currentTime;
         // Draw
-        state_stack.top()->Display(screenObj);
+        if (newState == state_stack.top())
+        {
+            state_stack.top()->Display(screenObj);
+        }
     }
     
     // Clean up

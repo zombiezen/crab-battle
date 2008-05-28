@@ -69,25 +69,6 @@ void MenuState::HandleEvent(SDL_Event evt)
     }
 }
 
-SDL_Surface *MenuState::render(double dh)
-{
-    SDL_Surface *temp;
-    outs << dh;
-    sOutput = outs.str();
-    if (sOutput == "0" && dh != 0)
-        sOutput = "200";
-    outs.str("");
-    temp = TTF_RenderText_Solid( font, sOutput.c_str(), textColor );
-    return temp;
-}
-
-SDL_Surface *MenuState::render(const char * dh)
-{
-    SDL_Surface *temp;
-    temp = TTF_RenderText_Solid( font, dh, textColor );
-    return temp;
-}
-
 CrabBattle::State *MenuState::Update(void)
 {
     SDL_Event quit_event;

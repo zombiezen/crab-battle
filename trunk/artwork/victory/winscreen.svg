@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="640"
+   height="480"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="0.46"
+   version="1.0"
+   sodipodi:docname="winscreen.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape">
+  <defs
+     id="defs4">
+    <linearGradient
+       id="linearGradient2386">
+      <stop
+         style="stop-color:#800000;stop-opacity:1;"
+         offset="0"
+         id="stop2388" />
+      <stop
+         style="stop-color:#ffaa4f;stop-opacity:1;"
+         offset="1"
+         id="stop2390" />
+    </linearGradient>
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       id="perspective10" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2386"
+       id="radialGradient2392"
+       cx="323"
+       cy="242.66667"
+       fx="323"
+       fy="242.66667"
+       r="320"
+       gradientTransform="matrix(0,-1.136439,1.0423752,0,70.050288,609.0698)"
+       gradientUnits="userSpaceOnUse" />
+    <filter
+       inkscape:collect="always"
+       id="filter3295"
+       x="-0.07721507"
+       width="1.1544301"
+       y="-0.26911911"
+       height="1.5382382">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="6.0306678"
+         id="feGaussianBlur3297" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       id="filter3354"
+       x="-0.076754373"
+       width="1.1535087"
+       y="-0.27486927"
+       height="1.5497385">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="6.2653096"
+         id="feGaussianBlur3356" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     gridtolerance="10000"
+     guidetolerance="10"
+     objecttolerance="10"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1"
+     inkscape:cx="253"
+     inkscape:cy="230.20807"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer4"
+     showgrid="false"
+     inkscape:window-width="1246"
+     inkscape:window-height="725"
+     inkscape:window-x="34"
+     inkscape:window-y="49" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Background"
+     inkscape:groupmode="layer"
+     id="layer1"
+     sodipodi:insensitive="true">
+    <rect
+       style="opacity:1;fill:url(#radialGradient2392);fill-opacity:1;stroke:none;stroke-width:2.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect2383"
+       width="640"
+       height="480"
+       x="0"
+       y="5.5067062e-14" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Congrats"
+     style="display:inline">
+    <path
+       sodipodi:type="star"
+       style="opacity:1;fill:#ffff00;fill-opacity:1;stroke:none;stroke-width:2.50000000000000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;"
+       id="path2394"
+       sodipodi:sides="20"
+       sodipodi:cx="327"
+       sodipodi:cy="228"
+       sodipodi:r1="74.330345"
+       sodipodi:r2="52.997536"
+       sodipodi:arg1="-0.34302394"
+       sodipodi:arg2="-0.18594431"
+       inkscape:flatsided="false"
+       inkscape:rounded="0.02"
+       inkscape:randomized="0.011"
+       d="M 397.59664,203.54901 C 397.75832,203.98997 378.7731,218.03942 378.86239,218.50268 C 378.95168,218.96595 400.75141,224.91945 400.76388,225.38808 C 400.77634,225.85671 380.27629,234.85618 380.22382,235.32541 C 380.17134,235.79464 397.79607,249.10586 397.65803,249.55388 C 397.52,250.00189 375.78523,251.04489 375.57794,251.46909 C 375.37066,251.8933 388.20996,269.78071 387.9398,270.16521 C 387.66965,270.5497 366.51979,263.55638 366.20214,263.89978 C 365.8845,264.24318 373.59551,286.67103 373.2208,286.9582 C 372.84609,287.24538 352.8399,274.27191 352.42429,274.49508 C 352.00868,274.71825 351.64272,298.43853 351.1992,298.59507 C 350.75568,298.75161 337.09398,280.36438 336.63369,280.454 C 336.1734,280.54362 329.82967,301.62556 329.35886,301.63734 C 328.88806,301.64911 321.02241,281.04358 320.55757,280.98012 C 320.09273,280.91666 305.95904,299.13809 305.51164,298.99915 C 305.06424,298.86022 304.61321,276.50154 304.18968,276.29471 C 303.76614,276.08787 284.74704,288.87206 284.36113,288.60607 C 283.97522,288.34008 290.6389,266.70938 290.2998,266.38493 C 289.9607,266.06049 268.18938,274.12846 267.89809,273.76067 C 267.6068,273.39289 280.40751,254.30635 280.17584,253.89801 C 279.94416,253.48967 257.65996,253.08093 257.50031,252.64027 C 257.34066,252.1996 274.69044,238.14943 274.59929,237.68659 C 274.50814,237.22376 252.69153,230.64579 252.67088,230.17618 C 252.65023,229.70657 274.81106,221.33113 274.87314,220.86387 C 274.93522,220.39661 256.01017,208.13685 256.13582,207.683 C 256.26147,207.22914 279.3132,205.14426 279.51901,204.72019 C 279.72481,204.29611 265.25429,186.40856 265.52188,186.02407 C 265.78947,185.63959 288.5728,192.63264 288.89481,192.2895 C 289.21682,191.94636 281.50765,169.52509 281.87615,169.23108 C 282.24466,168.93707 300.59279,181.28964 301.01046,181.06918 C 301.42813,180.84871 301.82442,157.75896 302.26249,157.59421 C 302.70055,157.42946 316.36725,175.82512 316.82799,175.73528 C 317.28874,175.64545 323.63591,152.93803 324.10282,152.91667 C 324.56973,152.89532 334.07492,175.1426 334.53938,175.20916 C 335.00383,175.27572 347.49993,157.05528 347.95005,157.19013 C 348.40016,157.32497 348.82456,180.70054 349.24508,180.90482 C 349.6656,181.1091 368.68103,166.6995 369.07362,166.95819 C 369.46621,167.21688 362.8256,189.47738 363.16188,189.80435 C 363.49817,190.13131 385.24968,181.43177 385.53666,181.80359 C 385.82364,182.17541 373.06225,201.87914 373.28585,202.29127 C 373.50945,202.70339 397.43496,203.10806 397.59664,203.54901 z"
+       transform="matrix(3.7467477,0,0,1.9050475,-904.12757,-192.97348)" />
+    <text
+       xml:space="preserve"
+       style="font-size:48px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Impact;-inkscape-font-specification:Impact Condensed"
+       x="319.57812"
+       y="229.08984"
+       id="text2396"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="319.57812"
+         y="229.08984"
+         id="tspan2400">Congratulations!</tspan><tspan
+         sodipodi:role="line"
+         x="319.57812"
+         y="289.08984"
+         id="tspan2404">You won!</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="Player1"
+     style="display:inline">
+    <text
+       id="text2413"
+       y="75.555717"
+       x="227.77449"
+       style="font-size:61.02177811px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter3295);font-family:Impact"
+       xml:space="preserve"><tspan
+         y="75.555717"
+         x="227.77449"
+         id="tspan2415"
+         sodipodi:role="line">Player 1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:61.02177811px;font-style:normal;font-weight:normal;fill:#008000;fill-opacity:1;stroke:#ffffff;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;font-family:Impact"
+       x="223.77449"
+       y="71.555717"
+       id="text2406"><tspan
+         sodipodi:role="line"
+         id="tspan2408"
+         x="223.77449"
+         y="71.555717">Player 1</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer4"
+     inkscape:label="Player2"
+     style="display:none">
+    <text
+       sodipodi:linespacing="125%"
+       id="text3338"
+       y="74.555984"
+       x="223.5435"
+       style="font-size:61.02177811px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter3354);font-family:Impact;-inkscape-font-specification:Impact Condensed"
+       xml:space="preserve"><tspan
+         y="74.555984"
+         x="223.5435"
+         id="tspan3340"
+         sodipodi:role="line">Player 2</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:61.02177811px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#008000;fill-opacity:1;stroke:#ffffff;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;font-family:Impact;-inkscape-font-specification:Impact Condensed"
+       x="219.5435"
+       y="70.555984"
+       id="text3332"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3336"
+         x="219.5435"
+         y="70.555984">Player 2</tspan></text>
+  </g>
+</svg>

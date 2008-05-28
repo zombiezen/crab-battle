@@ -30,13 +30,9 @@ namespace CrabBattle
             SDL_Surface *messPc1, *messPc2;
             Rect startRect, quitRect , choiceRect;
             Surface *background, *choice;
-            string sOutput;
-            ostringstream outs;
             unsigned short action;
         public:
             MenuState(void);
-            SDL_Surface* render(double dh);
-            SDL_Surface* render(const char * dh);
             virtual void HandleEvent(SDL_Event);
             virtual State *Update(void);
             virtual void Display(Surface *);

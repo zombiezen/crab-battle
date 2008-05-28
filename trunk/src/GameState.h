@@ -44,17 +44,17 @@ namespace CrabBattle
             string sOutput;
             bool shouldPause, shouldQuit;
             unsigned int countdownTimer;
-            double lastHP1, lastHP2;
+            int lastHP1, lastHP2;
             Surface *countdownSurface;
             
             friend void _game_state_collide(void *, dGeomID, dGeomID);
             
             void LoadStage(void);
+            SDL_Surface* render(int dh);
         protected:
             void AddContact(dContactGeom, dGeomID, dGeomID);
         public:
             GameState(void);
-            SDL_Surface* render(double dh);
             virtual void HandleEvent(SDL_Event);
             virtual State *Update(void);
             virtual void Display(Surface *);

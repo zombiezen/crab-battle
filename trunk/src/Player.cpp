@@ -15,9 +15,11 @@ using CrabBattle::Player;
 const short kPlayerMaxJumpCount = 2;
 const short kPlayerJumpTicks = 4;
 const short kPunchDamage = 5;
+const unsigned short kInitialLives = 3;
 
 const dReal kPhysicsMaxPlayerForce = 500.0;
 const dReal kPhysicsPlayerVelocity = 10.0;
+const dReal kPhysicsPlayerMidairVelocity = 5.0;
 const dReal kPhysicsPlayerJumpVelocity = 10.0;
 
 Player::Player(Surface *newSurfL, Surface *newSurfR) : Sprite(newSurfR)
@@ -27,7 +29,7 @@ Player::Player(Surface *newSurfL, Surface *newSurfR) : Sprite(newSurfR)
     lSurf->AddRef();
     rSurf->AddRef();
     hp = 200;
-    lives = 5;
+    lives = kInitialLives;
     jumpCount = -1;
     jumpTicks = -1;
     jumpTouchedOff = false;
@@ -41,19 +43,19 @@ Player::Player(Surface *newSurfL, Surface *newSurfR, Rect rect) : Sprite(newSurf
     lSurf->AddRef();
     rSurf->AddRef();
     hp = 200;
-    lives = 5;
+    lives = kInitialLives;
     jumpCount = -1;
     jumpTicks = -1;
     jumpTouchedOff = false;
     direction = 1;
 }
 
-double Player::GetHp(void)
+int Player::GetHp(void)
 {
     return hp;
 }
 
-void Player::ModHp(double dh)
+void Player::ModHp(int dh)
 {
     hp += dh;
     while (hp <= 0)
@@ -64,7 +66,7 @@ void Player::ModHp(double dh)
     }
 }
 
-void Player::SetHp(double dh)
+void Player::SetHp(int dh)
 {
     hp = dh;
     while (hp <= 0)
@@ -127,14 +129,33 @@ void Player::Update(void)
     // Check collisions
     if (colliders.size() == 0)
     {
-        // We're in mid-air, disable X movement
-        motor->setParam(dParamFMax, 0.0);
+        // We're in mid-air, hinder X movement
+        if (motor->getParam(dParamVel) > 0.0)
+        {
+            motor->setParam(dParamFMax, kPhysicsMaxPlayerForce);
+            motor->setParam(dParamVel, kPhysicsPlayerMidairVelocity);
+        }
+        else if (motor->getParam(dParamVel) < 0.0)
+        {
+            motor->setParam(dParamFMax, kPhysicsMaxPlayerForce);
+            motor->setParam(dParamVel, -kPhysicsPlayerMidairVelocity);
+        }
+        else
+        {
+            // No movement, allow free fall!
+            motor->setParam(dParamFMax, 0.0);
+        }
         jumpTouchedOff = true;
     }
     else
     {
         // We're colliding with something, allow X movement
         motor->setParam(dParamFMax, kPhysicsMaxPlayerForce);
+        // Un-hinder X movement
+        if (motor->getParam(dParamVel) > 0.0)
+            motor->setParam(dParamVel, kPhysicsPlayerVelocity);
+        else if (motor->getParam(dParamVel) < 0.0)
+            motor->setParam(dParamVel, -kPhysicsPlayerVelocity);
         // Check if we're colliding with environment, if so, allow jumping
         for (i = colliders.begin(); i < colliders.end(); i++)
         {
