@@ -7,97 +7,130 @@
  */
 
 #include "PlayerSelect.h"
+#include "GameState.h"
 #include "constants.h"
-#include "exceptions.h"
+#include "util.h"
 #include <fstream>
 #include <iostream>
+#include <string>
 
 using CrabBattle::PlayerSelect;
 using namespace std;
 
+const int kPlayerTopMargin = 32;
+const int kPlayerSideMargin = 64;
+const int kPlayerMargin = 32;
+
 PlayerSelect::PlayerSelect()
 {
-    using CrabBattle::FileNotFoundError;
-#ifdef NO_SDL_IMAGE
-    SDL_Surface *bg, *chuckNorris, *mudkips, *zim;
-#endif
-    int count = 0;
-    char value1[MAXPATHLEN];
-    char value2[MAXPATHLEN];
-    char value3[MAXPATHLEN];
-    char value4[MAXPATHLEN];
-    char value5[MAXPATHLEN];
+    vector<string> playerConfig;
+    vector<string>::const_iterator i;
     
-    // Read file
-    ifstream getTitles;
-    getTitles.open("PlayerSelection.txt");
-    
-    if (!getTitles.is_open())  // if failed to open file
+    // Read player file
+    playerConfig = LoadConfigFile("players.txt");
+    // Load images (left side only)
+    for (i = playerConfig.begin() + 1; i < playerConfig.end(); i += 2)
     {
-        throw FileNotFoundError("PlayerSelection.txt");
+        players.push_back(new Surface(*i));
     }
-    
-    //hard coded for base implementation
-    getTitles >> value1;
-    count++;
-    getTitles >> value2;
-    count++;
-    getTitles >> value3;
-    count++;
-    getTitles >> value4;
-    count++;
-    getTitles >> value5;
-    
-    cout << value1 << endl<< value2 <<endl<< value3<<endl;
-    if (getTitles.eof())
-    cout << "End of file reached.\n";
-    else if (getTitles.fail())
-    cout << "Input terminated by data mismatch.\n";
-    else
-    cout << "Input terminated for unknown reason.\n";
-    if (count == 0)
-    cout << "No data processed.\n";
-    else
-    {
-        cout << "# items read: " << count << endl;
-    }
-    getTitles.close();
-    
-    // Load images
-#ifndef NO_SDL_IMAGE
-    background = new Surface(value1);
-    chuckNorris = new Surface(value2);
-    mudkips = new Surface(value3);
-    zim = new Surface(value4);
-#else
-    bg = SDL_LoadBMP(value1);
-    // Put into objects
-    background = new Surface(bg);
-    // Decrement surface reference counts (Surface class automatically increments)
-    SDL_FreeSurface(bg);
-#endif
     // Tell ourselves to be patient
-    done = false;
-    }
+    p1Choice = p2Choice = 0;
+    p1Done = p2Done = false;
+    goBack = false;
+}
     
 void PlayerSelect::HandleEvent(SDL_Event evt)
 {
-    
+    if (evt.type == SDL_KEYDOWN)
+    {
+        switch (evt.key.keysym.sym)
+        {
+            case SDLK_SPACE:
+                p1Done = !p1Done;
+                break;
+            case SDLK_RETURN:
+                p2Done = !p2Done;
+                break;
+            case SDLK_w:
+                if (p1Choice > 0 && !p1Done)
+                    p1Choice--;
+                break;
+            case SDLK_s:
+                if (p1Choice < players.size() - 1 && !p1Done)
+                    p1Choice++;
+                break;
+            case SDLK_UP:
+                if (p2Choice > 0 && !p2Done)
+                    p2Choice--;
+                break;
+            case SDLK_DOWN:
+                if (p2Choice < players.size() - 1 && !p2Done)
+                    p2Choice++;
+                break;
+            case SDLK_ESCAPE:
+                goBack = true;
+                break;
+            default:
+                break;
+        }
+    }
 }
 CrabBattle::State *PlayerSelect::Update(void)
 {
-    if (done)
+    if (goBack)
+    {
         return NULL;
+    }
+    else if (p1Done && p2Done)
+    {
+        return new GameState(p1Choice, p2Choice);
+    }
     else
         return this;
 }
+
 void PlayerSelect::Display(Surface *screen)
 {
+    vector<Surface *>::const_iterator i;
+    Rect pos;
+    int currY = kPlayerTopMargin;
+    
     screen->Fill(screen->GetRect(), 0, 0, 0); // Clears screen
-    screen->Blit(background, background->GetRect()); // Blits the background
+//    screen->Blit(background, background->GetRect()); // Blits the background
+    for (i = players.begin(); i < players.end(); i++)
+    {
+        // Blit Side 1
+        pos = Rect(kPlayerSideMargin, currY, (*i)->GetWidth(), (*i)->GetHeight());
+        if ((i - players.begin()) == p1Choice)
+        {
+            if (p1Done)
+                screen->Fill(pos, 255, 0, 0);
+            else
+                screen->Fill(pos, 255, 255, 255);
+        }
+        screen->Blit((*i), pos);
+        // Blit Side 2
+        pos = Rect(kScreenWidth - kPlayerSideMargin - (*i)->GetWidth(), currY,
+                   (*i)->GetWidth(), (*i)->GetHeight());
+        if ((i - players.begin()) == p2Choice)
+        {
+            if (p2Done)
+                screen->Fill(pos, 255, 0, 0);
+            else
+                screen->Fill(pos, 255, 255, 255);
+        }
+        screen->Blit((*i), pos);
+        // Advance to next position
+        currY += pos.GetHeight() + kPlayerMargin;
+    }
     screen->Flip(); // Flips second buffer
 }
+
 PlayerSelect::~PlayerSelect(void)
 {
-    background->DelRef();
+    vector<Surface *>::const_iterator i;
+    
+    for (i = players.begin(); i < players.end(); i++)
+        (*i)->DelRef();
+//    background->DelRef();
 }

@@ -70,7 +70,7 @@ namespace CrabBattle
 
 using CrabBattle::_game_state_collide;
 
-GameState::GameState(void)
+GameState::GameState(unsigned short p1Sprite, unsigned short p2Sprite)
 {
     using CrabBattle::FileNotFoundError;
     int count =0;
@@ -110,10 +110,10 @@ GameState::GameState(void)
     healthbar1 = new Surface(paths[1]);
     // Load player images
     paths = LoadConfigFile("players.txt");
-    surf_p1L = new Surface(paths[0]);
-    surf_p1R = new Surface(paths[1]);
-    surf_p2L = new Surface(paths[4]);
-    surf_p2R = new Surface(paths[5]);
+    surf_p1L = new Surface(paths[p1Sprite * 2]);
+    surf_p1R = new Surface(paths[p1Sprite * 2 + 1]);
+    surf_p2L = new Surface(paths[p2Sprite * 2]);
+    surf_p2R = new Surface(paths[p2Sprite * 2 + 1]);
     // Create players
     player1 = new Player(surf_p1L, surf_p1R, CrabBattle::Rect(160, 350, 64, 64));
     player2 = new Player(surf_p2L, surf_p2R, CrabBattle::Rect(400, 350, 64, 64));
@@ -296,17 +296,6 @@ SDL_Surface *GameState::render(int dh)
 CrabBattle::State *GameState::Update(void)
 {
     vector<Sprite *>::const_iterator i;
-    // Check for quitting and pausing
-    if (shouldPause)
-    {
-        shouldPause = false;
-        return (new PausedState());
-    }
-    else if (shouldQuit)
-    {
-        shouldQuit = false;
-        return NULL;
-    }
     // Update physics if we're after countdown
     if (countdownTimer >= kCountdownDuration * 3)
     {
@@ -344,7 +333,21 @@ CrabBattle::State *GameState::Update(void)
         shouldQuit = true;
         return new VictoryScreen(1);
     }
-    return this;
+    // Check for quitting and pausing
+    if (shouldPause)
+    {
+        shouldPause = false;
+        return (new PausedState());
+    }
+    else if (shouldQuit)
+    {
+        shouldQuit = false;
+        return (new JumpState(0));
+    }
+    else
+    {
+        return this;
+    }
 }
 
 void GameState::AddContact(dContactGeom contactInfo, dGeomID geom1, dGeomID geom2)

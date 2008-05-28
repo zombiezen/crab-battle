@@ -7,7 +7,7 @@
  */
 
 #include "MenuState.h"
-#include "GameState.h"
+#include "PlayerSelect.h"
 #include "constants.h"
 #include "exceptions.h"
 #include "util.h"
@@ -79,7 +79,7 @@ CrabBattle::State *MenuState::Update(void)
             return this;
         case 1:
             action = 0;
-            return (new GameState());
+            return (new PlayerSelect());
         case 2:
             action = 0;
             quit_event.type = SDL_QUIT;
