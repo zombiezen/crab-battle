@@ -44,7 +44,7 @@ namespace CrabBattle
             string sOutput;
             bool shouldPause, shouldQuit;
             unsigned int countdownTimer;
-            int lastHP1, lastHP2;
+            double lastHP1, lastHP2;
             Surface *countdownSurface;
             
             friend void _game_state_collide(void *, dGeomID, dGeomID);
