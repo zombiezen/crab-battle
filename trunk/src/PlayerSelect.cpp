@@ -17,7 +17,7 @@
 using CrabBattle::PlayerSelect;
 using namespace std;
 
-const int kPlayerTopMargin = 32;
+const int kPlayerTopMargin = 99;
 const int kPlayerSideMargin = 64;
 const int kPlayerMargin = 32;
 
@@ -26,6 +26,7 @@ PlayerSelect::PlayerSelect()
     vector<string> playerConfig;
     vector<string>::const_iterator i;
     
+    background = new Surface("images/playerselect.png");
     // Read player file
     playerConfig = LoadConfigFile("players.txt");
     // Load images (left side only)
@@ -95,8 +96,8 @@ void PlayerSelect::Display(Surface *screen)
     Rect pos;
     int currY = kPlayerTopMargin;
     
-    screen->Fill(screen->GetRect(), 0, 0, 0); // Clears screen
-//    screen->Blit(background, background->GetRect()); // Blits the background
+    screen->Fill(screen->GetRect(), 0, 0, 0); // Clear screen
+    screen->Blit(background, screen->GetRect()); // Display background
     for (i = players.begin(); i < players.end(); i++)
     {
         // Blit Side 1
@@ -132,5 +133,5 @@ PlayerSelect::~PlayerSelect(void)
     
     for (i = players.begin(); i < players.end(); i++)
         (*i)->DelRef();
-//    background->DelRef();
+    background->DelRef();
 }
