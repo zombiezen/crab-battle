@@ -3,8 +3,7 @@
  *  Crab Battle
  *
  *  Created by TJ Ferrell on 5/27/08.
- *  Copyright 2008 AOC. All rights reserved.
- *
+ *  $Id$
  */
 
 #include "PlayerSelect.h"
