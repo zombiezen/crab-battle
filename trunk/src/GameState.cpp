@@ -160,7 +160,7 @@ GameState::GameState(void)
     background = new Surface(value1);
     surf_p1 = new Surface(value2);
     surf_p2 = new Surface(value3);
-    healthbar1 = new Surface(value4);
+    healthbar1 = new Surface(value5);
 #else
     bg = SDL_LoadBMP(value1);
     p1 = SDL_LoadBMP(value2);
