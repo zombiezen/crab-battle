@@ -16,7 +16,10 @@
    inkscape:version="0.46"
    version="1.0"
    sodipodi:docname="winscreen.svg"
-   inkscape:output_extension="org.inkscape.output.svg.inkscape">
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   inkscape:export-filename="/home/ross/src/C/crab-battle/Resources/images/victory_p2.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
   <defs
      id="defs4">
     <linearGradient
@@ -84,10 +87,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="253"
+     inkscape:cx="410.86986"
      inkscape:cy="230.20807"
      inkscape:document-units="px"
-     inkscape:current-layer="layer4"
+     inkscape:current-layer="layer5"
      showgrid="false"
      inkscape:window-width="1246"
      inkscape:window-height="725"
@@ -156,9 +159,25 @@
   </g>
   <g
      inkscape:groupmode="layer"
+     id="layer5"
+     inkscape:label="EscapeKey"
+     style="display:inline">
+    <text
+       xml:space="preserve"
+       style="font-size:48px;font-style:normal;font-weight:normal;fill:#0088aa;fill-opacity:1;stroke:#ffffff;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Impact"
+       x="72.558594"
+       y="450"
+       id="text2484"><tspan
+         sodipodi:role="line"
+         id="tspan2486"
+         x="72.558594"
+         y="450">Press Escape to Continue</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
      id="layer3"
      inkscape:label="Player1"
-     style="display:inline">
+     style="display:none">
     <text
        id="text2413"
        y="75.555717"
@@ -184,7 +203,7 @@
      inkscape:groupmode="layer"
      id="layer4"
      inkscape:label="Player2"
-     style="display:none">
+     style="display:inline">
     <text
        sodipodi:linespacing="125%"
        id="text3338"
