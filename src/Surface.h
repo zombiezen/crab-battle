@@ -7,6 +7,7 @@
  */
 
 #include "SDL.h"
+#include <string>
 
 #include "BaseObject.h"
 #include "Rect.h"
@@ -35,6 +36,8 @@ namespace CrabBattle
         #ifndef NO_SDL_IMAGE
         // Surface(filename)
         Surface(const char *);
+        // Surface(filename)
+        Surface(std::string);
         #endif
         // Surface(flags, width, height, bitsPerPixel)
         // Creates a surface with roughly the same arguments as SDL_CreateRGBSurface

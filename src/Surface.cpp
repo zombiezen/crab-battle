@@ -35,10 +35,16 @@ Surface::Surface(unsigned int w, unsigned int h)
 #ifndef NO_SDL_IMAGE
 Surface::Surface(const char *fname)
 {
-    using CrabBattle::FileNotFoundError;
     surface = IMG_Load(fname);
     if (surface == NULL)
         throw FileNotFoundError(fname);
+}
+
+Surface::Surface(std::string fname)
+{
+    surface = IMG_Load(fname.c_str());
+    if (surface == NULL)
+        throw FileNotFoundError(fname.c_str());
 }
 #endif
 
