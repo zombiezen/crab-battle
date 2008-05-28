@@ -47,7 +47,10 @@ namespace CrabBattle
             bool shouldPause, shouldQuit;
             unsigned int countdownTimer;
             Surface *countdownSurface;
+            
             friend void _game_state_collide(void *, dGeomID, dGeomID);
+            
+            void LoadStage(void);
         protected:
             void AddContact(dContactGeom, dGeomID, dGeomID);
         public:

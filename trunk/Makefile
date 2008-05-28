@@ -20,7 +20,8 @@ objects = $(builddir)/BaseObject.o \
 		  $(builddir)/State.o \
 		  $(builddir)/Surface.o \
 		  $(builddir)/Player.o \
-		  $(builddir)/exceptions.o
+		  $(builddir)/exceptions.o \
+		  $(builddir)/util.o
 
 $(builddir)/crab-battle : $(builddir) $(objects) build_resources
 	$(CXX) -o $(builddir)/crab-battle $(LDFLAGS) $(objects)
@@ -28,15 +29,15 @@ $(builddir)/crab-battle : $(builddir) $(objects) build_resources
 $(builddir) :
 	mkdir $(builddir)
 
-build_resources : $(builddir)/images $(builddir)/audio $(builddir)/titles.txt $(builddir)/titles1.txt $(builddir)/icon.png $(builddir)/times.ttf $(builddir)/titles-menu.txt
+build_resources : $(builddir)/images $(builddir)/audio $(builddir)/titles.txt $(builddir)/titles1.txt $(builddir)/icon.png $(builddir)/times.ttf $(builddir)/titles-menu.txt $(builddir)/platforms.txt
 
 $(builddir)/%.o : $(srcdir)/%.cpp
 	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c $< -o $@
 
 $(builddir)/BaseObject.o : $(srcdir)/BaseObject.h
-$(builddir)/GameState.o : $(srcdir)/GameState.h $(srcdir)/Rect.h $(srcdir)/State.h $(srcdir)/constants.h $(srcdir)/exceptions.h $(srcdir)/Player.h $(srcdir)/PausedState.h
+$(builddir)/GameState.o : $(srcdir)/GameState.h $(srcdir)/Rect.h $(srcdir)/State.h $(srcdir)/constants.h $(srcdir)/exceptions.h $(srcdir)/Player.h $(srcdir)/PausedState.h $(srcdir)/util.h
 $(builddir)/main.o : $(srcdir)/State.h $(srcdir)/Surface.h $(srcdir)/constants.h $(srcdir)/MenuState.h
-$(builddir)/MenuState.o : $(srcdir)/MenuState.h $(srcdir)/Rect.h $(srcdir)/Player.h $(srcdir)/State.h $(srcdir)/GameState.h $(srcdir)/constants.h $(srcdir)/exceptions.h
+$(builddir)/MenuState.o : $(srcdir)/MenuState.h $(srcdir)/Rect.h $(srcdir)/Player.h $(srcdir)/State.h $(srcdir)/GameState.h $(srcdir)/constants.h $(srcdir)/exceptions.h $(srcdir)/util.h
 $(builddir)/PausedState.o : $(srcdir)/PausedState.h $(srcdir)/State.h $(srcdir)/constants.h $(srcdir)/exceptions.h $(srcdir)/Surface.h
 $(builddir)/Player.o : $(srcdir)/Sprite.h
 $(builddir)/Rect.o : $(srcdir)/Rect.h $(srcdir)/BaseObject.h
@@ -44,6 +45,7 @@ $(builddir)/Sprite.o : $(srcdir)/BaseObject.h $(srcdir)/Sprite.h $(srcdir)/Rect.
 $(builddir)/State.o : $(srcdir)/State.h $(srcdir)/BaseObject.h $(srcdir)/Surface.h
 $(builddir)/Surface.o : $(srcdir)/Surface.h $(srcdir)/BaseObject.h $(srcdir)/Rect.h $(srcdir)/exceptions.h
 $(builddir)/exceptions.o : $(srcdir)/exceptions.h
+$(builddir)/util.o : $(srcdir)/util.h $(srcdir)/exceptions.h
 
 $(builddir)/images : $(resdir)/images
 	$(CP) -r $(resdir)/images $(builddir)/images
@@ -55,6 +57,8 @@ $(builddir)/titles1.txt : $(resdir)/titles1.txt
 	$(CP) $(resdir)/titles1.txt $(builddir)/titles1.txt
 $(builddir)/titles-menu.txt : $(resdir)/titles-menu.txt
 	$(CP) $(resdir)/titles-menu.txt $(builddir)/titles-menu.txt
+$(builddir)/platforms.txt : $(resdir)/platforms.txt
+	$(CP) $(resdir)/platforms.txt $(builddir)/platforms.txt
 $(builddir)/icon.png : $(resdir)/icon.png
 	$(CP) $(resdir)/icon.png $(builddir)/icon.png
 $(builddir)/times.ttf : $(resdir)/times.ttf

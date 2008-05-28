@@ -12,6 +12,7 @@
 
 using CrabBattle::BaseObject;
 using CrabBattle::Sprite;
+using CrabBattle::InvisibleSprite;
 using CrabBattle::Rect;
 using CrabBattle::Surface;
 
@@ -132,6 +133,15 @@ static void rotate (SDL_Surface *src, SDL_Surface *dst, Uint32 bgcolor, double s
     }
 }
 
+Sprite::Sprite(void)
+{
+    x = y = rot = 0.0;
+    surface = NULL;
+    body = NULL;
+    geometry = NULL;
+    env = false;
+}
+
 Sprite::Sprite(Surface *surf)
 {
     x = y = rot = 0.0;
@@ -232,14 +242,17 @@ dBody *Sprite::GetBody(void)
 
 void Sprite::SetBody(dBody *newBody)
 {
+    double w, h;
     if (body != NULL)
         delete body;
     body = newBody;
     if (body != NULL)
     {
         body->setData((void *)this);
-        body->setPosition((x + ((double)surface->GetWidth() / 2.0)) / kPhysicsScreenScale,
-                          (y + ((double)surface->GetHeight() / 2.0)) / kPhysicsScreenScale,
+        w = GetPosition().GetWidth();
+        h = GetPosition().GetHeight();
+        body->setPosition((x + (w / 2.0)) / kPhysicsScreenScale,
+                          (y + (h / 2.0)) / kPhysicsScreenScale,
                           0.0);
     }
 }
@@ -251,18 +264,20 @@ dGeom *Sprite::GetGeometry(void)
 
 void Sprite::SetGeometry(dGeom *newGeom)
 {
+    double w, h;
     if (geometry != NULL)
         delete geometry;
     geometry = newGeom;
     if (geometry != NULL)
     {
         geometry->setData((void *)this);
+        w = GetPosition().GetWidth();
+        h = GetPosition().GetHeight();
         if (!geometry->getBody())
         {
-            geometry->setPosition(
-                (x + ((double)surface->GetWidth() / 2.0)) / kPhysicsScreenScale,
-                (y + ((double)surface->GetHeight() / 2.0)) / kPhysicsScreenScale,
-                0.0);
+            geometry->setPosition((x + (w / 2.0)) / kPhysicsScreenScale,
+                                  (y + (h / 2.0)) / kPhysicsScreenScale,
+                                  0.0);
         }
     }
 }
@@ -383,4 +398,41 @@ Sprite::~Sprite(void)
     SetSurface(NULL);
     SetBody(NULL);
     SetGeometry(NULL);
+}
+
+InvisibleSprite::InvisibleSprite(Rect pos)
+{
+    SetPosition(pos);
+}
+
+Rect InvisibleSprite::GetPosition(void)
+{
+    Rect posRect = Rect(width, height);
+    const dReal *pos;
+    if (GetBody() != NULL)
+    {
+        pos = GetBody()->getPosition();
+        posRect.SetX(pos[0] * kPhysicsScreenScale - posRect.GetWidth() / 2);
+        posRect.SetY(pos[1] * kPhysicsScreenScale - posRect.GetHeight() / 2);
+    }
+    else if (GetGeometry() != NULL)
+    {
+        pos = GetGeometry()->getPosition();
+        posRect.SetX(pos[0] * kPhysicsScreenScale - posRect.GetWidth() / 2);
+        posRect.SetY(pos[1] * kPhysicsScreenScale - posRect.GetHeight() / 2);
+    }
+    else
+    {
+        posRect.SetX(x);
+        posRect.SetY(y);
+    }
+    return posRect;
+}
+
+void InvisibleSprite::SetPosition(Rect newRect)
+{
+    x = newRect.GetX();
+    y = newRect.GetY();
+    width = newRect.GetWidth();
+    height = newRect.GetHeight();
 }

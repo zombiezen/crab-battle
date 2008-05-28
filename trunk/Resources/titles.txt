@@ -1,6 +1,5 @@
-images/gamebackground.bmp
-images/ChuckNorris.bmp
-images/Mudkips.bmp
-images/Zim.bmp
+images/gamebackground.png
+images/ChuckNorris.png
+images/Mudkips.png
+images/Zim.png
 images/healthbar1.jpg
-

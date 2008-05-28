@@ -10,6 +10,7 @@
 #include "GameState.h"
 #include "constants.h"
 #include "exceptions.h"
+#include "util.h"
 #include <fstream>
 #include <iostream>
 
@@ -21,11 +22,7 @@ MenuState::MenuState(void)
 {
     using CrabBattle::FileNotFoundError;
     int count =0;
-    char value1[MAXPATHLEN];
-    char value2[MAXPATHLEN];
-    char value3[MAXPATHLEN];
-    char value4[MAXPATHLEN];
-    char value5[MAXPATHLEN];
+    vector<string> paths; 
     ifstream getTitles;
     
     font = TTF_OpenFont("times.ttf", 24);
@@ -35,44 +32,13 @@ MenuState::MenuState(void)
     messPc2 = TTF_RenderText_Solid( font, "Quit", textColor );
     startRect = Rect(300, 300, 200, 30);
     quitRect = Rect(300, 330, 200, 30);
-    choiceRect = Rect(250, 300, 200, 30); 
-   
-   getTitles.open("titles-menu.txt");
-
-    if (!getTitles.is_open())  // if failed to open file
-        throw FileNotFoundError("titles-menu.txt");
-   
-   //hard coded for base implementation
-   getTitles >> value1;
-   count++;
-   getTitles >> value2;
-   count++;
-   getTitles >> value3;
-   count++;
-   getTitles >> value4;
-   count++;
-   getTitles >> value5;
-       
-   cout << value1 << endl<< value2 <<endl<< value3<<endl<<value4<<endl;
-   if (getTitles.eof())
-       cout << "End of file reached.\n";
-   else if (getTitles.fail())
-       cout << "Input terminated by data mismatch.\n";
-   else
-       cout << "Input terminated for unknown reason.\n";
-   if (count == 0)
-       cout << "No data processed.\n";
-   else
-   {
-       cout << "# items read: " << count << endl;
-   }
-   getTitles.close();
-
-   // Load images
-   background = new Surface(value1);
-   choice = new Surface(value2);
-   // Don't advance yet
-   action = 0;
+    choiceRect = Rect(250, 300, 200, 30);
+    paths = LoadConfigFile("titles-menu.txt");
+    // Load images
+    background = new Surface(paths[0]);
+    choice = new Surface(paths[1]);
+    // Don't advance yet
+    action = 0;
 }
 
 void MenuState::HandleEvent(SDL_Event evt)

@@ -10,12 +10,12 @@
 #include "PausedState.h"
 #include "constants.h"
 #include "exceptions.h"
+#include "util.h"
 #include <fstream>
 #include <iostream>
-
-// TODO: Remove
-#include <cstdio>
-using std::printf;
+#include <sstream>
+#include <vector>
+#include <string>
 
 const unsigned int kCountdownDuration = 30;
 const unsigned int kCountdownPosX = 256;
@@ -75,12 +75,7 @@ GameState::GameState(void)
 {
     using CrabBattle::FileNotFoundError;
     int count =0;
-    char value1[MAXPATHLEN];
-    char value2[MAXPATHLEN];
-    char value3[MAXPATHLEN];
-    char value4[MAXPATHLEN];
-    char value5[MAXPATHLEN];
-    ifstream getTitles;
+    vector<string> paths;
     CrabBattle::Surface *surf_p1, *surf_p2;
     CrabBattle::Sprite *sprite;
     dBody *newBody;
@@ -109,46 +104,7 @@ GameState::GameState(void)
     wins1 = TTF_RenderText_Solid( font, "0", textColor );
     wins2 = TTF_RenderText_Solid( font, "0", textColor );
     
-    getTitles.open("titles.txt");
-
-    if (!getTitles.is_open())  // if failed to open file
-    {
-        throw FileNotFoundError("titles.txt");
-    }
-    
-    //hard coded for base implementation
-    getTitles >> value1;
-    count++;
-    getTitles >> value2;
-    count++;
-    getTitles >> value3;
-    count++;
-    getTitles >> value4;
-    count++;
-    getTitles >> value5;
-        
-    cout << value1 << endl<< value2 <<endl<< value3<<endl<<value4<<endl;
-    /*
-    while (getTitles.good())   // while input good and not at EOF
-    {
-        count++;
-        cout << value <<endl;
-        getTitles >> value;    // get next value
-    }
-    */
-    if (getTitles.eof())
-        cout << "End of file reached.\n";
-    else if (getTitles.fail())
-        cout << "Input terminated by data mismatch.\n";
-    else
-        cout << "Input terminated for unknown reason.\n";
-    if (count == 0)
-        cout << "No data processed.\n";
-    else
-    {
-        cout << "# items read: " << count << endl;
-    }
-    getTitles.close();
+    paths = LoadConfigFile("titles.txt");
 
     // Set up player rectangles
     hpRect1 = Rect(60, 30, 200, 30);
@@ -157,22 +113,22 @@ GameState::GameState(void)
     winsRect2 = Rect(315 , 30 , 200 , 30);
     // Load images
 #ifndef NO_SDL_IMAGE
-    background = new Surface(value1);
-    surf_p1 = new Surface(value2);
-    surf_p2 = new Surface(value3);
-    healthbar1 = new Surface(value5);
+    background = new Surface(paths[0]);
+    surf_p1 = new Surface(paths[1]);
+    surf_p2 = new Surface(paths[3]);
+    healthbar1 = new Surface(paths[4]);
 #else
-    bg = SDL_LoadBMP(value1);
-    p1 = SDL_LoadBMP(value2);
-    p2 = SDL_LoadBMP(value3);
+    bg = SDL_LoadBMP(paths[0].c_str());
+    p1 = SDL_LoadBMP(paths[1].c_str());
+    p2 = SDL_LoadBMP(paths[2].c_str());
     // Put into objects
     background = new Surface(bg);
     surf_p1 = new Surface(p1);
     surf_p2 = new Surface(p2);
 #endif
     // Create players
-    player1 = new Player(surf_p1, CrabBattle::Rect(160, 300, 64, 64));
-    player2 = new Player(surf_p2, CrabBattle::Rect(400, 300, 64, 64));
+    player1 = new Player(surf_p1, CrabBattle::Rect(160, 350, 64, 64));
+    player2 = new Player(surf_p2, CrabBattle::Rect(400, 350, 64, 64));
     // Clean up images
     surf_p1->DelRef();
     surf_p2->DelRef();
@@ -233,7 +189,7 @@ GameState::GameState(void)
     // Floor
     newGeom = new dPlane(physicsSpace->id(),
                          0.0, -1.0, 0.0,
-                         -(kScreenHeight / kPhysicsScreenScale));
+                         -(439 / kPhysicsScreenScale));
     // Walls
     newGeom = new dPlane(physicsSpace->id(),
                          1.0, 0.0, 0.0,
@@ -246,16 +202,34 @@ GameState::GameState(void)
                          0.0, 1.0, 0.0,
                          0.0);
     // Platforms
-    // TODO: Fix surface memory leak
-    sprite = new Sprite(new Surface("images/platform.bmp"),
-                        CrabBattle::Rect(160, 200, 300, 100));
-    newGeom = new dBox(physicsSpace->id(),
-                       300.0 / kPhysicsScreenScale,
-                       100.0 / kPhysicsScreenScale,
-                       1.0);
-    sprite->SetGeometry(newGeom);
-    sprite->SetIsEnv(true);
-    envsprites.push_back(sprite);
+    LoadStage();
+}
+
+void GameState::LoadStage(void)
+{
+    dGeom *newGeom;
+    Sprite *sprite;
+    vector<string> configRects;
+    vector<string>::const_iterator i;
+    double rectValues[4];
+    
+    configRects = LoadConfigFile("platforms.txt");
+    for (i = configRects.begin(); i < configRects.end(); i++)
+    {
+        // Parse line
+        stringstream(*i) >> rectValues[0] >> rectValues[1]
+                         >> rectValues[2] >> rectValues[3];
+        // Create sprite
+        sprite = new InvisibleSprite(Rect(rectValues[0], rectValues[1],
+                                          rectValues[2], rectValues[3]));
+        newGeom = new dBox(physicsSpace->id(),
+                           rectValues[2] / kPhysicsScreenScale,
+                           rectValues[3] / kPhysicsScreenScale,
+                           1.0);
+        sprite->SetGeometry(newGeom);
+        sprite->SetIsEnv(true);
+        envsprites.push_back(sprite);
+    }
 }
 
 void GameState::HandleEvent(SDL_Event evt)
@@ -391,6 +365,8 @@ void GameState::AddContact(dContactGeom contactInfo, dGeomID geom1, dGeomID geom
     Sprite *sprite1, *sprite2;
     dReal p1Height, p2Height;
     if (allContacts == NULL)
+        return;
+    if (dGeomGetBody(geom1) == NULL && dGeomGetBody(geom2) == NULL)
         return;
     contact = new dContact;
     // Determine sprites
