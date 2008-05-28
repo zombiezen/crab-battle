@@ -28,6 +28,8 @@ const int kScreenHeight = 480; // in pixels
 const double kPhysicsScreenScale = 32.0; // pixels over meters
 const SDL_Color textColor = { 255, 255, 255 };
 
+const double kDamageHeightTolerance = 0.25; // in meters
+
 #ifndef MAXPATHLEN
 #define MAXPATHLEN 512 // a reasonable assumption, I hope :D
 #endif

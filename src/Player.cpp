@@ -7,18 +7,20 @@
  */
  
 #include "Player.h"
+#include "constants.h"
 
 using CrabBattle::Sprite;
 using CrabBattle::Player;
 
 const short kPlayerMaxJumpCount = 2;
 const short kPlayerJumpTicks = 4;
+const short kPunchDamage = 5;
 
 const dReal kPhysicsMaxPlayerForce = 500.0;
 const dReal kPhysicsPlayerVelocity = 10.0;
 const dReal kPhysicsPlayerJumpVelocity = 10.0;
 
-Player::Player(Surface *newSurfL, Surface *newSurfR) : Sprite(newSurfL)
+Player::Player(Surface *newSurfL, Surface *newSurfR) : Sprite(newSurfR)
 {
     lSurf = newSurfL;
     rSurf = newSurfR;
@@ -29,9 +31,10 @@ Player::Player(Surface *newSurfL, Surface *newSurfR) : Sprite(newSurfL)
     jumpCount = -1;
     jumpTicks = -1;
     jumpTouchedOff = false;
+    direction = 1;
 }
 
-Player::Player(Surface *newSurfL, Surface *newSurfR, Rect rect) : Sprite(newSurfL, rect)
+Player::Player(Surface *newSurfL, Surface *newSurfR, Rect rect) : Sprite(newSurfR, rect)
 {
     lSurf = newSurfL;
     rSurf = newSurfR;
@@ -42,6 +45,7 @@ Player::Player(Surface *newSurfL, Surface *newSurfR, Rect rect) : Sprite(newSurf
     jumpCount = -1;
     jumpTicks = -1;
     jumpTouchedOff = false;
+    direction = 1;
 }
 
 double Player::GetHp(void)
@@ -188,11 +192,36 @@ void Player::Jump(void)
 void Player::TurnLeft(void)
 {
     SetSurface(lSurf);
+    direction = -1;
 }
 
 void Player::TurnRight(void)
 {
     SetSurface(rSurf);
+    direction = 1;
+}
+
+void Player::Punch(void)
+{
+    std::vector<Sprite *>::const_iterator i;
+    Player *otherPlayer;
+    Rect pos1, pos2;
+    for (i = colliders.begin(); i < colliders.end(); i++)
+    {
+        otherPlayer = dynamic_cast<Player *>(*i);
+        if (otherPlayer != NULL)
+        {
+            pos1 = GetPosition();
+            pos2 = otherPlayer->GetPosition();
+            if (pos1.GetY() - kDamageHeightTolerance * kPhysicsScreenScale <= pos2.GetY() &&
+                pos1.GetY() + kDamageHeightTolerance * kPhysicsScreenScale >= pos2.GetY() &&
+                ((direction == 1 && pos1.GetX() <= pos2.GetX()) ||
+                 (direction == -1 && pos1.GetX() >= pos2.GetX())))
+            {
+                otherPlayer->ModHp(-kPunchDamage);
+            }
+        }
+    }
 }
 
 Player::~Player(void)

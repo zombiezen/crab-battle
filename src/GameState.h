@@ -7,7 +7,6 @@
  */
 
 #include <iostream>
-#include <sstream>
 #if (defined(__WIN32__) || defined(WINDOWS)) || defined(MAC_OS_X)
 #include <SDL_ttf/SDL_ttf.h>
 #include <SDL_mixer/SDL_mixer.h>
@@ -43,9 +42,9 @@ namespace CrabBattle
             dSpace *physicsSpace;
             dJointGroup *allContacts;
             string sOutput;
-            ostringstream outs;
             bool shouldPause, shouldQuit;
             unsigned int countdownTimer;
+            int lastHP1, lastHP2;
             Surface *countdownSurface;
             
             friend void _game_state_collide(void *, dGeomID, dGeomID);
