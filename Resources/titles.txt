@@ -1,4 +1,6 @@
-images/bg.jpg
-images/player.gif
-images/player2.gif
+images/gamebackground.bmp
+images/ChuckNorris.bmp
+images/Mudkips.bmp
+images/Zim.bmp
 images/healthbar1.jpg
+
