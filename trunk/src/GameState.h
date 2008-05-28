@@ -35,7 +35,7 @@ namespace CrabBattle
             TTF_Font *font;
             Player *player1, *player2;
             vector<Sprite *> envsprites;
-            SDL_Surface *messPc1, *messPc2, *wins1, *wins2;
+            SDL_Surface *messPc1, *messPc2, *lives1, *lives2;
             Rect hpRect1, hpRect2 , hptext1, hptext2, winsRect1, winsRect2;
             Surface *background, *healthbar1;
             dWorld *physicsWorld;

@@ -19,7 +19,8 @@ namespace CrabBattle
     {
         private:
             Surface *lSurf, *rSurf;
-            double hp, wins;
+            double hp;
+            unsigned short lives;
             dLMotorJoint *motor;
             short jumpCount, jumpTicks;
             bool jumpTouchedOff;
@@ -30,8 +31,8 @@ namespace CrabBattle
             double GetHp(void);
             void ModHp(double);
             void SetHp(double);
-            double GetWins(void);
-            void AddWins(double);
+            unsigned short GetLives(void);
+            void SetLives(unsigned short);
             void CreateMotor(dWorld *);
             virtual void Update(void);
             void GoLeft(void);
