@@ -23,6 +23,7 @@ namespace CrabBattle
             dLMotorJoint *motor;
             short jumpCount, jumpTicks;
             bool jumpTouchedOff;
+            short direction;
         public:    
             Player(Surface *, Surface *);
             Player(Surface *, Surface *, Rect);
@@ -40,6 +41,7 @@ namespace CrabBattle
             void Jump(void);
             void TurnLeft(void);
             void TurnRight(void);
+            void Punch(void);
             virtual ~Player(void);
     };
 }

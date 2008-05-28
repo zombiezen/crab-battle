@@ -21,8 +21,6 @@ const unsigned int kCountdownDuration = 30;
 const unsigned int kCountdownPosX = 256;
 const unsigned int kCountdownPosY = 216;
 
-const dReal kDamageHeightTolerance = 0.25;
-
 // Maximum contacts per collision per iteration
 const unsigned int kMaxContacts = 16;
 
@@ -94,10 +92,11 @@ GameState::GameState(void)
     if (font == NULL)
         throw FileNotFoundError("times.ttf");
     
-    messPc1 = TTF_RenderText_Solid( font,"200", textColor );
-    messPc2 = TTF_RenderText_Solid( font, "200", textColor );
-    wins1 = TTF_RenderText_Solid( font, "0", textColor );
-    wins2 = TTF_RenderText_Solid( font, "0", textColor );
+    lastHP1 = lastHP2 = -1;
+//    messPc1 = TTF_RenderText_Solid( font,"200", textColor );
+//    messPc2 = TTF_RenderText_Solid( font, "200", textColor );
+//    wins1 = TTF_RenderText_Solid( font, "0", textColor );
+//    wins2 = TTF_RenderText_Solid( font, "0", textColor );
     
     paths = LoadConfigFile("titles.txt");
 
@@ -117,6 +116,7 @@ GameState::GameState(void)
     player1 = new Player(surf_p1L, surf_p1R, CrabBattle::Rect(160, 350, 64, 64));
     player2 = new Player(surf_p2L, surf_p2R, CrabBattle::Rect(400, 350, 64, 64));
     player1->TurnRight();
+    player2->TurnLeft();
     // Clean up images
     surf_p1L->DelRef();
     surf_p1R->DelRef();
@@ -234,6 +234,9 @@ void GameState::HandleEvent(SDL_Event evt)
             case SDLK_d:
                 player1->GoRight();
                 break;
+            case SDLK_SPACE:
+                player1->Punch();
+                break;
             case SDLK_UP:
                 player2->Jump();
                 break;
@@ -242,6 +245,9 @@ void GameState::HandleEvent(SDL_Event evt)
                 break;
             case SDLK_RIGHT:
                 player2->GoRight();
+                break;
+            case SDLK_RETURN:
+                player2->Punch();
                 break;
             case SDLK_ESCAPE:
                 //Mix_HaltMusic();
@@ -276,11 +282,11 @@ void GameState::HandleEvent(SDL_Event evt)
 SDL_Surface *GameState::render(double dh)
 {
     SDL_Surface *temp;
+    stringstream outs;
     outs << dh;
     sOutput = outs.str();
     if(sOutput == "0" && dh != 0)
         sOutput = "200";
-    outs.str("");
     temp = TTF_RenderText_Solid(font, sOutput.c_str(), textColor);
     return temp;
 }
@@ -288,7 +294,7 @@ SDL_Surface *GameState::render(double dh)
 CrabBattle::State *GameState::Update(void)
 {
     vector<Sprite *>::const_iterator i;
-    // Redraw player HP
+    // Examine wins
     if (player1->GetHp() <= 0)
     {
         player1->SetHp(200);
@@ -444,6 +450,18 @@ void GameState::Display(Surface *screen)
     player1->Display(screen);
     player2->Display(screen);
     // Display HUD
+    if (lastHP1 != player1->GetHp())
+    {
+        wins2 = render(player2->GetWins());
+        messPc1 = render(player1->GetHp());
+        lastHP1 = player1->GetHp();
+    }
+    if (lastHP2 != player2->GetHp())
+    {
+        wins1 = render(player1->GetWins());
+        messPc2 = render(player2->GetHp());
+        lastHP2 = player2->GetHp();
+    }
     screen->Blit(wins1, winsRect1);
     screen->Blit(wins2, winsRect2);
     screen->Blit(healthbar1, hpRect1, player1->GetHp());
