@@ -108,6 +108,20 @@ void Surface::Blit(SDL_Surface *src, Rect dest) //SDL_Surface
     // TODO: Raise an error if SDL_BlitSurface doesn't return 0
 }
 
+void Surface::Blit(Surface *src, int x, int y)
+{
+    SDL_Rect r = {x, y, GetHeight(), GetWidth()};
+    SDL_BlitSurface(src->GetSurface(), NULL, surface, &r);
+    // TODO: Raise an error if SDL_BlitSurface doesn't return 0
+}
+
+void Surface::Blit(SDL_Surface *src, int x, int y)
+{
+    SDL_Rect r = {x, y, GetHeight(), GetWidth()};
+    SDL_BlitSurface(src, NULL, surface, &r);
+    // TODO: Raise an error if SDL_BlitSurface doesn't return 0
+}
+
 void Surface::Blit(Surface *src, Rect dest, Rect srcRegion)
 {
     SDL_Rect r_dest = dest;

@@ -65,10 +65,13 @@ namespace CrabBattle
         //destination.Blit(source);
         //blits the entire screen
         void Blit(SDL_Surface *);
-        // destination.Blit(source, location)
+        // destination.Blit(source, locationRect)
+        // destination.Blit(source, x, y)
         // Blends source onto destination at rectangle location.
         void Blit(SDL_Surface *, Rect);
         void Blit(Surface *, Rect);
+        void Blit(SDL_Surface *, int, int);
+        void Blit(Surface *, int, int);
         // destination.Blit(source, location, srcArea)
         // Blends source onto destination at rectangle location, only copying
         // the portion of the image at srcArea.
