@@ -27,6 +27,7 @@ const int kScreenWidth = 640; // in pixels
 const int kScreenHeight = 480; // in pixels
 const double kPhysicsScreenScale = 32.0; // pixels over meters
 const SDL_Color textColor = { 255, 255, 255 };
+const double kPhysicsFloor = 439.0;
 
 const double kDamageHeightTolerance = 0.25; // in meters
 

@@ -19,7 +19,7 @@ namespace CrabBattle
     {
         private:
             Surface *lSurf, *rSurf;
-            double hp;
+            int hp;
             unsigned short lives;
             dLMotorJoint *motor;
             short jumpCount, jumpTicks;
@@ -28,9 +28,9 @@ namespace CrabBattle
         public:    
             Player(Surface *, Surface *);
             Player(Surface *, Surface *, Rect);
-            double GetHp(void);
-            void ModHp(double);
-            void SetHp(double);
+            int GetHp(void);
+            void ModHp(int);
+            void SetHp(int);
             unsigned short GetLives(void);
             void SetLives(unsigned short);
             void CreateMotor(dWorld *);

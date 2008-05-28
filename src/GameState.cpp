@@ -8,6 +8,7 @@
 
 #include "GameState.h"
 #include "PausedState.h"
+#include "VictoryScreen.h"
 #include "constants.h"
 #include "exceptions.h"
 #include "util.h"
@@ -26,7 +27,7 @@ const unsigned int kMaxContacts = 16;
 
 const dReal kPhysicsGravity = 9.81;
 const dReal kPhysicsCFM = 0.0;
-const dReal kPhysicsERP = 0.0;
+const dReal kPhysicsERP = 0.4;
 
 using namespace std;
 
@@ -173,7 +174,7 @@ GameState::GameState(void)
     // Floor
     newGeom = new dPlane(physicsSpace->id(),
                          0.0, -1.0, 0.0,
-                         -(439 / kPhysicsScreenScale));
+                         -(kPhysicsFloor / kPhysicsScreenScale));
     // Walls
     newGeom = new dPlane(physicsSpace->id(),
                          1.0, 0.0, 0.0,
@@ -279,7 +280,7 @@ void GameState::HandleEvent(SDL_Event evt)
     }
 }
 
-SDL_Surface *GameState::render(double dh)
+SDL_Surface *GameState::render(int dh)
 {
     SDL_Surface *temp;
     stringstream outs;
@@ -294,6 +295,17 @@ SDL_Surface *GameState::render(double dh)
 CrabBattle::State *GameState::Update(void)
 {
     vector<Sprite *>::const_iterator i;
+    // Check for quitting and pausing
+    if (shouldPause)
+    {
+        shouldPause = false;
+        return (new PausedState());
+    }
+    else if (shouldQuit)
+    {
+        shouldQuit = false;
+        return NULL;
+    }
     // Update physics if we're after countdown
     if (countdownTimer >= kCountdownDuration * 3)
     {
@@ -320,21 +332,18 @@ CrabBattle::State *GameState::Update(void)
     {
         countdownTimer++;
     }
-    if (player1->GetLives() == 0 || player2->GetLives() == 0)
+    // Check if game is over
+    if (player1->GetLives() == 0 && !shouldQuit)
+    {
         shouldQuit = true;
-    // Switch states if we're done
-    if (shouldPause)
-    {
-        shouldPause = false;
-        return (new PausedState());
+        return new VictoryScreen(2);
     }
-    else if (shouldQuit)
+    else if (player2->GetLives() == 0 && !shouldQuit)
     {
-        shouldQuit = false;
-        return NULL;
+        shouldQuit = true;
+        return new VictoryScreen(1);
     }
-    else
-        return this;
+    return this;
 }
 
 void GameState::AddContact(dContactGeom contactInfo, dGeomID geom1, dGeomID geom2)
