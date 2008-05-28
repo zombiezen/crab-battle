@@ -21,6 +21,8 @@ const unsigned int kCountdownDuration = 30;
 const unsigned int kCountdownPosX = 256;
 const unsigned int kCountdownPosY = 216;
 
+const dReal kDamageHeightTolerance = 0.25;
+
 // Maximum contacts per collision per iteration
 const unsigned int kMaxContacts = 16;
 
@@ -387,6 +389,7 @@ void GameState::AddContact(dContactGeom contactInfo, dGeomID geom1, dGeomID geom
     dContactJoint *joint;
     dContact *contact;
     Sprite *sprite1, *sprite2;
+    dReal p1Height, p2Height;
     if (allContacts == NULL)
         return;
     contact = new dContact;
@@ -420,14 +423,15 @@ void GameState::AddContact(dContactGeom contactInfo, dGeomID geom1, dGeomID geom
         contact->surface.soft_erp = kPhysicsERP;
         contact->surface.soft_cfm = kPhysicsCFM;
         // Do health check
-        if ((player1->GetGeometry()->getPosition()[1]) >
-            (player2->GetGeometry()->getPosition()[1]))
+        p1Height = player1->GetGeometry()->getPosition()[1];
+        p2Height = player2->GetGeometry()->getPosition()[1];
+        if (p1Height > p2Height + kDamageHeightTolerance)
         {
             player1->ModHp(-1);
             wins2 = render(player2->GetWins());
             messPc1 = render(player1->GetHp());
         }
-        else
+        else if (p1Height + kDamageHeightTolerance < p2Height)
         {
             player2->ModHp(-1);
             wins1 = render(player1->GetWins());
