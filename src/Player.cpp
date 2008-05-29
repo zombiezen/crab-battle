@@ -239,6 +239,7 @@ void Player::Punch(void)
     std::vector<Sprite *>::const_iterator i;
     Player *otherPlayer;
     Rect pos1, pos2;
+    double bot1, bot2;
     for (i = colliders.begin(); i < colliders.end(); i++)
     {
         otherPlayer = dynamic_cast<Player *>(*i);
@@ -246,8 +247,10 @@ void Player::Punch(void)
         {
             pos1 = GetPosition();
             pos2 = otherPlayer->GetPosition();
-            if (pos1.GetY() - kDamageHeightTolerance * kPhysicsScreenScale <= pos2.GetY() &&
-                pos1.GetY() + kDamageHeightTolerance * kPhysicsScreenScale >= pos2.GetY() &&
+            bot1 = pos1.GetBottom();
+            bot2 = pos2.GetBottom();
+            if (bot1 - kDamageHeightTolerance * kPhysicsScreenScale <= bot2 &&
+                bot1 + kDamageHeightTolerance * kPhysicsScreenScale >= bot2 &&
                 ((direction == 1 && pos1.GetX() <= pos2.GetX()) ||
                  (direction == -1 && pos1.GetX() >= pos2.GetX())))
             {
