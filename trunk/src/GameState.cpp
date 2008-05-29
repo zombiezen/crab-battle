@@ -220,12 +220,21 @@ void GameState::LoadStage(void)
 
 void GameState::HandleEvent(SDL_Event evt)
 {
+    // Ignore events if they come in before end of countdown
+    if (countdownTimer < kCountdownDuration * 3)
+        return;
+    // Handle events
     if (evt.type == SDL_KEYDOWN)
     {
         switch (evt.key.keysym.sym)
         {
             case SDLK_p:
+            case SDLK_ESCAPE:
                 shouldPause = true;
+                break;
+            case SDLK_BACKSPACE:
+                //Mix_HaltMusic();
+                shouldQuit = true;
                 break;
             case SDLK_w:
                 player1->Jump();
@@ -250,10 +259,6 @@ void GameState::HandleEvent(SDL_Event evt)
                 break;
             case SDLK_RETURN:
                 player2->Punch();
-                break;
-            case SDLK_ESCAPE:
-                //Mix_HaltMusic();
-                shouldQuit = true;
                 break;
             default:
                 break;

@@ -89,6 +89,7 @@ void PausedState::HandleEvent(SDL_Event evt)
     {
         switch (evt.key.keysym.sym)
         {
+            case SDLK_ESCAPE:
             case SDLK_p:
                 done = true;
                 break;
