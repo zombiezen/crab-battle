@@ -69,6 +69,10 @@ namespace CrabBattle
         void SetLeft(double);
         double GetRight(void) const;
         void SetRight(double);
+        double GetHorizontalCenter(void) const;
+        void SetHorizontalCenter(double);
+        double GetVerticalCenter(void) const;
+        void SetVerticalCenter(double);
         virtual ~Rect(void) {};
     };
 }
