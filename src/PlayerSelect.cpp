@@ -28,16 +28,14 @@ PlayerSelect::PlayerSelect()
     vector<string> config;
     vector<string>::const_iterator i;
     
-    music = Mix_LoadMUS("audio/musicPS.mp3");
-    if (music == NULL)
-        throw FileNotFoundError("audio/musicPS.mp3");
-    // Start music
-    Mix_PlayMusic(music, -1);
     // Load selection images
     config = LoadConfigFile("pselect-paths.txt");
     background = new Surface(config[0]);
     choice = new Surface(config[1]);
     ready = new Surface(config[2]);
+    music = Mix_LoadMUS(config[3].c_str());
+    if (music == NULL)
+        throw FileNotFoundError(config[3].c_str());
     // Read player file
     config = LoadConfigFile("players.txt");
     // Load images (left side only)
@@ -49,6 +47,8 @@ PlayerSelect::PlayerSelect()
     p1Choice = p2Choice = 0;
     p1Done = p2Done = false;
     goBack = false;
+    // Start music
+    Mix_PlayMusic(music, -1);
 }
     
 void PlayerSelect::HandleEvent(SDL_Event evt)

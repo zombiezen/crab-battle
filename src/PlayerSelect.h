@@ -14,7 +14,6 @@
 #include "SDL.h"
 #include "Surface.h"
 #include "State.h"
-#include "SoundEffect.h"
 #include <vector>
 
 #ifndef _CRAB_BATTLE_PLAYERSELECT_H_
