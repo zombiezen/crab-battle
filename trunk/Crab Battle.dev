@@ -1,7 +1,7 @@
 [Project]
 FileName=Crab Battle.dev
 Name=Crab Battle
-UnitCount=28
+UnitCount=30
 Type=0
 Ver=3
 IsCpp=1
@@ -334,6 +334,26 @@ BuildCmd=
 FileName=src\util.h
 CompileCpp=1
 Folder=Headers
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit29]
+FileName=src\SoundEffect.h
+CompileCpp=1
+Folder=Headers
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit30]
+FileName=src\SoundEffect.cpp
+CompileCpp=1
+Folder=Classes
 Compile=1
 Link=1
 Priority=1000

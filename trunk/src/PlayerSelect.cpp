@@ -10,6 +10,7 @@
 #include "GameState.h"
 #include "constants.h"
 #include "util.h"
+#include "exceptions.h"
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -27,6 +28,11 @@ PlayerSelect::PlayerSelect()
     vector<string> config;
     vector<string>::const_iterator i;
     
+    music = Mix_LoadMUS("audio/musicPS.mp3");
+    if (music == NULL)
+        throw FileNotFoundError("audio/musicPS.mp3");
+    // Start music
+    Mix_PlayMusic(music, -1);
     // Load selection images
     config = LoadConfigFile("pselect-paths.txt");
     background = new Surface(config[0]);
@@ -150,6 +156,8 @@ void PlayerSelect::Display(Surface *screen)
 
 PlayerSelect::~PlayerSelect(void)
 {
+    Mix_HaltMusic();
+    Mix_FreeMusic(music);
     vector<Surface *>::const_iterator i;
     
     for (i = players.begin(); i < players.end(); i++)
