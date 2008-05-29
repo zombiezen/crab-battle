@@ -30,11 +30,11 @@ PausedState::PausedState()
     
     // Read file
     ifstream getTitles;
-    getTitles.open("titles1.txt");
+    getTitles.open("pause-paths.txt");
 
     if (!getTitles.is_open())  // if failed to open file
     {
-        throw FileNotFoundError("titles1.txt");
+        throw FileNotFoundError("pause-paths.txt");
     }
 
     //hard coded for base implementation

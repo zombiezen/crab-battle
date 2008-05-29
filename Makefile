@@ -32,7 +32,7 @@ $(builddir)/crab-battle : $(builddir) $(objects) build_resources
 $(builddir) :
 	mkdir $(builddir)
 
-build_resources : $(builddir)/images $(builddir)/audio $(builddir)/titles.txt $(builddir)/titles1.txt $(builddir)/icon.png $(builddir)/times.ttf $(builddir)/titles-menu.txt $(builddir)/platforms.txt $(builddir)/players.txt $(builddir)/pselect-paths.txt
+build_resources : $(builddir)/images $(builddir)/audio $(builddir)/game-paths.txt $(builddir)/pause-paths.txt $(builddir)/icon.png $(builddir)/times.ttf $(builddir)/menu-paths.txt $(builddir)/platforms.txt $(builddir)/players.txt $(builddir)/pselect-paths.txt
 
 $(builddir)/%.o : $(srcdir)/%.cpp
 	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c $< -o $@
@@ -57,12 +57,12 @@ $(builddir)/images : $(resdir)/images
 	$(CP) -r $(resdir)/images $(builddir)/images
 $(builddir)/audio : $(resdir)/audio
 	$(CP) -r $(resdir)/audio $(builddir)/audio
-$(builddir)/titles.txt : $(resdir)/titles.txt
-	$(CP) $(resdir)/titles.txt $(builddir)/titles.txt
-$(builddir)/titles1.txt : $(resdir)/titles1.txt
-	$(CP) $(resdir)/titles1.txt $(builddir)/titles1.txt
-$(builddir)/titles-menu.txt : $(resdir)/titles-menu.txt
-	$(CP) $(resdir)/titles-menu.txt $(builddir)/titles-menu.txt
+$(builddir)/game-paths.txt : $(resdir)/game-paths.txt
+	$(CP) $(resdir)/game-paths.txt $(builddir)/game-paths.txt
+$(builddir)/pause-paths.txt : $(resdir)/pause-paths.txt
+	$(CP) $(resdir)/pause-paths.txt $(builddir)/pause-paths.txt
+$(builddir)/menu-paths.txt : $(resdir)/menu-paths.txt
+	$(CP) $(resdir)/menu-paths.txt $(builddir)/menu-paths.txt
 $(builddir)/platforms.txt : $(resdir)/platforms.txt
 	$(CP) $(resdir)/platforms.txt $(builddir)/platforms.txt
 $(builddir)/players.txt : $(resdir)/players.txt

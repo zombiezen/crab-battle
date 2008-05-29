@@ -33,7 +33,7 @@ MenuState::MenuState(void)
     startRect = Rect(300, 300, 200, 30);
     quitRect = Rect(300, 330, 200, 30);
     choiceRect = Rect(250, 300, 200, 30);
-    paths = LoadConfigFile("titles-menu.txt");
+    paths = LoadConfigFile("menu-paths.txt");
     // Load images
     background = new Surface(paths[0]);
     choice = new Surface(paths[1]);

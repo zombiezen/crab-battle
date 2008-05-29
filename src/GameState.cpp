@@ -90,7 +90,7 @@ GameState::GameState(unsigned short p1Sprite, unsigned short p2Sprite)
     hpRect1 = Rect(60, 30, 200, 30);
     hpRect2 = Rect(360, 30, 200, 30);
     // Load state resources
-    paths = LoadConfigFile("titles.txt");
+    paths = LoadConfigFile("game-paths.txt");
     background = new Surface(paths[0]);
     healthbar1 = new Surface(paths[1]);
     heart = new Surface(paths[2]);
