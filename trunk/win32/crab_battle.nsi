@@ -48,9 +48,14 @@ Section "Crab Battle" SecCrabBattle
   File SDL_ttf\bin\*.dll
   File ode\lib\releasedll\*.dll
   File /r ..\Resources\images
+  File /r ..\Resources\audio
   File ..\Resources\icon.png
-  File ..\Resources\titles.txt
-  File ..\Resources\titles1.txt
+  File ..\Resources\game-paths.txt
+  File ..\Resources\menu-paths.txt
+  File ..\Resources\pause-paths.txt
+  File ..\Resources\pselect-paths.txt
+  File ..\Resources\players.txt
+  File ..\Resources\platforms.txt
   File ..\Resources\times.ttf
   
   WriteUninstaller uninstall.exe
@@ -67,8 +72,12 @@ Section "Uninstall"
 	Delete "$INSTDIR\Crab Battle.exe"
 	Delete "$INSTDIR\*.dll"
     Delete "$INSTDIR\icon.png"
-    Delete "$INSTDIR\titles.txt"
-    Delete "$INSTDIR\titles1.txt"
+    Delete "$INSTDIR\game-paths.txt"
+    Delete "$INSTDIR\menu-paths.txt"
+    Delete "$INSTDIR\pause-paths.txt"
+    Delete "$INSTDIR\pselect-paths.txt"
+	Delete "$INSTDIR\players.txt"
+	Delete "$INSTDIR\platforms.txt"
     Delete "$INSTDIR\times.ttf"
 	Delete $INSTDIR\uninstall.exe
 	
@@ -76,6 +85,7 @@ Section "Uninstall"
 	Delete "$SMPROGRAMS\Crab Battle\*.url"
 	
     RMDir /r "$INSTDIR\images"
+    RMDir /r "$INSTDIR\audio"
 	RMDir $INSTDIR
 	RMDir "$SMPROGRAMS\Crab Battle"
 SectionEnd
