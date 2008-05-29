@@ -111,12 +111,12 @@ Includes=
 Libs=
 ResourceIncludes=
 MakeIncludes=
-Compiler=-I C:\Dev-Cpp\include\SDL_@@_
-CppCompiler=-I C:\Dev-Cpp\include\SDL_@@_
+Compiler=-I C:\Dev-Cpp\include\SDL -I C:\wxDev-Cpp\include\SDL_image_@@_
+CppCompiler=-I C:\Dev-Cpp\include\SDL -I C:\wxDev-Cpp\include\SDL_image_@@_
 Linker=-lSDL -lSDL_image -mwindows_@@_-lSDL_ttf_@@_-lode_@@_-lSDL_mixer_@@_
 PreprocDefines=_@@_
 CompilerSettings=0000000000000000000000
-Icon=
+Icon=Crab Battle.ico
 ExeOutput=build
 ObjectOutput=build
 OverrideOutput=0
@@ -341,9 +341,9 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit29]
-FileName=src\SoundEffect.h
+FileName=src\SoundEffect.cpp
 CompileCpp=1
-Folder=Headers
+Folder=Classes
 Compile=1
 Link=1
 Priority=1000
@@ -351,9 +351,9 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit30]
-FileName=src\SoundEffect.cpp
+FileName=src\SoundEffect.h
 CompileCpp=1
-Folder=Classes
+Folder=Headers
 Compile=1
 Link=1
 Priority=1000
