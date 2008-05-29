@@ -25,7 +25,7 @@ Player 2 --
     Up Arrow  - - Jump
     Left Arrow  - Go left
     Right Arrow - Go right
-    Space Bar - - Punch
+    Enter - - Punch
 +++++++++++++++++++++++++++++++++++++++++++++++
 
 To start a game, choose "New Game" from the main menu by pressing Enter.  A
