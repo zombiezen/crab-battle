@@ -21,6 +21,7 @@
 const unsigned int kCountdownDuration = 30;
 const unsigned int kCountdownPosX = 256;
 const unsigned int kCountdownPosY = 216;
+const unsigned int kLifeMargin = 8;
 
 // Maximum contacts per collision per iteration
 const unsigned int kMaxContacts = 16;
@@ -88,20 +89,19 @@ GameState::GameState(unsigned short p1Sprite, unsigned short p2Sprite)
     // Set up player rectangles
     hpRect1 = Rect(60, 30, 200, 30);
     hpRect2 = Rect(360, 30, 200, 30);
-    winsRect1 = Rect(270 , 30 , 200 , 30);
-    winsRect2 = Rect(315 , 30 , 200 , 30);
     // Load state resources
     paths = LoadConfigFile("titles.txt");
     background = new Surface(paths[0]);
     healthbar1 = new Surface(paths[1]);
-    font = TTF_OpenFont(paths[2].c_str(), 24);
+    heart = new Surface(paths[2]);
+    font = TTF_OpenFont(paths[3].c_str(), 24);
     if (font == NULL)
-        throw FileNotFoundError(paths[2].c_str());
-    music = Mix_LoadMUS(paths[3].c_str());
-    if (music == NULL)
         throw FileNotFoundError(paths[3].c_str());
-    punchSfx = new SoundEffect(paths[4]);
-    boingSfx = new SoundEffect(paths[5]);
+    music = Mix_LoadMUS(paths[4].c_str());
+    if (music == NULL)
+        throw FileNotFoundError(paths[4].c_str());
+    punchSfx = new SoundEffect(paths[5]);
+    boingSfx = new SoundEffect(paths[6]);
     // Start music
     Mix_PlayMusic(music, -1);
     // Load player images
@@ -441,6 +441,7 @@ void GameState::AddContact(dContactGeom contactInfo, dGeomID geom1, dGeomID geom
 void GameState::Display(Surface *screen)
 {
     vector<Sprite *>::const_iterator i;
+    int j;
     // Display background
     screen->Fill(screen->GetRect(), 0, 0, 0); // Clears screen
     screen->Blit(background, background->GetRect()); // Blits the background
@@ -455,22 +456,27 @@ void GameState::Display(Surface *screen)
     // Display HUD
     if (lastHP1 != player1->GetHp())
     {
-        lives1 = render(player1->GetLives());
         messPc1 = render(player1->GetHp());
         lastHP1 = player1->GetHp();
     }
     if (lastHP2 != player2->GetHp())
     {
-        lives2 = render(player2->GetLives());
         messPc2 = render(player2->GetHp());
         lastHP2 = player2->GetHp();
     }
-    screen->Blit(lives1, winsRect1);
-    screen->Blit(lives2, winsRect2);
     screen->Blit(healthbar1, hpRect1, player1->GetHp());
     screen->Blit(healthbar1, hpRect2, player2->GetHp());
     screen->Blit(messPc1, hpRect1);
     screen->Blit(messPc2, hpRect2);
+    // Display lives
+    for (j = 0; j < player1->GetLives(); j++)
+    {
+        screen->Blit(heart, hpRect1.GetLeft() + (heart->GetWidth() + kLifeMargin) * j, hpRect1.GetBottom() + kLifeMargin);
+    }
+    for (j = 0; j < player2->GetLives(); j++)
+    {
+        screen->Blit(heart, hpRect2.GetLeft() + (heart->GetWidth() + kLifeMargin) * j, hpRect2.GetBottom() + kLifeMargin);
+    }
     // Display countdown
     if (countdownSurface == NULL)
     {
@@ -512,12 +518,11 @@ GameState::~GameState(void)
     player1->DelRef();
     player2->DelRef();
     healthbar1->DelRef();
+    heart->DelRef();
     punchSfx->DelRef();
     boingSfx->DelRef();
     SDL_FreeSurface(messPc1);
     SDL_FreeSurface(messPc2);
-    SDL_FreeSurface(lives1);
-    SDL_FreeSurface(lives2);
     TTF_CloseFont(font);
     delete physicsWorld;
     delete physicsSpace;
