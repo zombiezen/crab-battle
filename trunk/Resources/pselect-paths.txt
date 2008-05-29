@@ -1,0 +1,3 @@
+images/playerselect.png
+images/choice.png
+images/ready.png
