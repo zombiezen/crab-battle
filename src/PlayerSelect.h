@@ -19,7 +19,7 @@ namespace CrabBattle
     class PlayerSelect : public State
     {
     private:
-        Surface *background;
+        Surface *background, *choice, *ready;
         std::vector<Surface *> players;
         unsigned short p1Choice, p2Choice;
         bool goBack, p1Done, p2Done;

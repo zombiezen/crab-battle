@@ -20,17 +20,22 @@ using namespace std;
 const int kPlayerTopMargin = 99;
 const int kPlayerSideMargin = 64;
 const int kPlayerMargin = 32;
+const int kElementMargin = 8;
 
 PlayerSelect::PlayerSelect()
 {
-    vector<string> playerConfig;
+    vector<string> config;
     vector<string>::const_iterator i;
     
-    background = new Surface("images/playerselect.png");
+    // Load selection images
+    config = LoadConfigFile("pselect-paths.txt");
+    background = new Surface(config[0]);
+    choice = new Surface(config[1]);
+    ready = new Surface(config[2]);
     // Read player file
-    playerConfig = LoadConfigFile("players.txt");
+    config = LoadConfigFile("players.txt");
     // Load images (left side only)
-    for (i = playerConfig.begin() + 1; i < playerConfig.end(); i += 2)
+    for (i = config.begin() + 1; i < config.end(); i += 2)
     {
         players.push_back(new Surface(*i));
     }
@@ -93,7 +98,7 @@ CrabBattle::State *PlayerSelect::Update(void)
 void PlayerSelect::Display(Surface *screen)
 {
     vector<Surface *>::const_iterator i;
-    Rect pos;
+    Rect pos, elemPos;
     int currY = kPlayerTopMargin;
     
     screen->Fill(screen->GetRect(), 0, 0, 0); // Clear screen
@@ -105,9 +110,17 @@ void PlayerSelect::Display(Surface *screen)
         if ((i - players.begin()) == p1Choice)
         {
             if (p1Done)
-                screen->Fill(pos, 255, 0, 0);
+            {
+                screen->Blit(ready,
+                             pos.GetRight() + kElementMargin,
+                             pos.GetVerticalCenter() - ready->GetHeight() / 2.0);
+            }
             else
-                screen->Fill(pos, 255, 255, 255);
+            {
+                screen->Blit(choice,
+                             pos.GetRight() + kElementMargin,
+                             pos.GetVerticalCenter() - choice->GetHeight() / 2.0);
+            }
         }
         screen->Blit((*i), pos);
         // Blit Side 2
@@ -116,9 +129,17 @@ void PlayerSelect::Display(Surface *screen)
         if ((i - players.begin()) == p2Choice)
         {
             if (p2Done)
-                screen->Fill(pos, 255, 0, 0);
+            {
+                screen->Blit(ready,
+                             pos.GetLeft() - kElementMargin - ready->GetWidth(),
+                             pos.GetVerticalCenter() - ready->GetHeight() / 2.0);
+            }
             else
-                screen->Fill(pos, 255, 255, 255);
+            {
+                screen->Blit(choice,
+                             pos.GetLeft() - kElementMargin - choice->GetWidth(),
+                             pos.GetVerticalCenter() - choice->GetHeight() / 2.0);
+            }
         }
         screen->Blit((*i), pos);
         // Advance to next position
