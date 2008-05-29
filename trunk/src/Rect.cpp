@@ -128,22 +128,22 @@ void Rect::SetRight(double right)
     x = right - w;
 }
 
-double GetHorizontalCenter(void) const
+double Rect::GetHorizontalCenter(void) const
 {
     return x + w / 2.0;
 }
 
-void SetHorizontalCenter(double newCenter)
+void Rect::SetHorizontalCenter(double newCenter)
 {
     x = newCenter - w / 2.0;
 }
 
-double GetVerticalCenter(void) const
+double Rect::GetVerticalCenter(void) const
 {
     return y + h / 2.0;
 }
 
-void SetVerticalCenter(double newCenter)
+void Rect::SetVerticalCenter(double newCenter)
 {
     y = newCenter - h / 2.0;
 }
