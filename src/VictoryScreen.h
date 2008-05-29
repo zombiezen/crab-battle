@@ -7,6 +7,7 @@
  */
 
 #include "SDL.h"
+#include "SoundEffect.h"
 #include "Surface.h"
 #include "State.h"
 
@@ -19,6 +20,7 @@ namespace CrabBattle
     {
     private:
         Surface *background;
+        SoundEffect *applauseSfx;
         bool done;
     public:
         VictoryScreen(unsigned short);

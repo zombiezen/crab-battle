@@ -82,32 +82,28 @@ GameState::GameState(unsigned short p1Sprite, unsigned short p2Sprite)
     dGeom *newGeom;
     dJointID joint2d;
     
-    Mix_OpenAudio( 22050, MIX_DEFAULT_FORMAT, 2, 4096 );
-    music = Mix_LoadMUS( "audio/GameState.mp3" );
-    Mix_PlayMusic( music, -1 );
-    
     countdownTimer = 0;
     countdownSurface = NULL;
-    
-    font = TTF_OpenFont( "times.ttf", 24 );
-    if (font == NULL)
-        throw FileNotFoundError("times.ttf");
-    
     lastHP1 = lastHP2 = -1;
-//    messPc1 = TTF_RenderText_Solid( font,"200", textColor );
-//    messPc2 = TTF_RenderText_Solid( font, "200", textColor );
-//    lives1 = TTF_RenderText_Solid( font, "0", textColor );
-//    lives2 = TTF_RenderText_Solid( font, "0", textColor );
-
     // Set up player rectangles
     hpRect1 = Rect(60, 30, 200, 30);
     hpRect2 = Rect(360, 30, 200, 30);
     winsRect1 = Rect(270 , 30 , 200 , 30);
     winsRect2 = Rect(315 , 30 , 200 , 30);
-    // Load HUD images
+    // Load state resources
     paths = LoadConfigFile("titles.txt");
     background = new Surface(paths[0]);
     healthbar1 = new Surface(paths[1]);
+    font = TTF_OpenFont(paths[2].c_str(), 24);
+    if (font == NULL)
+        throw FileNotFoundError(paths[2].c_str());
+    music = Mix_LoadMUS(paths[3].c_str());
+    if (music == NULL)
+        throw FileNotFoundError(paths[3].c_str());
+    punchSfx = new SoundEffect(paths[4]);
+    boingSfx = new SoundEffect(paths[5]);
+    // Start music
+    Mix_PlayMusic(music, -1);
     // Load player images
     paths = LoadConfigFile("players.txt");
     surf_p1L = new Surface(paths[p1Sprite * 2]);
@@ -233,11 +229,11 @@ void GameState::HandleEvent(SDL_Event evt)
                 shouldPause = true;
                 break;
             case SDLK_BACKSPACE:
-                //Mix_HaltMusic();
                 shouldQuit = true;
                 break;
             case SDLK_w:
                 player1->Jump();
+                boingSfx->Play();
                 break;
             case SDLK_a:
                 player1->GoLeft();
@@ -247,9 +243,11 @@ void GameState::HandleEvent(SDL_Event evt)
                 break;
             case SDLK_SPACE:
                 player1->Punch();
+                punchSfx->Play();
                 break;
             case SDLK_UP:
                 player2->Jump();
+                boingSfx->Play();
                 break;
             case SDLK_LEFT:
                 player2->GoLeft();
@@ -259,6 +257,7 @@ void GameState::HandleEvent(SDL_Event evt)
                 break;
             case SDLK_RETURN:
                 player2->Punch();
+                punchSfx->Play();
                 break;
             default:
                 break;
@@ -331,11 +330,13 @@ CrabBattle::State *GameState::Update(void)
     if (player1->GetLives() == 0 && !shouldQuit)
     {
         shouldQuit = true;
+        Mix_HaltMusic();
         return new VictoryScreen(2);
     }
     else if (player2->GetLives() == 0 && !shouldQuit)
     {
         shouldQuit = true;
+        Mix_HaltMusic();
         return new VictoryScreen(1);
     }
     // Check for quitting and pausing
@@ -346,6 +347,7 @@ CrabBattle::State *GameState::Update(void)
     }
     else if (shouldQuit)
     {
+        Mix_HaltMusic();
         shouldQuit = false;
         return (new JumpState(0));
     }
@@ -501,8 +503,8 @@ void GameState::Display(Surface *screen)
 
 GameState::~GameState(void)
 {
+    Mix_HaltMusic();
     Mix_FreeMusic(music);
-    Mix_CloseAudio();
     vector<Sprite *>::const_iterator i;
     for (i = envsprites.begin(); i < envsprites.end(); i++)
         (*i)->DelRef();
@@ -510,6 +512,8 @@ GameState::~GameState(void)
     player1->DelRef();
     player2->DelRef();
     healthbar1->DelRef();
+    punchSfx->DelRef();
+    boingSfx->DelRef();
     SDL_FreeSurface(messPc1);
     SDL_FreeSurface(messPc2);
     SDL_FreeSurface(lives1);

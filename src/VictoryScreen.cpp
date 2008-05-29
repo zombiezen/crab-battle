@@ -14,6 +14,8 @@ using CrabBattle::VictoryScreen;
 
 VictoryScreen::VictoryScreen(unsigned short winner)
 {
+    applauseSfx = new SoundEffect("audio/applause.ogg");
+    applauseSfx->Play();
     // Load image
     switch (winner)
     {
@@ -67,5 +69,6 @@ void VictoryScreen::Display(Surface *screen)
 
 VictoryScreen::~VictoryScreen(void)
 {
+    applauseSfx->DelRef();
     background->DelRef();
 }
