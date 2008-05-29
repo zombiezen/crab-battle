@@ -15,8 +15,10 @@
 
 #include "SDL.h"
 #if (defined(__WIN32__) || defined(WINDOWS)) || defined(MAC_OS_X)
+#include <SDL_mixer/SDL_mixer.h>
 #include <SDL_ttf/SDL_ttf.h>
 #else
+#include <SDL/SDL_mixer.h>
 #include <SDL/SDL_ttf.h>
 #endif
 #include "State.h"
@@ -61,9 +63,8 @@ extern "C" int main(int argc, char *argv[])
     if (SDL_Init(kMainInitFlags) < 0)
     {
         cerr << "Couldn't initialize SDL: " << SDL_GetError() << endl;
-        exit(1);
+        return 1;
     }
-    
     // Set video mode
     screen = SDL_SetVideoMode(kScreenWidth, kScreenHeight, kMainBitsPerPixel, kMainVideoFlags);
     if (screen == NULL)
@@ -73,9 +74,20 @@ extern "C" int main(int argc, char *argv[])
                          << "x" << kScreenWidth;
         cerr << " video mode: " << SDL_GetError() << endl;
         SDL_Quit();
-        exit(2);
+        return 2;
     }
-    
+    // Set up audio
+    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096) != 0)
+    {
+        cerr << "Couldn't initialize SDL_mixer: " << Mix_GetError() << endl;
+        return 1;
+    }
+    // Set up font loader
+    if (TTF_Init() != 0)
+    {
+        cerr << "Couldn't initialize SDL_ttf: " << TTF_GetError() << endl;
+        return 1;
+    }
     // Set up window manager
     SDL_WM_SetCaption("Crab Battle", NULL); // Sets the title of the window
 #if !defined(NO_SDL_IMAGE) && !defined(MAC_OS_X)
@@ -85,9 +97,6 @@ extern "C" int main(int argc, char *argv[])
     screenObj = Surface::GetVideoSurface();
     if (kMainVideoFlags & SDL_FULLSCREEN)
         SDL_ShowCursor(SDL_DISABLE);
-    // Set up SDL_ttf
-    TTF_Init();
-    
     // Run main event loop
     state_stack.push(new MenuState());
     newState = state_stack.top();

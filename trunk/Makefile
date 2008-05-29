@@ -21,6 +21,7 @@ objects = $(builddir)/BaseObject.o \
 		  $(builddir)/Surface.o \
 		  $(builddir)/Player.o \
 		  $(builddir)/PlayerSelect.o \
+		  $(builddir)/SoundEffect.o \
 		  $(builddir)/exceptions.o \
 		  $(builddir)/util.o \
 		  $(builddir)/VictoryScreen.o
@@ -47,6 +48,7 @@ $(builddir)/Rect.o : $(srcdir)/Rect.h $(srcdir)/BaseObject.h
 $(builddir)/Sprite.o : $(srcdir)/BaseObject.h $(srcdir)/Sprite.h $(srcdir)/Rect.h $(srcdir)/Surface.h $(srcdir)/constants.h
 $(builddir)/State.o : $(srcdir)/State.h $(srcdir)/BaseObject.h $(srcdir)/Surface.h
 $(builddir)/Surface.o : $(srcdir)/Surface.h $(srcdir)/BaseObject.h $(srcdir)/Rect.h $(srcdir)/exceptions.h
+$(builddir)/SoundEffect.o : $(srcdir)/BaseObject.h $(srcdir)/exceptions.h
 $(builddir)/exceptions.o : $(srcdir)/exceptions.h
 $(builddir)/util.o : $(srcdir)/util.h $(srcdir)/exceptions.h
 $(builddir)/VictoryScreen.o : $(srcdir)/Surface.h $(srcdir)/State.h

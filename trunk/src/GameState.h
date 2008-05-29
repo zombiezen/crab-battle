@@ -20,6 +20,7 @@
 #include "Rect.h"
 #include "Player.h"
 #include "State.h"
+#include "SoundEffect.h"
 
 using namespace std;
 
@@ -32,6 +33,7 @@ namespace CrabBattle
     {
         private:
             Mix_Music *music;
+            SoundEffect *punchSfx, *boingSfx;
             TTF_Font *font;
             Player *player1, *player2;
             vector<Sprite *> envsprites;
