@@ -42,6 +42,10 @@
 		91FC3CF30DF23FDA008E5E98 /* VictoryScreen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91FC3CF10DF23FDA008E5E98 /* VictoryScreen.cpp */; };
 		91FC3CFA0DF24013008E5E98 /* SoundEffect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91FC3CF60DF24013008E5E98 /* SoundEffect.cpp */; };
 		91FC3CFB0DF24013008E5E98 /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91FC3CF80DF24013008E5E98 /* util.cpp */; };
+		91FC3D0F0DF2447A008E5E98 /* SDL_image.framework in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = 91A9F15B0D70BDAF00CB6365 /* SDL_image.framework */; };
+		91FC3D100DF2447A008E5E98 /* SDL_mixer.framework in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = 91A9F1790D70C38D00CB6365 /* SDL_mixer.framework */; };
+		91FC3D110DF2447A008E5E98 /* SDL_ttf.framework in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = 91A9F17A0D70C38D00CB6365 /* SDL_ttf.framework */; };
+		91FC3D3A0DF244A2008E5E98 /* libode.dylib in Copy Frameworks into .app bundle */ = {isa = PBXBuildFile; fileRef = 4518FB430DDDE09700212A0D /* libode.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -51,7 +55,11 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				91FC3D3A0DF244A2008E5E98 /* libode.dylib in Copy Frameworks into .app bundle */,
 				002F3A0009D0884600EBEB88 /* SDL.framework in Copy Frameworks into .app bundle */,
+				91FC3D0F0DF2447A008E5E98 /* SDL_image.framework in Copy Frameworks into .app bundle */,
+				91FC3D100DF2447A008E5E98 /* SDL_mixer.framework in Copy Frameworks into .app bundle */,
+				91FC3D110DF2447A008E5E98 /* SDL_ttf.framework in Copy Frameworks into .app bundle */,
 			);
 			name = "Copy Frameworks into .app bundle";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -64,7 +72,7 @@
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
-		4518FB430DDDE09700212A0D /* libode.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libode.dylib; path = /usr/local/lib/libode.dylib; sourceTree = "<absolute>"; };
+		4518FB430DDDE09700212A0D /* libode.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libode.dylib; path = macosx/lib/libode.dylib; sourceTree = "<group>"; };
 		4535F5640DDDE17E003496B1 /* exceptions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = exceptions.cpp; sourceTree = "<group>"; };
 		4535F5650DDDE17E003496B1 /* exceptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = exceptions.h; sourceTree = "<group>"; };
 		4535F5660DDDE17E003496B1 /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
@@ -450,6 +458,7 @@
 					/Library/Frameworks/SDL.framework/Headers,
 					"$(HEADER_SEARCH_PATHS)",
 				);
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/macosx/lib";
 				ONLY_ACTIVE_ARCH_PRE_XCODE_3_1 = "$(NATIVE_ARCH)";
 				PREBINDING = NO;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
@@ -473,6 +482,7 @@
 					/Library/Frameworks/SDL.framework/Headers,
 					"$(HEADER_SEARCH_PATHS)",
 				);
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/macosx/lib";
 				PREBINDING = NO;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 				SEPARATE_STRIP = YES;
