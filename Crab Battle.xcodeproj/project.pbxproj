@@ -15,13 +15,10 @@
 		4535F57B0DDDE1BC003496B1 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4535F5790DDDE1BC003496B1 /* icon.png */; };
 		4535F57C0DDDE1BC003496B1 /* times.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4535F57A0DDDE1BC003496B1 /* times.ttf */; };
 		457166030DECC5D3002C69E5 /* MenuState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 457166010DECC5D3002C69E5 /* MenuState.cpp */; };
-		457166090DECC607002C69E5 /* titles-menu.txt in Resources */ = {isa = PBXBuildFile; fileRef = 457166080DECC607002C69E5 /* titles-menu.txt */; };
 		4571660D0DECC61A002C69E5 /* audio in Resources */ = {isa = PBXBuildFile; fileRef = 4571660A0DECC61A002C69E5 /* audio */; };
 		4571666D0DECEFC5002C69E5 /* PlayerSelect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4571666C0DECEFC5002C69E5 /* PlayerSelect.cpp */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
-		912DF83C0D9B2A1D00269FC5 /* titles.txt in Resources */ = {isa = PBXBuildFile; fileRef = 912DF83A0D9B2A1D00269FC5 /* titles.txt */; };
-		912DF83D0D9B2A1D00269FC5 /* titles1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 912DF83B0D9B2A1D00269FC5 /* titles1.txt */; };
 		912DF8550D9B2AC200269FC5 /* PausedState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 912DF8530D9B2AC200269FC5 /* PausedState.cpp */; };
 		918D79430D8C470B00DF7AB3 /* BaseObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 918D79410D8C470B00DF7AB3 /* BaseObject.cpp */; };
 		918D797D0D8C509F00DF7AB3 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 918D79780D8C509F00DF7AB3 /* images */; };
@@ -36,6 +33,15 @@
 		91CD821A0D8C7EA10048A161 /* CrabBattle.icns in Resources */ = {isa = PBXBuildFile; fileRef = 91CD82190D8C7EA10048A161 /* CrabBattle.icns */; };
 		91CD824D0D8C824D0048A161 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91CD824C0D8C824D0048A161 /* State.cpp */; };
 		91CD82560D8C882F0048A161 /* GameState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91CD82550D8C882F0048A161 /* GameState.cpp */; };
+		91FC3CE10DF23F92008E5E98 /* game-paths.txt in Resources */ = {isa = PBXBuildFile; fileRef = 91FC3CDB0DF23F92008E5E98 /* game-paths.txt */; };
+		91FC3CE20DF23F92008E5E98 /* menu-paths.txt in Resources */ = {isa = PBXBuildFile; fileRef = 91FC3CDC0DF23F92008E5E98 /* menu-paths.txt */; };
+		91FC3CE30DF23F92008E5E98 /* pause-paths.txt in Resources */ = {isa = PBXBuildFile; fileRef = 91FC3CDD0DF23F92008E5E98 /* pause-paths.txt */; };
+		91FC3CE40DF23F92008E5E98 /* platforms.txt in Resources */ = {isa = PBXBuildFile; fileRef = 91FC3CDE0DF23F92008E5E98 /* platforms.txt */; };
+		91FC3CE50DF23F92008E5E98 /* players.txt in Resources */ = {isa = PBXBuildFile; fileRef = 91FC3CDF0DF23F92008E5E98 /* players.txt */; };
+		91FC3CE60DF23F92008E5E98 /* pselect-paths.txt in Resources */ = {isa = PBXBuildFile; fileRef = 91FC3CE00DF23F92008E5E98 /* pselect-paths.txt */; };
+		91FC3CF30DF23FDA008E5E98 /* VictoryScreen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91FC3CF10DF23FDA008E5E98 /* VictoryScreen.cpp */; };
+		91FC3CFA0DF24013008E5E98 /* SoundEffect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91FC3CF60DF24013008E5E98 /* SoundEffect.cpp */; };
+		91FC3CFB0DF24013008E5E98 /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91FC3CF80DF24013008E5E98 /* util.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -67,14 +73,11 @@
 		4535F57A0DDDE1BC003496B1 /* times.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = times.ttf; sourceTree = "<group>"; };
 		457166010DECC5D3002C69E5 /* MenuState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MenuState.cpp; sourceTree = "<group>"; };
 		457166020DECC5D3002C69E5 /* MenuState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuState.h; sourceTree = "<group>"; };
-		457166080DECC607002C69E5 /* titles-menu.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "titles-menu.txt"; sourceTree = "<group>"; };
 		4571660A0DECC61A002C69E5 /* audio */ = {isa = PBXFileReference; lastKnownFileType = folder; path = audio; sourceTree = "<group>"; };
 		4571666B0DECEFC5002C69E5 /* PlayerSelect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerSelect.h; sourceTree = "<group>"; };
 		4571666C0DECEFC5002C69E5 /* PlayerSelect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerSelect.cpp; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = SOURCE_ROOT; };
 		8D1107320486CEB800E47090 /* Crab Battle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Crab Battle.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		912DF83A0D9B2A1D00269FC5 /* titles.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = titles.txt; sourceTree = "<group>"; };
-		912DF83B0D9B2A1D00269FC5 /* titles1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = titles1.txt; sourceTree = "<group>"; };
 		912DF8530D9B2AC200269FC5 /* PausedState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PausedState.cpp; sourceTree = "<group>"; };
 		912DF8540D9B2AC200269FC5 /* PausedState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PausedState.h; sourceTree = "<group>"; };
 		918D79410D8C470B00DF7AB3 /* BaseObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseObject.cpp; sourceTree = "<group>"; };
@@ -99,6 +102,18 @@
 		91CD82530D8C86190048A161 /* constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
 		91CD82540D8C882F0048A161 /* GameState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameState.h; sourceTree = "<group>"; };
 		91CD82550D8C882F0048A161 /* GameState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameState.cpp; sourceTree = "<group>"; };
+		91FC3CDB0DF23F92008E5E98 /* game-paths.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "game-paths.txt"; sourceTree = "<group>"; };
+		91FC3CDC0DF23F92008E5E98 /* menu-paths.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "menu-paths.txt"; sourceTree = "<group>"; };
+		91FC3CDD0DF23F92008E5E98 /* pause-paths.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "pause-paths.txt"; sourceTree = "<group>"; };
+		91FC3CDE0DF23F92008E5E98 /* platforms.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = platforms.txt; sourceTree = "<group>"; };
+		91FC3CDF0DF23F92008E5E98 /* players.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = players.txt; sourceTree = "<group>"; };
+		91FC3CE00DF23F92008E5E98 /* pselect-paths.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "pselect-paths.txt"; sourceTree = "<group>"; };
+		91FC3CF10DF23FDA008E5E98 /* VictoryScreen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VictoryScreen.cpp; sourceTree = "<group>"; };
+		91FC3CF20DF23FDA008E5E98 /* VictoryScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VictoryScreen.h; sourceTree = "<group>"; };
+		91FC3CF60DF24013008E5E98 /* SoundEffect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoundEffect.cpp; sourceTree = "<group>"; };
+		91FC3CF70DF24013008E5E98 /* SoundEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundEffect.h; sourceTree = "<group>"; };
+		91FC3CF80DF24013008E5E98 /* util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = util.cpp; sourceTree = "<group>"; };
+		91FC3CF90DF24013008E5E98 /* util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,8 +136,10 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				91D2C7660D8C9FD000ADC6F4 /* Utility */,
+				91FC3CF40DF23FE5008E5E98 /* Logic */,
 				91D2C7650D8C9FBE00ADC6F4 /* States */,
+				91FC3CF50DF23FF9008E5E98 /* SDL Wrappers */,
+				91D2C7660D8C9FD000ADC6F4 /* Utility */,
 			);
 			name = Classes;
 			path = src;
@@ -187,13 +204,11 @@
 			isa = PBXGroup;
 			children = (
 				4571660A0DECC61A002C69E5 /* audio */,
-				457166080DECC607002C69E5 /* titles-menu.txt */,
+				918D79780D8C509F00DF7AB3 /* images */,
+				91FC3CE90DF23F9B008E5E98 /* Paths */,
 				4535F5790DDDE1BC003496B1 /* icon.png */,
 				4535F57A0DDDE1BC003496B1 /* times.ttf */,
 				91CD82190D8C7EA10048A161 /* CrabBattle.icns */,
-				918D79780D8C509F00DF7AB3 /* images */,
-				912DF83A0D9B2A1D00269FC5 /* titles.txt */,
-				912DF83B0D9B2A1D00269FC5 /* titles1.txt */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 			);
@@ -212,16 +227,18 @@
 		91D2C7650D8C9FBE00ADC6F4 /* States */ = {
 			isa = PBXGroup;
 			children = (
-				457166010DECC5D3002C69E5 /* MenuState.cpp */,
-				457166020DECC5D3002C69E5 /* MenuState.h */,
 				91CD824B0D8C824D0048A161 /* State.h */,
 				91CD824C0D8C824D0048A161 /* State.cpp */,
 				91CD82540D8C882F0048A161 /* GameState.h */,
 				91CD82550D8C882F0048A161 /* GameState.cpp */,
+				457166020DECC5D3002C69E5 /* MenuState.h */,
+				457166010DECC5D3002C69E5 /* MenuState.cpp */,
 				912DF8540D9B2AC200269FC5 /* PausedState.h */,
 				912DF8530D9B2AC200269FC5 /* PausedState.cpp */,
 				4571666B0DECEFC5002C69E5 /* PlayerSelect.h */,
 				4571666C0DECEFC5002C69E5 /* PlayerSelect.cpp */,
+				91FC3CF20DF23FDA008E5E98 /* VictoryScreen.h */,
+				91FC3CF10DF23FDA008E5E98 /* VictoryScreen.cpp */,
 			);
 			name = States;
 			sourceTree = "<group>";
@@ -229,20 +246,51 @@
 		91D2C7660D8C9FD000ADC6F4 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				4535F5640DDDE17E003496B1 /* exceptions.cpp */,
-				4535F5650DDDE17E003496B1 /* exceptions.h */,
-				4535F5660DDDE17E003496B1 /* Player.cpp */,
-				4535F5670DDDE17E003496B1 /* Player.h */,
 				918D79420D8C470B00DF7AB3 /* BaseObject.h */,
 				918D79410D8C470B00DF7AB3 /* BaseObject.cpp */,
+				4535F5640DDDE17E003496B1 /* exceptions.cpp */,
+				4535F5650DDDE17E003496B1 /* exceptions.h */,
 				91A9F1940D70C7F000CB6365 /* Rect.h */,
 				91A9F1950D70C7F000CB6365 /* Rect.cpp */,
+				91FC3CF90DF24013008E5E98 /* util.h */,
+				91FC3CF80DF24013008E5E98 /* util.cpp */,
+			);
+			name = Utility;
+			sourceTree = "<group>";
+		};
+		91FC3CE90DF23F9B008E5E98 /* Paths */ = {
+			isa = PBXGroup;
+			children = (
+				91FC3CDB0DF23F92008E5E98 /* game-paths.txt */,
+				91FC3CDC0DF23F92008E5E98 /* menu-paths.txt */,
+				91FC3CDD0DF23F92008E5E98 /* pause-paths.txt */,
+				91FC3CDE0DF23F92008E5E98 /* platforms.txt */,
+				91FC3CDF0DF23F92008E5E98 /* players.txt */,
+				91FC3CE00DF23F92008E5E98 /* pselect-paths.txt */,
+			);
+			name = Paths;
+			sourceTree = "<group>";
+		};
+		91FC3CF40DF23FE5008E5E98 /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				4535F5670DDDE17E003496B1 /* Player.h */,
+				4535F5660DDDE17E003496B1 /* Player.cpp */,
+			);
+			name = Logic;
+			sourceTree = "<group>";
+		};
+		91FC3CF50DF23FF9008E5E98 /* SDL Wrappers */ = {
+			isa = PBXGroup;
+			children = (
+				91FC3CF70DF24013008E5E98 /* SoundEffect.h */,
+				91FC3CF60DF24013008E5E98 /* SoundEffect.cpp */,
 				91A9F1E20D70D2F100CB6365 /* Sprite.h */,
 				91A9F1E30D70D2F100CB6365 /* Sprite.cpp */,
 				91A9F1E50D70D5AF00CB6365 /* Surface.h */,
 				91A9F1E60D70D5AF00CB6365 /* Surface.cpp */,
 			);
-			name = Utility;
+			name = "SDL Wrappers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -292,12 +340,15 @@
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				918D797D0D8C509F00DF7AB3 /* images in Resources */,
 				91CD821A0D8C7EA10048A161 /* CrabBattle.icns in Resources */,
-				912DF83C0D9B2A1D00269FC5 /* titles.txt in Resources */,
-				912DF83D0D9B2A1D00269FC5 /* titles1.txt in Resources */,
 				4535F57B0DDDE1BC003496B1 /* icon.png in Resources */,
 				4535F57C0DDDE1BC003496B1 /* times.ttf in Resources */,
-				457166090DECC607002C69E5 /* titles-menu.txt in Resources */,
 				4571660D0DECC61A002C69E5 /* audio in Resources */,
+				91FC3CE10DF23F92008E5E98 /* game-paths.txt in Resources */,
+				91FC3CE20DF23F92008E5E98 /* menu-paths.txt in Resources */,
+				91FC3CE30DF23F92008E5E98 /* pause-paths.txt in Resources */,
+				91FC3CE40DF23F92008E5E98 /* platforms.txt in Resources */,
+				91FC3CE50DF23F92008E5E98 /* players.txt in Resources */,
+				91FC3CE60DF23F92008E5E98 /* pselect-paths.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,6 +372,9 @@
 				4535F5690DDDE17E003496B1 /* Player.cpp in Sources */,
 				457166030DECC5D3002C69E5 /* MenuState.cpp in Sources */,
 				4571666D0DECEFC5002C69E5 /* PlayerSelect.cpp in Sources */,
+				91FC3CF30DF23FDA008E5E98 /* VictoryScreen.cpp in Sources */,
+				91FC3CFA0DF24013008E5E98 /* SoundEffect.cpp in Sources */,
+				91FC3CFB0DF24013008E5E98 /* util.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
