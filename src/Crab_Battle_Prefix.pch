@@ -10,3 +10,4 @@
 #include <SDL_image/SDL_image.h>
 #include <SDL_mixer/SDL_mixer.h>
 #include <SDL_ttf/SDL_ttf.h>
+#include <ode/ode.h>
