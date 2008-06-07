@@ -74,10 +74,8 @@ using CrabBattle::_game_state_collide;
 GameState::GameState(unsigned short p1Sprite, unsigned short p2Sprite)
 {
     using CrabBattle::FileNotFoundError;
-    int count =0;
     vector<string> paths;
     CrabBattle::Surface *surf_p1L, *surf_p1R, *surf_p2L, *surf_p2R;
-    CrabBattle::Sprite *sprite;
     dBody *newBody;
     dMass *newMass;
     dGeom *newGeom;
