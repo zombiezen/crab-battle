@@ -9,6 +9,9 @@ Ross Light, TJ Ferrell, and Ephraim Ruprecht
 
 Welcome to Crab Battle, a two-player fighting game.
 
+Crab Battle is released under the GNU General Public License, Version 3.0.
+See LICENSE.txt for details.
+
 +++++++++++++++++++++++++++++++++++++++++++++++
 CONTROLS
 
