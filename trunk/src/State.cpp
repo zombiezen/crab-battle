@@ -27,6 +27,7 @@ void JumpState::HandleEvent(SDL_Event event)
 
 State *JumpState::Update(void)
 {
+    return this;
 }
 
 void JumpState::Display(CrabBattle::Surface *surf)

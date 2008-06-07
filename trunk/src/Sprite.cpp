@@ -294,7 +294,7 @@ void Sprite::SetIsEnv(bool flag)
 
 void Sprite::FixPhysics(void)
 {
-    const dReal *pos, *lvel, *rot;
+    const dReal *rot;
     const dReal *quat_ptr;
     dReal quat[4], quat_len;
     if (body == NULL)

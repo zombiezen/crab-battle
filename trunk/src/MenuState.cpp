@@ -21,7 +21,6 @@ using CrabBattle::MenuState;
 MenuState::MenuState(void)
 {
     using CrabBattle::FileNotFoundError;
-    int count =0;
     vector<string> paths; 
     ifstream getTitles;
     
