@@ -1,0 +1,7 @@
+images/gamebackground.png
+images/healthbar1.jpg
+images/heart.png
+times.ttf
+audio/music.ogg
+audio/punch.ogg
+audio/boing.ogg

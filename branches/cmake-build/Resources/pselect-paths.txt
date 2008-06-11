@@ -1,0 +1,4 @@
+images/playerselect.png
+images/choice.png
+images/ready.png
+audio/music-pselect.ogg

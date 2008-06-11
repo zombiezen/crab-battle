@@ -1,0 +1,6 @@
+images/ChuckNorrisL.png
+images/ChuckNorrisR.png
+images/MudkipsL.png
+images/MudkipsR.png
+images/ZimL.png
+images/ZimR.png
